@@ -143,9 +143,9 @@ function draw(){
         ctx.drawImage(img3, 550, 100, 100, 100);
     }
     if(tela == 2){
-        //ctx.clearRect(0, 0, 800, 500)
-        //spr1.src = "Images/Sprites/"+battle.pokeatual+".png";
-        //ctx.drawImage(spr1, 150, 100, 100, 100);
+        ctx.clearRect(0, 0, 800, 500)
+        spr1.src = "Images/Sprites/"+battle.pokeatual+".png";
+        ctx.drawImage(spr1, 150, 100, 100, 100);
     }
     requestAnimationFrame(draw);
 }

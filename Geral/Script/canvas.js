@@ -20,7 +20,7 @@ var tela = 1;
 var spr1 = new Image();
 var spr2 = new Image();
 
-export * from "./canvas.js";
+export {choose, escolha, yn};
 import * as battle from "./Battle.js";
 
 ctx.imageSmoothingEnabled = false

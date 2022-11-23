@@ -13,7 +13,7 @@ addEventListener("keyup", function(){
     }else if(canvas.choose == 3){
         pokeatual = 7;
     }
-    if(canvas.escolha && yn==1){
+    if(canvas.escolha && canvas.yn==1){
         inimigoatual = Math.ceil(Math.random()*151);
     }
 });

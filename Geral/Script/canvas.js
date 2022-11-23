@@ -1,4 +1,4 @@
-
+//inicio
 var canvas = document.getElementById("inicio");
 var ctx = canvas.getContext("2d");
 var img1 = new Image();
@@ -14,7 +14,15 @@ var message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selec
 var poke = "";
 var escolha = false;
 var yn = 0;
+
+//transição
 var tela = 1;
+var spr1 = new Image();
+var spr2 = new Image();
+
+export * from "./canvas.js";
+import * as battle from "./Battle.js";
+
 ctx.imageSmoothingEnabled = false
 
 
@@ -73,7 +81,6 @@ function right(){
         yn++;
         if(yn>1){
             yn=0;
-            
         }
     }
 }
@@ -88,6 +95,7 @@ function enter(){
             escolha = false;
         }else{
             tela = 2
+            escolha = false;
         }
     }
 }
@@ -135,7 +143,9 @@ function draw(){
         ctx.drawImage(img3, 550, 100, 100, 100);
     }
     if(tela == 2){
-        ctx.clearRect(0, 0, 800, 500)
+        //ctx.clearRect(0, 0, 800, 500)
+        //spr1.src = "Images/Sprites/"+battle.pokeatual+".png";
+        //ctx.drawImage(spr1, 150, 100, 100, 100);
     }
     requestAnimationFrame(draw);
 }

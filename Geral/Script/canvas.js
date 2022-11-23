@@ -20,12 +20,14 @@ var tela = 1;
 var spr1 = new Image();
 var spr2 = new Image();
 
-export {choose, escolha, yn};
-import * as battle from "Battle.js";
+//batalha
+var pokeatual, meunvl, inimigoatual, ininvl, Statusg=[], pokes=[];
+pokes = [0,"Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetch'd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
+
 
 ctx.imageSmoothingEnabled = false
 
-
+//teclas pressionadas
 addEventListener("keyup", function(){
     if(event.keyCode === 39)
     {
@@ -36,23 +38,13 @@ addEventListener("keyup", function(){
         left();
     }
 
-    switch(choose){
-        case 1:
-            poke = "Bulbassaur";
-            break;
-        case 2:
-            poke = "Charmander";
-            break;
-        case 3:
-            poke = "Squirtle";
-    }
-
     if(event.keyCode === 13)
     {
         enter();
     }
 });
 
+//se apertar pra esquerda, executar
 function left(){
     if(!escolha){
         count-=2;
@@ -69,6 +61,7 @@ function left(){
     }
 }
 
+//se apertar pra direita, executar
 function right(){
     if(!escolha){
         count+=2;
@@ -85,8 +78,19 @@ function right(){
     }
 }
 
+//se apertar enter, executar
 function enter(){
     if(!escolha){
+        switch(choose){
+            case 1:
+                poke = "Bulbassaur";
+                break;
+            case 2:
+                poke = "Charmander";
+                break;
+            case 3:
+                poke = "Squirtle";
+        }
         message = "Tem certeza que deseja escolher "+poke;
         escolha = true;
     }else{
@@ -94,12 +98,21 @@ function enter(){
             message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selecionar!";
             escolha = false;
         }else{
-            tela = 2
+            tela = 2;
+            if(choose == 1){
+                pokeatual = 1;
+            }else if(choose == 2){
+                pokeatual = 4;
+            }else if(choose == 3){
+                pokeatual = 7;
+            }
+            inimigoatual = Math.ceil(Math.random()*151);
             escolha = false;
         }
     }
 }
 
+//desenha tudo na tela
 function draw(){
     if(tela == 1){
         ctx.clearRect(0, 0, 800, 500);
@@ -144,8 +157,8 @@ function draw(){
     }
     if(tela == 2){
         ctx.clearRect(0, 0, 800, 500)
-        spr1.src = "Images/Sprites/"+battle.pokeatual+".png";
-        ctx.drawImage(spr1, 150, 100, 100, 100);
+        spr1.src = "Images/Sprites/"+pokeatual+".png";
+        ctx.drawImage(spr1, 10, 200, 400, 400);
     }
     requestAnimationFrame(draw);
 }

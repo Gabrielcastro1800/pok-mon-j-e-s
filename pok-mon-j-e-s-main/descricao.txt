@@ -1,0 +1,2 @@
+Projeto: Pokémon J e Pokémon S
+Descrição: Jogo de batalha pokémon, com quase todas as mecânicas originais da versão Fire Red/Leaf Green. Você escolhe um pokémon inicial e com ele você batalha contra pokémons sorteados pelo programa.   

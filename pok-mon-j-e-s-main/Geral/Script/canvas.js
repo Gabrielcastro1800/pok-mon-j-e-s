@@ -6,6 +6,8 @@ var img2 = new Image();
 var img3 = new Image();
 var back = new Image();
 var chat = new Image();
+var poke1 = new Image();
+var poke2 = new Image();
 var count = 1;
 var choose = 1;
 var message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selecionar!";
@@ -104,10 +106,10 @@ function draw(){
     ctx.textAlign = "start";
     ctx.drawImage(chat, 5, 270, 720, 45);
     ctx.fillText(message, 50, 300);
-
     if(!escolha){
         ctx.fillStyle = "rgb(184,241,112)";
-        ctx.fillRect(50+(100*count), 100, 100, 100);
+        poke1.src = "Images/fundo/poke1.png"
+        ctx.drawImage(poke1,50+(100*count), 100, 100, 100);
     }else{
         ctx.fillStyle = "rgb(184,241,112)";
         ctx.fillRect(45+(100*yn), 328, 50, 30);

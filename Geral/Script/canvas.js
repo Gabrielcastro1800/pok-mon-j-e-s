@@ -21,10 +21,12 @@ var spr1 = new Image();
 var spr2 = new Image();
 
 //batalha
-var pokeatual, meunvl, inimigoatual, ininvl, Statusg=[], pokes=[];
+var pokeatual, meunvl, vida, maxvida, inimigoatual, ininvl, inivida, maxinivida, Statusg=[], pokes=[];
 pokes = [0,"Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetch'd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
-
-
+maxvida = 100;
+maxinivida = 100;
+vida = maxvida;
+inivida = maxinivida;
 ctx.imageSmoothingEnabled = false
 
 //teclas pressionadas
@@ -120,8 +122,8 @@ function enter(){
 function draw(){
     //Se for a tela 1 ele vai desenhar isso
     if(tela == 1){
-        //desenhar fundo
         ctx.clearRect(0, 0, 800, 500);
+        //desenhar fundo
         back.src = "Images/fundo/lab.png"
         ctx.drawImage(back, -90, -150, back.width*6, back.height*6);
 
@@ -167,8 +169,8 @@ function draw(){
     }
     //Se for a tela 2 ele vai desenhar isso
     if(tela == 2){
-        //Desenha os pokemons
         ctx.clearRect(0, 0, 800, 500);
+        //Desenha os pokemons
         spr1.src = "Images/Sprites/"+pokeatual+".png";
         ctx.save();
         ctx.translate(350, 120);
@@ -189,6 +191,27 @@ function draw(){
     //Se for a tela 3 ele vai desenhar isso
     if(tela==3){
         ctx.clearRect(0, 0, 800, 500)
+        //desenhar pokémons
+        spr1.src = "Images/Sprites/"+pokeatual+".png";
+        ctx.save();
+        ctx.translate(300, 120);
+        ctx.scale(-1, 1);
+        ctx.drawImage(spr1, 0, 0, 200, 200);
+        ctx.restore();
+        spr2.src = "Images/Sprites/"+inimigoatual+".png";
+        ctx.drawImage(spr2, 500, 120, 200, 200);
+
+        //desenhar barras de vida
+        ctx.fillStyle = "black";
+        ctx.fillRect(30, 10, 200, 15);
+        ctx.fillStyle = "rgb(184,241,142)";
+        ctx.fillRect(30, 10, 200*vida/maxvida, 15);
+        ctx.fillStyle = "black";
+        ctx.fillRect(770, 10, -200, 15);
+        ctx.fillStyle = "rgb(184,241,142)";
+        ctx.fillRect(770, 10, -200*inivida/maxinivida, 15);
+
+
     }
     requestAnimationFrame(draw);
 }

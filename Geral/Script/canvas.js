@@ -80,45 +80,52 @@ function right(){
 
 //se apertar enter, executar
 function enter(){
-    if(!escolha){
-        switch(choose){
-            case 1:
-                poke = "Bulbassaur";
-                break;
-            case 2:
-                poke = "Charmander";
-                break;
-            case 3:
-                poke = "Squirtle";
-        }
-        message = "Tem certeza que deseja escolher "+poke;
-        escolha = true;
-    }else{
-        if(yn==1){
-            message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selecionar!";
-            escolha = false;
-        }else{
-            tela = 2;
-            if(choose == 1){
-                pokeatual = 1;
-            }else if(choose == 2){
-                pokeatual = 4;
-            }else if(choose == 3){
-                pokeatual = 7;
+    if(tela==1){
+        if(!escolha){
+            switch(choose){
+                case 1:
+                    poke = "Bulbassaur";
+                    break;
+                case 2:
+                    poke = "Charmander";
+                    break;
+                case 3:
+                    poke = "Squirtle";
             }
-            inimigoatual = Math.ceil(Math.random()*151);
-            escolha = false;
+            message = "Tem certeza que deseja escolher "+poke;
+            escolha = true;
+        }else{
+            if(yn==1){
+                message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selecionar!";
+                escolha = false;
+            }else{
+                tela = 2;
+                if(choose == 1){
+                    pokeatual = 1;
+                }else if(choose == 2){
+                    pokeatual = 4;
+                }else if(choose == 3){
+                    pokeatual = 7;
+                }
+                inimigoatual = Math.ceil(Math.random()*9);
+                escolha = false;
+            }
         }
+    }else if(tela ==2){
+        tela = 3;
     }
 }
 
 //desenha tudo na tela
 function draw(){
+    //Se for a tela 1 ele vai desenhar isso
     if(tela == 1){
+        //desenhar fundo
         ctx.clearRect(0, 0, 800, 500);
         back.src = "Images/fundo/lab.png"
         ctx.drawImage(back, -90, -150, back.width*6, back.height*6);
 
+        //desenhar titulo
         ctx.fillStyle = "black";
         ctx.textAlign = "center";
         ctx.font = "30px Arial";
@@ -126,11 +133,13 @@ function draw(){
         ctx.drawImage(chat, 180, 15, 450, 45);
         ctx.fillText("Escolha o Pokémon inicial:", 400, 50);
 
+        //desenhar mensagem
         ctx.font = "20px Arial";
         ctx.textAlign = "start";
         ctx.drawImage(chat, 2, 270, 720, 45);
         ctx.fillText(message, 50, 300);
 
+        //sim ou não
         if(!escolha){
             ctx.fillStyle = "rgb(184,241,112)";
             poke1.src = "Images/fundo/poke1.png";
@@ -145,6 +154,7 @@ function draw(){
         }
         poke2.src = "Images/fundo/poke2.png"
 
+        //desenhar pokemons
         if(choose != 1 || escolha){ctx.drawImage(poke2, 150, 100, 100, 100);}
         img1.src = "Images/Sprites/1.png";
         ctx.drawImage(img1, 150, 100, 100, 100);
@@ -155,10 +165,30 @@ function draw(){
         img3.src = "Images/Sprites/7.png";
         ctx.drawImage(img3, 550, 100, 100, 100);
     }
+    //Se for a tela 2 ele vai desenhar isso
     if(tela == 2){
-        ctx.clearRect(0, 0, 800, 500)
+        //Desenha os pokemons
+        ctx.clearRect(0, 0, 800, 500);
         spr1.src = "Images/Sprites/"+pokeatual+".png";
-        ctx.drawImage(spr1, 10, 200, 400, 400);
+        ctx.save();
+        ctx.translate(350, 120);
+        ctx.scale(-1, 1);
+        ctx.drawImage(spr1, 0, 0, 350, 350);
+        ctx.restore();
+        spr2.src = "Images/Sprites/"+inimigoatual+".png";
+        ctx.drawImage(spr2, 450, 120, 350, 350);
+
+        //desenha a mensagem
+        ctx.fillStyle = "black";
+        ctx.textAlign = "start";
+        ctx.font = "25px Arial";
+        chat.src = "Images/fundo/chat.png";
+        ctx.drawImage(chat, 17, 20, 500, 45);
+        ctx.fillText("Aperte 'Enter' para começar a batalha!", 50, 50);
+    }
+    //Se for a tela 3 ele vai desenhar isso
+    if(tela==3){
+        ctx.clearRect(0, 0, 800, 500)
     }
     requestAnimationFrame(draw);
 }

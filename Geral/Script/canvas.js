@@ -17,6 +17,7 @@ var poke = "";
 var escolha = false;
 var yn = 0;
 var fob = 1; //fob = fight or bag
+var battlemode = 0;
 
 //transição
 var tela = 1;
@@ -26,6 +27,7 @@ var spr2 = new Image();
 //batalha
 var pokeatual, meunvl, vida, maxvida, inimigoatual, ininvl, inivida, maxinivida, Statusg=[], pokes=[];
 pokes = [0,"Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetch'd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
+moves = [0,[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0],[Splash(), 0, 0, 0]];
 maxvida = 100;
 maxinivida = 100;
 vida = maxvida;
@@ -36,76 +38,65 @@ ctx.imageSmoothingEnabled = false
 addEventListener("keyup", function(){
     if(event.keyCode === 39)
     {
-        if(tela == 1){
-        right();}
-        if(tela == 3){
-            righttela3()
-        }
-        
+        right();   
     }
     if(event.keyCode === 37)
     {
-        if(tela == 1){
-        left();}
-        if(tela == 3){
-            lefttela3()
-        }
+        left();
     }
 
     if(event.keyCode === 13)
     {
-        if(tela == 1 || tela == 2){
-        enter();}
-        if(tela == 3){
-            
-        }
+        enter();
     }
 });
 
 //se apertar pra esquerda, executar
-function lefttela3(){
-    fob = fob+1
-    if(fob > 2)
-    {
-        fob = 1
-    }
-}
-function righttela3(){
-    fob = fob-1
-    if(fob == 0)
-    {
-        fob = 2
-    }
-}
 function left(){
-    if(!escolha){
-        count-=2;
-        choose--;
-        if(count<1){
-            choose=3;
-            count = 5;
+    if(tela==1){
+        if(!escolha){
+            count-=2;
+            choose--;
+            if(count<1){
+                choose=3;
+                count = 5;
+            }
+        }else{
+            yn--;
+            if(yn<0){
+                yn=1;
+            }
         }
-    }else{
-        yn--;
-        if(yn<0){
-            yn=1;
+    }else if(tela==3){
+        fob = fob+1;
+        if(fob > 2)
+        {
+            fob = 1;
         }
     }
 }
 
 //se apertar pra direita, executar
 function right(){
-    if(!escolha){
-        count+=2;
-        choose++;
-        if(count>5){
-            choose=1;
-            count = 1;
+    if(tela==1){
+        if(!escolha){
+            count+=2;
+            choose++;
+            if(count>5){
+                choose=1;
+                count = 1;
+            }
+        }else{
+            yn++;
+            if(yn>1){
+                yn=0;
+            }
         }
-    }else{
-        yn++;
-        if(yn>1){
-            yn=0;
+    }else if(tela==3){
+        fob = fob-1
+        if(fob == 0)
+        {
+            fob = 2
         }
     }
 }
@@ -143,8 +134,12 @@ function enter(){
                 escolha = false;
             }
         }
-    }else if(tela ==2){
+    }else if(tela==2){
         tela = 3;
+    }else if(tela==3){
+        if(fob==1){
+            battlemode=1;
+        }
     }
 }
 
@@ -244,17 +239,28 @@ function draw(){
         ctx.fillRect(770, 20, -200, 15);
         ctx.fillStyle = "rgb(184,241,142)";
         ctx.fillRect(770, 20, -200*inivida/maxinivida, 15);
-        ctx.drawImage(chat,0,300,800,150)
-        if(fob == 1){
-            ctx.fillRect(100, 370,60,50);
-        }
-        if(fob == 2){
-            ctx.fillRect(250, 370,60,50);
-        }
-        ctx.fillStyle = "black";
-        ctx.fillText("Fight", 100, 400);
-        ctx.fillText("Bag", 250, 400);
 
+        ctx.drawImage(chat,0,350,800,150);
+        if(battlemode==0){
+            if(fob == 1){
+                ctx.fillRect(515, 370,80,40);
+            }
+            if(fob == 2){
+                ctx.fillRect(645, 370,100,40);
+            }
+            ctx.fillStyle = "black";
+            ctx.fillText("Lutar", 520, 400);
+            ctx.fillText("Mochila", 650, 400);
+
+            ctx.fillStyle = "black";
+            ctx.textAlign = "start";
+            ctx.font = "25px Arial";
+            ctx.fillText("O que o "+pokes[pokeatual]+" vai fazer?", 80, 400);
+        }else if(battlemode==1){
+
+        }else if(battlemode==2){
+
+        }
     }
     requestAnimationFrame(draw);
 }

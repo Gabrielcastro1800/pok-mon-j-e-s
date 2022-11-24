@@ -2,6 +2,12 @@ function damage(nvl, atk, atkpower, dfs){
 
     return ((((2*nvl/5+2)*atk*atkpower/dfs)/50)+2);
 }
+function morreu(vida,inivida){
+    if(inivida < 0){
+        inivida = 100;
+    }
+
+}
 //attacks
 function Splash(pok){
     bmessage = "Nada aconteceu!";
@@ -14,11 +20,14 @@ function Tackle(pok, bol){
         var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
         var damg = damage(meunvl, atk, power, dfs);
         inivida-=damg;
+        //chega se algum pokemon morreu todo round!
+        morreu(vida,inivida);
     }else if(bol==1){
         var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
         var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
         var damg = damage(ininvl, atk, power, dfs);
         vida-=damg;
+        
     }
     bmessage = pokes[pok]+" levou "+damg.toFixed(0)+" de dano!";
 }
@@ -294,6 +303,7 @@ function enter(){
 
 //desenha tudo na tela
 function draw(){
+    
     //Se for a tela 1 ele vai desenhar isso
     if(tela == 1){
         ctx.clearRect(0, 0, 800, 500);

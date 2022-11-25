@@ -78,6 +78,7 @@ var poke2 = new Image();
 var vspng = new Image();
 var barpng = new Image();
 var potionpng = new Image();
+var spotionpng = new Image();
 var count = 1;
 var choose = 1;
 var message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selecionar!";
@@ -85,6 +86,8 @@ var poke = "";
 var escolha = false;
 var yn = 0;
 var fob = 1; //fob = fight or bag
+var money = 10
+var comp = 1
 
 
 //transição
@@ -141,10 +144,20 @@ addEventListener("keyup", function(){
     {
         enter();
     }
+    if(event.keyCode === 8)
+    {
+        backspace();
+    }
 });
 
 //se apertar pra esquerda, executar
 function left(){
+    if(tela == 4){
+        comp = comp-1;
+        if(comp < 1){
+            comp = 2;
+        }
+    }
     if(tela==1){
         if(!escolha){
             count-=2;
@@ -178,6 +191,12 @@ function left(){
 
 //se apertar pra direita, executar
 function right(){
+    if(tela == 4){
+        comp = comp+1;
+        if(comp > 2){
+            comp = 1;
+        }
+    }
     if(tela==1){
         if(!escolha){
             count+=2;
@@ -304,6 +323,7 @@ function enter(){
             }else if(click==2){
                 if(inivida==0){
                     tela = 2;
+                    money += 5;
                     battlemode=0;
                     bmessage = "";
                     inimigoatual = Math.ceil(Math.random()*151);
@@ -322,6 +342,11 @@ function enter(){
             }
         }
     }
+}
+//se apertar backspace executar!
+function backspace(){
+if(tela == 2){tela = 4}else if(tela = 4){tela =2}
+
 }
 
 //desenha tudo na tela
@@ -472,9 +497,24 @@ function draw(){
     }
     if(tela == 4){
         ctx.clearRect(0,0,800,500)
+        if(comp == 1){
+            ctx.fillStyle = "rgb(184,241,142)";
+            ctx.fillRect(15, 115,80,80);
+            }
+            if(comp == 2){
+                ctx.fillStyle = "rgb(184,241,142)";
+                ctx.fillRect(115, 115,80,80);
+                }
         potionpng.src = "Images/fundo/potion.png";
+        spotionpng.src = "Images/fundo/super-potion.png";
         ctx.drawImage(potionpng,0,100,100,100)
-
+        ctx.drawImage(spotionpng,100,100,100,100)
+        ctx.fillStyle = "black";
+        ctx.textAlign = "start";
+        ctx.font = "25px Arial";
+        ctx.fillText("10$", 30, 220);
+        ctx.fillText("50$", 130, 220);
+        ctx.fillText("Dinheiro:"+money, 10, 25);
     }
     requestAnimationFrame(draw);
 }

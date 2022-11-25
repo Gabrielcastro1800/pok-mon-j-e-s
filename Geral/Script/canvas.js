@@ -157,13 +157,6 @@ addEventListener("keyup", function(){
 
 //se apertar pra esquerda, executar
 function left(){
-    if(bagoverlay == true)
-    {
-        bagovs = bagovs-1;
-        if(bagovs < 1){
-            bagovs = 2;
-        }
-    }else{
     if(tela == 4){
         comp = comp-1;
         if(comp < 1){
@@ -197,21 +190,17 @@ function left(){
             }
         }
     }}}
-}
+
 //funçoes de items
 function potion(){
     vida+=20;
+    if(vida > maxvida){
+        vida = maxvida
+    }
 }
 
 //se apertar pra direita, executar
 function right(){
-    if(bagoverlay == true)
-    {
-        bagovs = bagovs+1;
-        if(bagovs > 2){
-            bagovs = 1;
-        }
-    }else{
     if(tela == 4){
         comp = comp+1;
         if(comp > 2){
@@ -246,10 +235,16 @@ function right(){
             }
         }
     }}
-}
+
 
 //se apertar pra cima, executar
 function up(){
+    if(bagoverlay == true)
+    {
+        bagovs = bagovs+1;
+        if(bagovs > 2){
+            bagovs = 1;
+        }}
     if(tela==3){
         if(battlemode==1){
             if(yatk==1){
@@ -263,6 +258,12 @@ function up(){
 
 //se apertar pra baixo, executar
 function down(){
+    if(bagoverlay == true)
+    {
+        bagovs = bagovs-1;
+        if(bagovs < 1){
+            bagovs = 2;
+        }}
     if(tela==3){
         if(battlemode==1){
             if(yatk==1){

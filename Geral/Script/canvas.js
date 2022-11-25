@@ -157,7 +157,7 @@ addEventListener("keyup", function(){
 
 //se apertar pra esquerda, executar
 function left(){
-    if(bagoverlay = true)
+    if(bagoverlay == true)
     {
         bagovs = bagovs-1;
         if(bagovs < 1){
@@ -167,9 +167,7 @@ function left(){
     if(tela == 4){
         comp = comp-1;
         if(comp < 1){
-            comp = 2;
-        }
-    }
+            comp = 2;}}else{
     if(tela==1){
         if(!escolha){
             count-=2;
@@ -198,7 +196,11 @@ function left(){
                 xatk=1;
             }
         }
-    }}
+    }}}
+}
+//funçoes de items
+function potion(){
+    vida+=20;
 }
 
 //se apertar pra direita, executar
@@ -214,8 +216,7 @@ function right(){
         comp = comp+1;
         if(comp > 2){
             comp = 1;
-        }
-    }
+    }}
     if(tela==1){
         if(!escolha){
             count+=2;
@@ -274,12 +275,16 @@ function down(){
 }
 //se apertar enter, executar
 function enter(){
+    if(bagoverlay == true){
+        if(bagovs == 1 && bag[1] > 0){potion(); bag[1]-=1}
+        if(bagovs == 2 && bag[2] > 0){spotion(); bag[2]-=1}
+    }
     if(tela == 4 && money >= 10){
-        if(comp = 1){
+        if(comp == 1){
             bag[1]+=1;
             money = money-10
         }
-        if(comp = 2 && money >= 50){
+        if(comp == 2 && money >= 50){
             bag[2]+=1;
             money = money-50
         }
@@ -373,8 +378,8 @@ function enter(){
                 battlemode = 0;
             }
         }
-    }
-}
+    }}
+
 //se apertar backspace executar!
 function backspace(){
 if(tela == 2){tela = 4}else if(tela == 4){tela =2}

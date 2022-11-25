@@ -302,6 +302,8 @@ function enter(){
             }else if(click==2){
                 if(inivida==0){
                     tela = 2;
+                    battlemode=0;
+                    bmessage = "";
                     inimigoatual = Math.ceil(Math.random()*151);
                     click=0;
                 }else{

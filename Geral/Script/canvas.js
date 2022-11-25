@@ -88,7 +88,11 @@ var yn = 0;
 var fob = 1; //fob = fight or bag
 var money = 10
 var comp = 1
-var bag=[0,0]
+var bag=[,];
+bag[1]= 0
+bag[2]=0
+var bagoverlay = false;
+var bagovs = 1;
 
 
 //transição
@@ -153,6 +157,13 @@ addEventListener("keyup", function(){
 
 //se apertar pra esquerda, executar
 function left(){
+    if(bagoverlay = true)
+    {
+        bagovs = bagovs-1;
+        if(bagovs < 1){
+            bagovs = 2;
+        }
+    }else{
     if(tela == 4){
         comp = comp-1;
         if(comp < 1){
@@ -174,7 +185,7 @@ function left(){
             }
         }
     }else if(tela==3){
-        if(battlemode==0){
+        if(battlemode==0 && bagoverlay == false){
             fob = fob+1;
             if(fob > 2)
             {
@@ -187,11 +198,18 @@ function left(){
                 xatk=1;
             }
         }
-    }
+    }}
 }
 
 //se apertar pra direita, executar
 function right(){
+    if(bagoverlay == true)
+    {
+        bagovs = bagovs+1;
+        if(bagovs > 2){
+            bagovs = 1;
+        }
+    }else{
     if(tela == 4){
         comp = comp+1;
         if(comp > 2){
@@ -213,7 +231,7 @@ function right(){
             }
         }
     }else if(tela==3){
-        if(battlemode==0){
+        if(battlemode==0 && bagoverlay == false){
             fob = fob-1
             if(fob == 0)
             {
@@ -226,7 +244,7 @@ function right(){
                 xatk=1;
             }
         }
-    }
+    }}
 }
 
 //se apertar pra cima, executar
@@ -305,6 +323,9 @@ function enter(){
         inivida = maxinivida;
     }else if(tela==3){
         if(battlemode==0){
+            if(fob == 2){
+                bagoverlay = true
+            }
             if(fob==1){
                 battlemode=1;
             }
@@ -356,9 +377,10 @@ function enter(){
 }
 //se apertar backspace executar!
 function backspace(){
-if(tela == 2){tela = 4}else if(tela = 4){tela =2}
-
+if(tela == 2){tela = 4}else if(tela == 4){tela =2}
+if(tela == 3){bagoverlay = false}
 }
+
 
 //desenha tudo na tela
 function draw(){
@@ -504,6 +526,24 @@ function draw(){
             ctx.textAlign = "start";
             ctx.font = "25px Arial";
             ctx.fillText(bmessage, 80, 400);
+        }
+        if(bagoverlay == true){
+            ctx.drawImage(chat,580,300,250,150)
+            if(bagovs == 1){
+                ctx.fillStyle = "rgb(184,241,142)";
+                ctx.fillRect(600, 310,100,40);
+                
+            }
+            if(bagovs == 2){
+                ctx.fillStyle = "rgb(184,241,142)";
+                ctx.fillRect(600, 350,170,40);
+                
+            }ctx.fillStyle = "black";
+            ctx.textAlign = "start";
+            ctx.font = "25px Arial";
+            ctx.fillText("Poção:"+bag[1], 600, 340);
+            ctx.fillText("Super Poção:"+bag[2], 600, 380);
+            
         }
     }
     if(tela == 4){

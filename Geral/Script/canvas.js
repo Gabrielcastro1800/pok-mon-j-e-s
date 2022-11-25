@@ -39,12 +39,17 @@ function Tackle(pok, bol){
         var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
         var damg = damage(meunvl, atk, power, dfs, type, pokeatual);
         inivida-=damg;
+        if(inivida<0){
+            inivida=0;
+        }
     }else if(bol==1){
         var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
         var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
         var damg = damage(ininvl, atk, power, dfs, type, inimigoatual);
         vida-=damg;
-        
+        if(vida<0){
+            vida=0;
+        }
     }
     bmessage = pokes[pok]+" levou "+damg.toFixed(0)+" de dano!";
 }
@@ -105,10 +110,6 @@ Statusg = [0,[45,49,49,65,65,45],[60,62,63,80,80,60],[80,82,83,100,100,80],[39,5
 //Types: parou no Fearow
 tipos=[0,[4,7],[4,7],[4,7],[1],[1],[1,9],[2],[2],[2],[11],[11],[11,9],[11,7],[11,7],[11,7],[0,9],[0,9],[0,9],[0],[0],[0,9],[0,9],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]];
 
-maxvida = 100;
-maxinivida = 100;
-vida = maxvida;
-inivida = maxinivida;
 meunvl = 5;
 ininvl = 5;
 click = 0;
@@ -266,6 +267,10 @@ function enter(){
         }
     }else if(tela==2){
         tela = 3;
+        maxvida = ((50+2*Statusg[pokeatual][0])*meunvl/100)+10+meunvl;
+        maxinivida = ((50+2*Statusg[inimigoatual][0])*ininvl/100)+10+ininvl;;
+        vida = maxvida;
+        inivida = maxinivida;
     }else if(tela==3){
         if(battlemode==0){
             if(fob==1){
@@ -295,10 +300,16 @@ function enter(){
                     moves[pokeatual][3](inimigoatual, 0);
                 }
             }else if(click==2){
-                do{
-                    inimigoatk = Math.floor(Math.random()*3);
-                }while(moves[inimigoatual][inimigoatk]==0);
+                if(inivida==0){
+                    tela = 2;
+                    inimigoatual = Math.ceil(Math.random()*151);
+                    click=0;
+                }else{
+                    do{
+                        inimigoatk = Math.floor(Math.random()*3);
+                    }while(moves[inimigoatual][inimigoatk]==0);
                     bmessage = pokes[inimigoatual]+" usou "+moves[inimigoatual][inimigoatk].name;
+                }
             }else if(click == 3){
                     moves[inimigoatual][inimigoatk](pokeatual, 1);
             }else if(click == 4){
@@ -435,10 +446,18 @@ function draw(){
             ctx.fillStyle = "black";
             ctx.textAlign = "start";
             ctx.font = "25px Arial";
-            ctx.fillText(moves[pokeatual][0].name, 100, 400);
-            ctx.fillText(moves[pokeatual][1].name, 300, 400);
-            ctx.fillText(moves[pokeatual][2].name, 100, 450);
-            ctx.fillText(moves[pokeatual][3].name, 300, 450);
+            if(moves[pokeatual][0]!=0){
+                ctx.fillText(moves[pokeatual][0].name, 100, 400);
+            }
+            if(moves[pokeatual][1]!=0){
+                ctx.fillText(moves[pokeatual][1].name, 300, 400);
+            }
+            if(moves[pokeatual][2]!=0){
+                ctx.fillText(moves[pokeatual][2].name, 100, 450);
+            }
+            if(moves[pokeatual][3]!=0){
+                ctx.fillText(moves[pokeatual][3].name, 300, 450);
+            }
 
         }else if(battlemode==2){
             ctx.fillStyle = "black";

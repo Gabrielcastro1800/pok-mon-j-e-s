@@ -77,6 +77,7 @@ var poke1 = new Image();
 var poke2 = new Image();
 var vspng = new Image();
 var barpng = new Image();
+var potionpng = new Image();
 var count = 1;
 var choose = 1;
 var message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selecionar!";
@@ -84,6 +85,7 @@ var poke = "";
 var escolha = false;
 var yn = 0;
 var fob = 1; //fob = fight or bag
+
 
 //transição
 var tela = 1;
@@ -385,8 +387,6 @@ function draw(){
         spr2.src = "Images/Sprites/"+inimigoatual+".png";
         ctx.drawImage(spr2, 450, 120, 350, 350);
         //desenhar versus
-        vspng.src ="Images/fundo/vs.png"
-        ctx.drawImage(vspng,230,100)
 
         //desenha a mensagem
         ctx.fillStyle = "black";
@@ -394,7 +394,9 @@ function draw(){
         ctx.font = "25px Arial";
         chat.src = "Images/fundo/chat.png";
         ctx.drawImage(chat, 17, 20, 500, 45);
+        ctx.drawImage(chat, 17, 70, 530, 45);
         ctx.fillText("Aperte 'Enter' para começar a batalha!", 50, 50);
+        ctx.fillText("Ou Aperte 'Backspace' para ir a lojinha!", 50, 100);
     }
     //Se for a tela 3 ele vai desenhar isso
     if(tela==3){
@@ -467,6 +469,12 @@ function draw(){
             ctx.font = "25px Arial";
             ctx.fillText(bmessage, 80, 400);
         }
+    }
+    if(tela == 4){
+        ctx.clearRect(0,0,800,500)
+        potionpng.src = "Images/fundo/potion.png";
+        ctx.drawImage(potionpng,0,100,100,100)
+
     }
     requestAnimationFrame(draw);
 }

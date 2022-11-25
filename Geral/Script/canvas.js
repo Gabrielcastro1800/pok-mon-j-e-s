@@ -88,6 +88,7 @@ var yn = 0;
 var fob = 1; //fob = fight or bag
 var money = 10
 var comp = 1
+var bag=[0,0]
 
 
 //transição
@@ -255,6 +256,16 @@ function down(){
 }
 //se apertar enter, executar
 function enter(){
+    if(tela == 4 && money >= 10){
+        if(comp = 1){
+            bag[1]+=1;
+            money = money-10
+        }
+        if(comp = 2 && money >= 50){
+            bag[2]+=1;
+            money = money-50
+        }
+    }
     if(tela==1){
         if(!escolha){
             switch(choose){

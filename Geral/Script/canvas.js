@@ -404,6 +404,7 @@ function gameover(){
     bag[2]=0
     bagoverlay = false;
     bagovs = 1;
+    battlemode =0;
  }
 }
 

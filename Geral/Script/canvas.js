@@ -100,6 +100,8 @@ bag[1]= 0
 bag[2]=0
 var bagoverlay = false;
 var bagovs = 1;
+var xp = 0;
+var level = 5;
 
 
 //transição

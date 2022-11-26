@@ -82,6 +82,10 @@ var vspng = new Image();
 var barpng = new Image();
 var potionpng = new Image();
 var spotionpng = new Image();
+var arena = new Image();
+var arena2 = new Image();
+var arena3 = new Image();
+var arenaescolher = 0;
 var count = 1;
 var choose = 1;
 var message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selecionar!";
@@ -321,6 +325,7 @@ function enter(){
                     pokeatual = 7;
                 }
                 inimigoatual = Math.ceil(Math.random()*46);//151 para todos
+                arenaescolher = Math.ceil(Math.random()*3);
                 escolha = false;
             }
         }
@@ -368,6 +373,7 @@ function enter(){
                     battlemode=0;
                     bmessage = "";
                     inimigoatual = Math.ceil(Math.random()*46);//151 para todos
+                    arenaescolher = Math.ceil(Math.random()*3);
                     click=0;
                 }else{
                     do{
@@ -487,15 +493,25 @@ function draw(){
     //Se for a tela 3 ele vai desenhar isso
     if(tela==3){
         ctx.clearRect(0, 0, 800, 500)
+        arena.src = "Images/fundo/arena.png"
+        arena2.src = "Images/fundo/arena2.png"
+        arena3.src = "Images/fundo/arena3.png"
+
+        if(arenaescolher == 1){
+        ctx.drawImage(arena,0,0,800,350)}
+        if(arenaescolher == 2){
+            ctx.drawImage(arena2,0,0,800,350)}
+            if(arenaescolher == 3){
+                ctx.drawImage(arena3,0,0,800,350)}
         //desenhar pokémons
         spr1.src = "Images/Sprites/"+pokeatual+".png";
         ctx.save();
         ctx.translate(xplayer, 120);
         ctx.scale(-1, 1);
-        ctx.drawImage(spr1, 0, 0, 200, 200);
+        ctx.drawImage(spr1, 0, 50, 200, 200);
         ctx.restore();
         spr2.src = "Images/Sprites/"+inimigoatual+".png";
-        ctx.drawImage(spr2, xini, 120, 200, 200);
+        ctx.drawImage(spr2, xini, 160, 200, 200);
         
 
         //desenhar barras de vida

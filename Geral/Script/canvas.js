@@ -39,6 +39,7 @@ function Tackle(pok, bol){
         var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
         var damg = damage(meunvl, atk, power, dfs, type, pokeatual);
         inivida-=damg;
+        bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
         if(inivida<0){
             inivida=0;
         }
@@ -47,11 +48,13 @@ function Tackle(pok, bol){
         var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
         var damg = damage(ininvl, atk, power, dfs, type, inimigoatual);
         vida-=damg;
+        bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
         if(vida<0){
             vida=0;
         }
     }
-    bmessage = pokes[pok]+" levou "+damg.toFixed(0)+" de dano!";
+
+
 }
 
 function LeechSeed(pok){
@@ -112,7 +115,7 @@ var click;
 var inimigoatk = 0;
 pokes = [0,"Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetch'd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
 //moves: parou no Bulbasaur
-moves = [0,[Tackle, LeechSeed, PoisonPowder, RazorLeaf],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],
+moves = [0,[Tackle, LeechSeed, PoisonPowder, RazorLeaf],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],
 [Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0]];
 //status: parou no Wartotle
 Statusg = [0,[45,49,49,65,65,45],[60,62,63,80,80,60],[80,82,83,100,100,80],[39,52,43,60,50,65],[58,64,58,80,65,80],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],
@@ -193,7 +196,7 @@ function left(){
 
 //funçoes de items
 function potion(){
-    vida+=20;
+    vida = vida+20;
     if(vida > maxvida){
         vida = maxvida
     }
@@ -317,7 +320,7 @@ function enter(){
                 }else if(choose == 3){
                     pokeatual = 7;
                 }
-                inimigoatual = Math.ceil(Math.random()*151);
+                inimigoatual = Math.ceil(Math.random()*46);//151 para todos
                 escolha = false;
             }
         }
@@ -364,7 +367,7 @@ function enter(){
                     money += 5;
                     battlemode=0;
                     bmessage = "";
-                    inimigoatual = Math.ceil(Math.random()*151);
+                    inimigoatual = Math.ceil(Math.random()*46);//151 para todos
                     click=0;
                 }else{
                     do{
@@ -386,11 +389,29 @@ function backspace(){
 if(tela == 2){tela = 4}else if(tela == 4){tela =2}
 if(tela == 3){bagoverlay = false}
 }
+//se o seu pokemon morrer executar
+function gameover(){
+ if(vida <= 0){
+    money = 10;
+    tela = 1;
+    vida = maxvida
+    message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selecionar!";
+    bmessage = "";
+    fob = 1; //fob = fight or bag
+    money = 10
+    comp = 1
+    bag[1]= 0
+    bag[2]=0
+    bagoverlay = false;
+    bagovs = 1;
+ }
+}
 
 
 //desenha tudo na tela
 function draw(){
-    
+    gameover()
+
     //Se for a tela 1 ele vai desenhar isso
     if(tela == 1){
         ctx.clearRect(0, 0, 800, 500);

@@ -85,6 +85,7 @@ var spotionpng = new Image();
 var arena = new Image();
 var arena2 = new Image();
 var arena3 = new Image();
+var mart = new Image();
 var arenaescolher = 0;
 var count = 1;
 var choose = 1;
@@ -207,7 +208,12 @@ function potion(){
         vida = maxvida
     }
 }
-
+function spotion(){
+    vida = vida+50;
+    if(vida > maxvida){
+        vida = maxvida
+    }
+}
 //se apertar pra direita, executar
 function right(){
     if(tela == 4){
@@ -471,6 +477,7 @@ function draw(){
     //Se for a tela 2 ele vai desenhar isso
     if(tela == 2){
         ctx.clearRect(0, 0, 800, 500);
+        
         //Desenha os pokemons
         spr1.src = "Images/Sprites/"+pokeatual+".png";
         ctx.save();
@@ -594,6 +601,7 @@ function draw(){
     }
     if(tela == 4){
         ctx.clearRect(0,0,800,500)
+        ctx.drawImage(mart,0,0,800,500)
         if(comp == 1){
             ctx.fillStyle = "rgb(184,241,142)";
             ctx.fillRect(15, 115,80,80);
@@ -602,6 +610,7 @@ function draw(){
                 ctx.fillStyle = "rgb(184,241,142)";
                 ctx.fillRect(115, 115,80,80);
                 }
+        mart.src = "images/fundo/pokemart.jpg"
         potionpng.src = "Images/fundo/potion.png";
         spotionpng.src = "Images/fundo/super-potion.png";
         ctx.drawImage(potionpng,0,100,100,100)

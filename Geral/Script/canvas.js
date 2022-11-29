@@ -60,6 +60,17 @@ function Splash(bol, aaccuracy, baccuracy){
     bmessage = "Nada aconteceu!";
 }
 
+function Metronome(bol, aaccuracy, baccuracy){
+    var move;
+    do{
+        var randp = Math.ceil(Math.random()*151);
+        var randa = Math.floor(Math.random()*4);
+        move = moves[randp][randa];
+    }while(move==0);
+    moves[randp][randa](bol, aaccuracy, baccuracy);
+    bmessage = moves[randp][randa].name+" foi usado! "+bmessage;
+}
+
 //fisicos
 function Tackle(bol, aaccuracy, baccuracy){
     var accuracy = 1;
@@ -86,6 +97,136 @@ function Tackle(bol, aaccuracy, baccuracy){
         }else if(bol==1){
             bmessage = pokes[inimigoatual]+" errou o ataque!";
         }
+    }
+}
+
+function Pound(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 40;
+    var type = 0;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            var atk = ((50+2*Statusg[pokeatual][1]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, pokeatual, 0, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, inimigoatual, 0, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function Peck(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 35;
+    var type = 9;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            var atk = ((50+2*Statusg[pokeatual][1]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, pokeatual, 0, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, inimigoatual, 0, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function DrillPeck(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 80;
+    var type = 9;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            var atk = ((50+2*Statusg[pokeatual][1]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, pokeatual, 0, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, inimigoatual, 0, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function QuickAttack(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 40;
+    var type = 0;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            var atk = ((50+2*Statusg[pokeatual][1]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, pokeatual, 0, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, inimigoatual, 0, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function Swift(bol, aaccuracy, baccuracy){
+    var power = 60;
+    var type = 0;
+    if(bol==0){
+        var atk = ((50+2*Statusg[pokeatual][1]+5)*meunvl/100);
+        var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
+        var damg = damage(meunvl, atk, power, dfs, type, pokeatual, 0, bol);
+        inivida-=damg;
+        bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+    }else if(bol==1){
+        var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
+        var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
+        var damg = damage(ininvl, atk, power, dfs, type, inimigoatual, 0, bol);
+        vida-=damg;
+        bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
     }
 }
 
@@ -204,6 +345,235 @@ function Bite(bol, aaccuracy, baccuracy){
     }
 }
 
+function Wrap(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 15;
+    var type = 0;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            iwrap = true;
+            var atk = ((50+2*Statusg[pokeatual][1]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, pokeatual, 0, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            mwrap = true;
+            var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, inimigoatual, 0, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function HyperFang(bol, aaccuracy, baccuracy){
+    var accuracy = 0.9;
+    var power = 80;
+    var type = 0;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            if(Math.random()>0.7){
+                flinch = true;
+            }
+            var atk = ((50+2*Statusg[pokeatual][1]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, pokeatual, 0, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, inimigoatual, 0, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function SuperFang(bol, aaccuracy, baccuracy){
+    var accuracy = 0.9;
+    var type = 0;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            var damg = maxinivida/2;
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            var damg = maxvida/2;
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function PoisonSting(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 15;
+    var type = 7;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            if(Math.random()>0.7 && tipos[inimigoatual][1] != 16 && tipos[inimigoatual][1] != 7 && tipos[inimigoatual][0] != 7){
+                iestado = 4;
+            }
+            var atk = ((50+2*Statusg[pokeatual][1]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, pokeatual, 0, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            if(Math.random()>0.7 && tipos[pokeatual][1] != 16 && tipos[pokeatual][1] != 7 && tipos[pokeatual][0] != 7){
+                mestado = 4;
+            }
+            var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, inimigoatual, 0, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function FuryAttack(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 15;
+    var type = 0;
+    var rand;
+    var ttdano = 0;
+    do{
+        rand = Math.ceil(Math.random()*5);
+    }while(rand < 2);
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        for(var i=0;i<rand;i++){
+            if(bol==0){
+                var atk = ((50+2*Statusg[pokeatual][1]+5)*meunvl/100);
+                var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
+                var damg = damage(meunvl, atk, power, dfs, type, pokeatual, 0, bol);
+                inivida-=damg;
+                ttdano+=damg;
+                bmessage = pokes[inimigoatual]+" levou "+ttdano.toFixed(0)+" de dano, com "+rand+" ataques!";
+            }else if(bol==1){
+                var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
+                var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
+                var damg = damage(ininvl, atk, power, dfs, type, inimigoatual, 0, bol);
+                vida-=damg;
+                ttdano+=damg;
+                bmessage = pokes[pokeatual]+" levou "+ttdano.toFixed(0)+" de dano, com "+rand+" ataques!";
+            }
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function DoubleSlap(bol, aaccuracy, baccuracy){
+    var accuracy = 0.85;
+    var power = 15;
+    var type = 0;
+    var rand;
+    var ttdano = 0;
+    do{
+        rand = Math.ceil(Math.random()*5);
+    }while(rand < 2);
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        for(var i=0;i<rand;i++){
+            if(bol==0){
+                var atk = ((50+2*Statusg[pokeatual][1]+5)*meunvl/100);
+                var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
+                var damg = damage(meunvl, atk, power, dfs, type, pokeatual, 0, bol);
+                inivida-=damg;
+                ttdano+=damg;
+                bmessage = pokes[inimigoatual]+" levou "+ttdano.toFixed(0)+" de dano, com "+rand+" ataques!";
+            }else if(bol==1){
+                var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
+                var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
+                var damg = damage(ininvl, atk, power, dfs, type, inimigoatual, 0, bol);
+                vida-=damg;
+                ttdano+=damg;
+                bmessage = pokes[pokeatual]+" levou "+ttdano.toFixed(0)+" de dano, com "+rand+" ataques!";
+            }
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function FurySwipes(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 15;
+    var type = 0;
+    var rand;
+    var ttdano = 0;
+    do{
+        rand = Math.ceil(Math.random()*5);
+    }while(rand < 2);
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        for(var i=0;i<rand;i++){
+            if(bol==0){
+                var atk = ((50+2*Statusg[pokeatual][1]+5)*meunvl/100);
+                var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
+                var damg = damage(meunvl, atk, power, dfs, type, pokeatual, 0, bol);
+                inivida-=damg;
+                ttdano+=damg;
+                bmessage = pokes[inimigoatual]+" levou "+ttdano.toFixed(0)+" de dano, com "+rand+" ataques!";
+            }else if(bol==1){
+                var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
+                var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
+                var damg = damage(ininvl, atk, power, dfs, type, inimigoatual, 0, bol);
+                vida-=damg;
+                ttdano+=damg;
+                bmessage = pokes[pokeatual]+" levou "+ttdano.toFixed(0)+" de dano, com "+rand+" ataques!";
+            }
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
 function BodySlam(bol, aaccuracy, baccuracy){
     var accuracy = 1;
     var power = 85;
@@ -262,6 +632,54 @@ function Earthquake(bol, aaccuracy, baccuracy){
             bmessage = pokes[pokeatual]+" errou o ataque!";
         }else if(bol==1){
             bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function Dig(bol, aaccuracy, baccuracy){
+    if(bol==0){
+        if(mwait == true){
+            var accuracy = 1;
+            var power = 100;
+            var type = 8;
+            var chance = accuracy*aaccuracy/baccuracy;
+            if(Math.random()<chance){
+                    var atk = ((50+2*Statusg[pokeatual][1]+5)*meunvl/100);
+                    var dfs = ((50+2*Statusg[inimigoatual][2]+5)*ininvl/100);
+                    var damg = damage(meunvl, atk, power, dfs, type, pokeatual, 0, bol);
+                    inivida-=damg;
+                    bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+                    maccuracy-=1000;
+            }else{
+                bmessage = pokes[pokeatual]+" errou o ataque!";
+            }
+            mwait = false;
+        }else{
+            mwait = true;
+            maccuracy+=1000;
+            bmessage = pokes[pokeatual]+" entrou na terra!";
+        }
+    }else if(bol==1){
+        if(iwait == true){
+            var accuracy = 1;
+            var power = 100;
+            var type = 8;
+            var chance = accuracy*aaccuracy/baccuracy;
+            if(Math.random()<chance){
+                    var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
+                    var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
+                    var damg = damage(ininvl, atk, power, dfs, type, inimigoatual, 0, bol);
+                    vida-=damg;
+                    bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+                    iaccuracy-=1000;
+            }else{
+                bmessage = pokes[inimigoatual]+" errou o ataque!";
+            }
+            iwait = false;
+        }else{
+            iwait = true;
+            iaccuracy+=1000;
+            bmessage = pokes[inimigoatual]+" entrou na terra!";
         }
     }
 }
@@ -399,13 +817,147 @@ function SleepPowder(bol, aaccuracy, baccuracy){
     }
 }
 
+function Sing(bol, aaccuracy, baccuracy){
+    var accuracy = 0.55;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0 && iestado == 0){
+            iestado = 5;
+            bmessage = pokes[inimigoatual]+" está dormindo";
+        }else if(bol==1 && mestado == 0){
+            mestado = 5;
+            bmessage = pokes[pokeatual]+"  está dormindo";
+        }else{
+            bmessage = "Não rolou";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function ThunderWave(bol, aaccuracy, baccuracy){
+    var accuracy = 0.9;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0 && iestado == 0){
+            iestado = 3;
+            bmessage = pokes[inimigoatual]+" está paralizado";
+        }else if(bol==1 && mestado == 0){
+            mestado = 3;
+            bmessage = pokes[pokeatual]+"  está paralizado";
+        }else{
+            bmessage = "Não rolou";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
 function Harden(bol, aaccuracy, baccuracy){
     if(bol==0){
-        mboost[1]+=1;
-        bmessage = pokes[pokeatual]+" endureceu";
+        if(mboost[1]<6){
+            mboost[1]+=1;
+            bmessage = pokes[pokeatual]+" endureceu";
+        }else{
+            bmessage = pokes[pokeatual]+" endureceu o limite";
+        }
     }else if(bol==1){
-        iboost[1]+=1;
-        bmessage = pokes[inimigoatual]+"  endureceu";
+        if(iboost[1]<6){
+            iboost[1]+=1;
+            bmessage = pokes[inimigoatual]+" endureceu";
+        }else{
+            bmessage = pokes[inimigoatual]+" endureceu o limite";
+        }
+    }
+}
+
+function DefenseCurl(bol, aaccuracy, baccuracy){
+    if(bol==0){
+        if(mboost[1]<6){
+            mboost[1]+=1;
+            bmessage = pokes[pokeatual]+" endureceu";
+        }else{
+            bmessage = pokes[pokeatual]+" endureceu o limite";
+        }
+    }else if(bol==1){
+        if(iboost[1]<6){
+            iboost[1]+=1;
+            bmessage = pokes[inimigoatual]+" endureceu";
+        }else{
+            bmessage = pokes[inimigoatual]+" endureceu o limite";
+        }
+    }
+}
+
+function Leer(bol, aaccuracy, baccuracy){
+    if(bol==0){
+        if(iboost[1]>-6){
+            iboost[1]-=1;
+            bmessage = pokes[inimigoatual]+" perdeu defesa";
+        }else{
+            bmessage = pokes[inimigoatual]+" perdeu toda defesa";
+        }
+    }else if(bol==1){
+        if(mboost[1]>-6){
+            mboost[1]-=1;
+            bmessage = pokes[pokeatual]+"  perdeu defesa";
+        }else{
+            bmessage = pokes[pokeatual]+" perdeu toda defesa";
+        }
+    }
+}
+
+function Growl(bol, aaccuracy, baccuracy){
+    if(bol==0){
+        if(iboost[0]>-6){
+            iboost[0]-=1;
+            bmessage = pokes[inimigoatual]+" perdeu ataque";
+        }else{
+            bmessage = pokes[inimigoatual]+" perdeu todo ataque";
+        }
+    }else if(bol==1){
+        if(mboost[0]>-6){
+            mboost[0]-=1;
+            bmessage = pokes[pokeatual]+"  perdeu ataque";
+        }else{
+            bmessage = pokes[pokeatual]+" perdeu todo ataque";
+        }
+    }
+}
+
+function SandAttack(bol, aaccuracy, baccuracy){
+    if(bol==0){
+        if(iaccuracy>50){
+            iaccuracy-=10;
+            bmessage = pokes[inimigoatual]+" perdeu precisão";
+        }else{
+            bmessage = pokes[inimigoatual]+"  perdeu toda precisão";
+        }
+    }else if(bol==1){
+        if(maccuracy>50){
+            maccuracy-=10;
+            bmessage = pokes[pokeatual]+"  perdeu precisão";
+        }else{
+            bmessage = pokes[pokeatual]+"  perdeu toda precisão";
+        }
+    }
+}
+
+function ConfuseRay(bol, aaccuracy, baccuracy){
+    if(bol==0){
+        mconfuso = true;
+        bmessage = pokes[inimigoatual]+" está confuso";
+    }else if(bol==1){
+        iconfuso = false;
+        bmessage = pokes[pokeatual]+"  está confuso";
     }
 }
 
@@ -438,6 +990,62 @@ function RazorLeaf(bol, aaccuracy, baccuracy){
     }
 }
 
+function Gust(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 40;
+    var type = 9;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            var atk = ((50+2*Statusg[pokeatual][3]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][4]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, inimigoatual, 1, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            var atk = ((50+2*Statusg[inimigoatual][3]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][4]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 1, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function WingAttack(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 60;
+    var type = 9;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            var atk = ((50+2*Statusg[pokeatual][3]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][4]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, inimigoatual, 1, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            var atk = ((50+2*Statusg[inimigoatual][3]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][4]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 1, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
 function Ember(bol, aaccuracy, baccuracy){
     var accuracy = 1;
     var power = 40;
@@ -445,8 +1053,8 @@ function Ember(bol, aaccuracy, baccuracy){
     var chance = accuracy*aaccuracy/baccuracy;
     if(Math.random()<chance){
         if(bol==0){
-            if(Math.random()>0.9){
-                mestado = 1;
+            if(Math.random()>0.9 && iestado==0){
+                iestado = 1;
             }
             var atk = ((50+2*Statusg[pokeatual][3]+5)*meunvl/100);
             var dfs = ((50+2*Statusg[inimigoatual][4]+5)*ininvl/100);
@@ -454,8 +1062,76 @@ function Ember(bol, aaccuracy, baccuracy){
             inivida-=damg;
             bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
         }else if(bol==1){
-            if(Math.random()>0.9){
-                iestado = 1;
+            if(Math.random()>0.9 && mestado==0){
+                mestado = 1;
+            }
+            var atk = ((50+2*Statusg[inimigoatual][3]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][4]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 1, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function ThunderShock(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 40;
+    var type = 3;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            if(Math.random()>0.9 && iestado==0){
+                iestado = 3;
+            }
+            var atk = ((50+2*Statusg[pokeatual][3]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][4]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, inimigoatual, 1, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            if(Math.random()>0.9 && mestado==0){
+                mestado = 3;
+            }
+            var atk = ((50+2*Statusg[inimigoatual][3]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][4]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 1, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function Thunder(bol, aaccuracy, baccuracy){
+    var accuracy = 0.7;
+    var power = 110;
+    var type = 3;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            if(Math.random()>0.7 && iestado==0){
+                iestado = 3;
+            }
+            var atk = ((50+2*Statusg[pokeatual][3]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][4]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, inimigoatual, 1, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            if(Math.random()>0.7 && mestado==0){
+                mestado = 3;
             }
             var atk = ((50+2*Statusg[inimigoatual][3]+5)*ininvl/100);
             var dfs = ((50+2*Statusg[pokeatual][4]+5)*meunvl/100);
@@ -535,8 +1211,42 @@ function Flamethrower(bol, aaccuracy, baccuracy){
     var chance = accuracy*aaccuracy/baccuracy;
     if(Math.random()<chance){
         if(bol==0){
-            if(Math.random()>0.9){
+            if(Math.random()>0.9 && iestado==0){
+                iestado = 1;
+            }
+            var atk = ((50+2*Statusg[pokeatual][3]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][4]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, inimigoatual, 1, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            if(Math.random()>0.9 && mestado==0){
                 mestado = 1;
+            }
+            var atk = ((50+2*Statusg[inimigoatual][3]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][4]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 1, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function Psybeam(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 65;
+    var type = 10;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            if(Math.random()>0.9){
+                iconfuso = true;
             }
             var atk = ((50+2*Statusg[pokeatual][3]+5)*meunvl/100);
             var dfs = ((50+2*Statusg[inimigoatual][4]+5)*ininvl/100);
@@ -545,7 +1255,75 @@ function Flamethrower(bol, aaccuracy, baccuracy){
             bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
         }else if(bol==1){
             if(Math.random()>0.9){
-                iestado = 1;
+                mconfuso = true;
+            }
+            var atk = ((50+2*Statusg[inimigoatual][3]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][4]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 1, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function Confusion(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 50;
+    var type = 10;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            if(Math.random()>0.9){
+                iconfuso = true;
+            }
+            var atk = ((50+2*Statusg[pokeatual][3]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][4]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, inimigoatual, 1, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            if(Math.random()>0.9){
+                mconfuso = true;
+            }
+            var atk = ((50+2*Statusg[inimigoatual][3]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][4]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 1, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
+function Acid(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 40;
+    var type = 7;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            if(Math.random()>0.9){
+                iboost[3]--;
+            }
+            var atk = ((50+2*Statusg[pokeatual][3]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][4]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, inimigoatual, 1, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            if(Math.random()>0.9){
+                mboost[3]--;
             }
             var atk = ((50+2*Statusg[inimigoatual][3]+5)*ininvl/100);
             var dfs = ((50+2*Statusg[pokeatual][4]+5)*meunvl/100);
@@ -652,6 +1430,36 @@ function HydroPump(bol, aaccuracy, baccuracy){
     }
 }
 
+function HyperBeam(bol, aaccuracy, baccuracy){
+    var accuracy = 1;
+    var power = 120;
+    var type = 0;
+    var chance = accuracy*aaccuracy/baccuracy;
+    if(Math.random()<chance){
+        if(bol==0){
+            mrecharge = true;
+            var atk = ((50+2*Statusg[pokeatual][3]+5)*meunvl/100);
+            var dfs = ((50+2*Statusg[inimigoatual][4]+5)*ininvl/100);
+            var damg = damage(meunvl, atk, power, dfs, type, inimigoatual, 1, bol);
+            inivida-=damg;
+            bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }else if(bol==1){
+            irecharge = true;
+            var atk = ((50+2*Statusg[inimigoatual][3]+5)*ininvl/100);
+            var dfs = ((50+2*Statusg[pokeatual][4]+5)*meunvl/100);
+            var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 1, bol);
+            vida-=damg;
+            bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
+        }
+    }else{
+        if(bol==0){
+            bmessage = pokes[pokeatual]+" errou o ataque!";
+        }else if(bol==1){
+            bmessage = pokes[inimigoatual]+" errou o ataque!";
+        }
+    }
+}
+
 //inicio
 var canvas = document.getElementById("inicio");
 var ctx = canvas.getContext("2d");
@@ -710,12 +1518,18 @@ var meuestado = new Image();
 var iniestado = new Image();
 var mrecharge = false;
 var irecharge = false;
+var mconfuso = false;
+var iconfuso = false;
+var mwrap = false;
+var iwrap = false;
 var flinch = false;
+var iwait = false;
+var mwait = false;
 //errar e acertar
 var maccuracy = 1, mevasion = 1, iaccuracy = 1, ievasion = 1, a = 1;
 pokes = [0,"Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetch'd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
-//moves: parou no Metapod
-moves = [0,[Tackle, LeechSeed, PoisonPowder, RazorLeaf],[SleepPowder, LeechSeed, PoisonPowder, RazorLeaf],[SleepPowder, LeechSeed, PoisonPowder, SolarBeam],[Scratch, Ember, 0, 0],[Slash, Ember, 0, 0],[FireBlast, Flamethrower, BodySlam, Earthquake],[Tackle, Bubble, Bite, 0],[Tackle, WaterGun, Bite, MegaPunch],[HydroPump, WaterGun, Bite, MegaPunch],[Tackle, 0, 0, 0],[Tackle, Harden, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],
+//moves: parou no Sandshrew
+moves = [0,[Tackle, LeechSeed, PoisonPowder, RazorLeaf],[SleepPowder, LeechSeed, PoisonPowder, RazorLeaf],[SleepPowder, LeechSeed, PoisonPowder, SolarBeam],[Scratch, Ember, 0, 0],[Slash, Ember, 0, 0],[FireBlast, Flamethrower, BodySlam, Earthquake],[Tackle, Bubble, Bite, 0],[Tackle, WaterGun, Bite, MegaPunch],[HydroPump, WaterGun, Bite, MegaPunch],[Tackle, 0, 0, 0],[Tackle, Harden, 0, 0],[Confusion, PoisonPowder, Psybeam, SleepPowder],[PoisonSting, 0, 0, 0],[PoisonSting, Harden, 0, 0],[PoisonSting, Harden, Toxic, FuryAttack],[Gust, QuickAttack, SandAttack, 0],[Gust, QuickAttack, SandAttack, WingAttack],[HyperBeam, QuickAttack, SandAttack, WingAttack],[Tackle, QuickAttack, 0, 0],[SuperFang, QuickAttack, HyperFang, 0],[Peck, 0, 0, 0],[Peck, FuryAttack, DrillPeck, 0],[Leer, Wrap, PoisonSting, 0],[Leer, Wrap, PoisonSting, Acid],[ThunderShock, ThunderWave, Growl, QuickAttack],[Thunder, ThunderWave, MegaPunch, QuickAttack],[Scratch, SandAttack, PoisonSting, 0],[Swift, FurySwipes, PoisonSting, Dig],[Tackle, PoisonSting, Bite, 0],[Tackle, PoisonSting, Bite, FurySwipes],[Earthquake, Toxic, BodySlam, FurySwipes],[Tackle, PoisonSting, Bite, 0],[Tackle, PoisonSting, Bite, FurySwipes],[Earthquake, Toxic, BodySlam, FurySwipes],[Growl, Sing, DefenseCurl, Metronome],[Growl, Sing, DoubleSlap, Metronome],[Ember, QuickAttack, ConfuseRay, 0],[Swift, QuickAttack, ConfuseRay, Flamethrower],[Sing, Pound, DefenseCurl, DoubleSlap],[Sing, BodySlam, DefenseCurl, DoubleSlap],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Tackle, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],
 [Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0],[Splash, 0, 0, 0]];
 //status: parou no Nidoking
 Statusg = [0,[45,49,49,65,65,45],[60,62,63,80,80,60],[80,82,83,100,100,80],[39,52,43,60,50,65],[58,64,58,80,65,80],[78,84,78,109,85,100],[44,48,65,50,64,43],[59,63,80,65,80,58],[79,83,100,85,105,78],[45,30,35,20,20,45],[50,20,55,25,25,30],[60,45,50,90,80,70],[40,35,30,20,20,50],[45,25,50,25,25,35],[65,90,40,45,80,75],[40,45,40,35,35,56],[63,60,55,50,50,71],[83,80,75,70,70,101],[30,56,35,25,35,72],[55,81,60,50,70,97],[40,60,30,31,31,70],[65,90,65,61,61,100],[35,60,44,40,54,55],[60,95,69,65,79,80],[35,55,40,50,50,90],[60,90,55,90,80,110],[50,75,85,20,30,40],[75,100,110,45,55,65],[55,47,52,40,40,41],[70,62,67,55,55,56],[90,92,87,75,85,76],[46,57,40,40,40,50],[61,72,57,55,55,65],[81,102,77,85,75,85],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],[50,50,50,50,50,50],
@@ -930,7 +1744,7 @@ function enter(){
                 }else if(choose == 3){
                     pokeatual = 7;
                 }
-                inimigoatual = 11//Math.ceil(Math.random()*151);//151 para todos
+                inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                 arenaescolher = Math.ceil(Math.random()*3);
                 escolha = false;
             }
@@ -945,6 +1759,14 @@ function enter(){
         iniseed = false;
         mestado = 0;
         iestado = 0;
+        mconfuso = false;
+        iconfuso = false; 
+        mboost=[0,0,0,0,0];
+        iboost=[0,0,0,0,0];
+        mwrap = false;
+        iwrap = false;
+        iwait = false;
+        mwait = false;
     }else if(tela==3){
         if(battlemode==0){
             if(fob == 2){
@@ -980,17 +1802,22 @@ function enter(){
                         a = Math.random();
                     }
                     if(a > .5){
-                        if(xatk==0 && yatk==0){
-                            moves[pokeatual][0](0,maccuracy,iaccuracy);
-                        }else if(xatk==1 && yatk==0){
-                            moves[pokeatual][1](0,maccuracy,iaccuracy);
-                        }else if(xatk==0 && yatk==1){
-                            moves[pokeatual][2](0,maccuracy,iaccuracy);
-                        }else if(xatk==1 && yatk==1){
-                            moves[pokeatual][3](0,maccuracy,iaccuracy);
-                        }
-                        if(inivida<0){
-                            inivida=0;
+                        if(!mconfuso || mconfuso && Math.random()>0.66){
+                            if(xatk==0 && yatk==0){
+                                moves[pokeatual][0](0,maccuracy,iaccuracy);
+                            }else if(xatk==1 && yatk==0){
+                                moves[pokeatual][1](0,maccuracy,iaccuracy);
+                            }else if(xatk==0 && yatk==1){
+                                moves[pokeatual][2](0,maccuracy,iaccuracy);
+                            }else if(xatk==1 && yatk==1){
+                                moves[pokeatual][3](0,maccuracy,iaccuracy);
+                            }
+                            if(inivida<0){
+                                inivida=0;
+                            }
+                        }else{
+                            bmessage = pokes[pokeatual]+" se bateu por estar confuso!";
+                            vida-=5;
                         }
                         a = 1;
                     }else{
@@ -1016,9 +1843,11 @@ function enter(){
                     }
                 }else{
                     if(!flinch){
-                        do{
-                            inimigoatk = Math.floor(Math.random()*3);
-                        }while(moves[inimigoatual][inimigoatk]==0);
+                        if(!iwait){
+                            do{
+                                inimigoatk = Math.floor(Math.random()*4);
+                            }while(moves[inimigoatual][inimigoatk]==0);
+                        }
                         bmessage = pokes[inimigoatual]+" usou "+moves[inimigoatual][inimigoatk].name;
                     }else{
                         bmessage = pokes[inimigoatual]+" exitou!";
@@ -1038,9 +1867,14 @@ function enter(){
                             a = Math.random();
                         }
                         if(a > .5){
-                            moves[inimigoatual][inimigoatk](1,iaccuracy,maccuracy);
-                            if(vida<0){
-                                vida=0;
+                            if(!iconfuso || iconfuso && Math.random()>0.66){
+                                moves[inimigoatual][inimigoatk](1,iaccuracy,maccuracy);
+                                if(vida<0){
+                                    vida=0;
+                                }
+                            }else{
+                                bmessage = pokes[inimigoatual]+" se bateu por estar confuso!";
+                                inivida-=5;
                             }
                                 a = 1;
                         }else{
@@ -1055,6 +1889,7 @@ function enter(){
                     bmessage = pokes[inimigoatual]+" está em um sono profundo";
                 }
             }else if(click == 4){
+                if(vida > 0){
                 if(mseed == true){
                     vida-=maxvida/8;
                     inivida+=maxvida/8;
@@ -1062,6 +1897,12 @@ function enter(){
                 if(iniseed == true){
                     inivida-=maxinivida/8;
                     vida+=maxinivida/8;
+                }
+                if(mwrap == true){
+                    vida-=maxvida/8;
+                }
+                if(iwrap == true){
+                    inivida-=maxinivida/8;
                 }
                 if(mestado == 4){
                     vida-=maxvida/8;
@@ -1076,16 +1917,29 @@ function enter(){
                     inivida-=maxvida/16;
                 }
                 bmessage = "Dano extra";
+                if(vida>maxvida){
+                    vida=maxvida
+                }
+                if(inivida>maxinivida){
+                    inivida=maxinivida
+                }
+            }
             }else if(click == 5){
                 gameover();
                 if(mrecharge == false){
+                    if(!mwait){
                     click=0;
                     battlemode = 0;
+                    }else{
+                        click=0;
+                        battlemode = 2;
+                        bmessage = pokes[pokeatual]+" usou Dig!";
+                    }
                 }else{
                     mrecharge = false;
                     click=1;
                     battlemode = 2;
-                    bmessage = " Esta recarregando"
+                    bmessage = "Está recarregando";
                 }
             }
         }
@@ -1114,6 +1968,9 @@ function gameover(){
     bagoverlay = false;
     bagovs = 1;
     battlemode =0;
+    mboost=[0,0,0,0,0];
+    iboost=[0,0,0,0,0];
+    mconfuso = true;
  }
 }
 
@@ -1210,10 +2067,10 @@ function draw(){
         ctx.save();
         ctx.translate(xplayer, 120);
         ctx.scale(-1, 1);
-        ctx.drawImage(spr1, 0, 50, 200, 200);
+        if(!mwait)ctx.drawImage(spr1, 0, 50, 200, 200);
         ctx.restore();
         spr2.src = "Images/Sprites/"+inimigoatual+".png";
-        ctx.drawImage(spr2, xini, 160, 200, 200);
+        if(!iwait)ctx.drawImage(spr2, xini, 160, 200, 200);
         
 
         //desenhar barras de vida

@@ -3094,8 +3094,6 @@ var yatk = 0;
 var xatk = 0;
 var bmessage;
 var battlemode = 0;
-var xplayer = 300;
-var xini = 500;
 var click;
 var inimigoatk = 0;
 var meuatk = 0;
@@ -3505,8 +3503,8 @@ function enter(){
                         }while(ininvl<meunvl-3);
                         meuxp+=10*ininvl;
                         if(meuxp>=maxxp){
+                            meuxp=meuxp-maxxp;
                             maxxp=maxxp*2;
-                            meuxp=0;
                             meunvl++;
                         }
                         click=0;
@@ -3607,8 +3605,8 @@ function enter(){
                     }while(ininvl<meunvl-3);
                     meuxp+=10*ininvl;
                     if(meuxp>=maxxp){
+                        meuxp=meuxp-maxxp;
                         maxxp=maxxp*2;
-                        meuxp=0;
                         meunvl++;
                     }
                     click=0;
@@ -3734,8 +3732,8 @@ function enter(){
                         }while(ininvl<meunvl-3);
                         meuxp+=10*ininvl;
                         if(meuxp>=maxxp){
+                            meuxp=meuxp-maxxp;
                             maxxp=maxxp*2;
-                            meuxp=0;
                             meunvl++;
                         }
                         click=0;
@@ -3791,8 +3789,8 @@ function enter(){
                     }while(ininvl<meunvl-3);
                     meuxp+=10*ininvl;
                     if(meuxp>=maxxp){
+                        meuxp=meuxp-maxxp;
                         maxxp=maxxp*2;
-                        meuxp=0;
                         meunvl++;
                     }
                     click=0;
@@ -3813,8 +3811,8 @@ function enter(){
                         }while(ininvl<meunvl-3);
                         meuxp+=10*ininvl;
                         if(meuxp>=maxxp){
+                            meuxp=meuxp-maxxp;
                             maxxp=maxxp*2;
-                            meuxp=0;
                             meunvl++;
                         }
                         click=0;

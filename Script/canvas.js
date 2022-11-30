@@ -4001,7 +4001,6 @@ function draw(){
 
         //desenhar contagem
         backcount.src="Images/fundo/counter.png";
-        ctx.ImageAlign("center");
         ctx.drawImage(backcount, 370, -5, 130, 130);
 
         //desenhar barras de vida

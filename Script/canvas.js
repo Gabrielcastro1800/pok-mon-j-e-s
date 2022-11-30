@@ -4046,11 +4046,11 @@ function draw(){
         }
         if(mspeed>ispeed && click==1 || ispeed>mspeed && click==3){
             damagepng.src = "Images/fundo/damage.png";
-            ctx.drawImage(damagepng,50,220,50,50);
+            ctx.drawImage(damagepng,80,240,50,50);
         }
         if(ispeed>mspeed && click==1 || mspeed>ispeed && click==3){
             damagepng.src = "Images/fundo/damage.png";
-            ctx.drawImage(damagepng,50,220,50,50);
+            ctx.drawImage(damagepng,80,240,50,50);
         }
     }
     if(tela == 4){

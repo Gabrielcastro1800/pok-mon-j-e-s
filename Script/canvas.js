@@ -3848,6 +3848,10 @@ function draw(){
     //Se for a tela 2 ele vai desenhar isso
     if(tela == 2){
         ctx.clearRect(0, 0, 800, 500);
+
+        //desenhar versus
+        versus.src = "Images/fundo/versus.png"
+        ctx.drawImage(versus,0,0,800,500);
         
         //Desenha os pokemons
         spr1.src = "Images/Sprites/"+pokeatual+".png";
@@ -3858,9 +3862,6 @@ function draw(){
         ctx.restore();
         spr2.src = "Images/Sprites/"+inimigoatual+".png";
         ctx.drawImage(spr2, 450, 120, 350, 350);
-        //desenhar versus
-        versus.src = "Images/fundo/versus.png"
-        ctx.drawImage(versus,0,0,800,350);
 
         //desenha a mensagem
         ctx.fillStyle = "black";

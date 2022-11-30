@@ -4042,14 +4042,16 @@ function draw(){
             ctx.font = "25px Arial";
             ctx.fillText("Poção:"+bag[1], 600, 340);
             ctx.fillText("Super Poção:"+bag[2], 600, 380);
-            if(mspeed>ispeed && click==1 || ispeed>mspeed && click==3){
-                damagepng.src = "Images/fundo/damage.png";
-                ctx.drawImage(damagepng,50,220,50,50);
-            }
-            if(ispeed>mspeed && click==1 || speed>ispeed && click==3){
-
-            }
             
+        }
+        if(mspeed>ispeed && click==1 || ispeed>mspeed && click==3){
+            damagepng.src = "Images/fundo/damage.png";
+            ctx.drawImage(damagepng,50,220,50,50);
+        }
+        if(ispeed>mspeed && click==1 || speed>ispeed && click==3){
+            damagepng.src = "Images/fundo/damage.png";
+            alert()
+            ctx.drawImage(damagepng,50,220,50,50);
         }
     }
     if(tela == 4){

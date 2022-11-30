@@ -3464,7 +3464,7 @@ function enter(){
                         inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                         arenaescolher = Math.ceil(Math.random()*3);
                         do{
-                            ininvl == Math.ceil(Math.random()*meunvl+3);
+                            ininvl = Math.ceil(Math.random()*meunvl+3);
                         }while(ininvl<meunvl-2);
                         meuxp+=10*ininvl;
                         click=0;

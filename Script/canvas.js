@@ -3464,8 +3464,8 @@ function enter(){
                         inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                         arenaescolher = Math.ceil(Math.random()*3);
                         do{
-                            ininvl = Math.ceil(Math.random()*meunvl+3);
-                        }while(ininvl<meunvl-2);
+                            ininvl = Math.ceil(Math.random()*meunvl+2);
+                        }while(ininvl<meunvl-3);
                         meuxp+=10*ininvl;
                         if(meuxp>=maxxp){
                             maxxp=maxxp*2;
@@ -3672,8 +3672,15 @@ function enter(){
                         bmessage = "";
                         inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                         arenaescolher = Math.ceil(Math.random()*3);
-                        ininvl++;
-                        meunvl++;
+                        do{
+                            ininvl = Math.ceil(Math.random()*meunvl+2);
+                        }while(ininvl<meunvl-3);
+                        meuxp+=10*ininvl;
+                        if(meuxp>=maxxp){
+                            maxxp=maxxp*2;
+                            meuxp=0;
+                            meunvl++;
+                        }
                         click=0;
                         if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
                             pokeatual++;
@@ -3722,8 +3729,15 @@ function enter(){
                         bmessage = "";
                         inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                         arenaescolher = Math.ceil(Math.random()*3);
-                        ininvl++;
-                        meunvl++;
+                        do{
+                            ininvl = Math.ceil(Math.random()*meunvl+2);
+                        }while(ininvl<meunvl-3);
+                        meuxp+=10*ininvl;
+                        if(meuxp>=maxxp){
+                            maxxp=maxxp*2;
+                            meuxp=0;
+                            meunvl++;
+                        }
                         click=0;
                         if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
                             pokeatual++;

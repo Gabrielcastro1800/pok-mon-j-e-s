@@ -3896,7 +3896,7 @@ function draw(){
         ctx.drawImage(chat, 180, 15, 450, 45);
         ctx.fillText("Escolha o Pokémon inicial:", 400, 50);
 
-        ctx.drawImage(chat, 50, 15, 400, 250);
+        ctx.drawImage(chat, 400, 250, 450, 45);
         ctx.font = "20px Arial";
         ctx.fillText("Aleatório", 400, 250);
 

@@ -3136,9 +3136,10 @@ mboost=[0,0,0,0,0];
 iboost=[0,0,0,0,0];
 meunvl = 5;
 do{
-    ininvl == Math.ceil(Math.random()*meunvl+3);
+    ininvl = Math.ceil(Math.random()*meunvl+3);
 }while(ininvl<meunvl-2);
 meuxp = 0;
+maxxp = 100;
 
 click = 0;
 

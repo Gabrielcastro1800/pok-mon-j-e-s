@@ -3310,7 +3310,6 @@ function enter(){
         if(comp == 1 && money >= 10){
             bag[1]+=1;
             money = money-10;
-            alert(bag[1]);
         }
         if(comp == 2 && money >= 50){
             bag[2]+=1;
@@ -3369,15 +3368,9 @@ function enter(){
         mwait = false;
     }else if(tela==3){
         if(battlemode==0){
-            if(fob == 2){
-                bagoverlay = true
-            }
-            if(fob==1){
-                battlemode=1;
-            }
             if(bagoverlay == true){
                 if(bagovs == 1 && bag[1] > 0){
-                    potion(); 
+                    potion();
                     bag[1]-=1;
                     mspeed += 10000;
                     if(!iwait){
@@ -3398,6 +3391,12 @@ function enter(){
                     }
                     battlemode = 2;
                 }
+            }
+            if(fob == 2 && bagoverlay==false){
+                bagoverlay = true
+            }
+            if(fob==1){
+                battlemode=1;
             }
         }else if(battlemode==1){
             mspeed = ((50+2*Statusg[pokeatual][5]+5)*meunvl/100);
@@ -3438,6 +3437,7 @@ function enter(){
                 bmessage = pokes[inimigoatual]+" usou "+moves[inimigoatual][inimigoatk].name;
             }
         }else if(battlemode==2){
+            bagoverlay = false;
             click++;
             if(mspeed>ispeed){
                 if(click == 1){

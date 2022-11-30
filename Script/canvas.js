@@ -3084,6 +3084,7 @@ var bagovs = 1;
 
 //transição
 var tela = 1;
+var versus = new Image();
 var spr1 = new Image();
 var spr2 = new Image();
 
@@ -3858,6 +3859,8 @@ function draw(){
         spr2.src = "Images/Sprites/"+inimigoatual+".png";
         ctx.drawImage(spr2, 450, 120, 350, 350);
         //desenhar versus
+        versus.src = "Images/fundo/versus.png"
+        ctx.drawImage(versus,0,0,800,350);
 
         //desenha a mensagem
         ctx.fillStyle = "black";

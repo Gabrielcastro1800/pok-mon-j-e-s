@@ -3104,6 +3104,7 @@ var mestado = 0;
 var iestado = 0;
 var meuestado = new Image();
 var iniestado = new Image();
+var backcount = new Image();
 var mrecharge = false;
 var irecharge = false;
 var mconfuso = false;
@@ -3997,7 +3998,10 @@ function draw(){
         ctx.restore();
         spr2.src = "Images/Sprites/"+inimigoatual+".png";
         if(!iwait)ctx.drawImage(spr2, xini, 160, 200, 200);
-        
+
+        //desenhar contagem
+        backcount.src="Images/Sprites/counter.png";
+        ctx.drawImage(backcount, 385, -5, 30, 30);
 
         //desenhar barras de vida
         ctx.drawImage(chat, 10, 15, 240, 60);

@@ -3740,6 +3740,7 @@ function draw(){
         }
     }
     if(tela == 4){
+        mart.src = "images/fundo/pokemart.png"
         ctx.clearRect(0,0,800,500)
         ctx.drawImage(mart,0,0,800,500)
         if(comp == 1){
@@ -3750,7 +3751,6 @@ function draw(){
                 ctx.fillStyle = "rgb(184,241,142)";
                 ctx.fillRect(115, 115,80,80);
                 }
-        mart.src = "images/fundo/pokemart.png"
         potionpng.src = "Images/fundo/potion.png";
         spotionpng.src = "Images/fundo/super-potion.png";
         ctx.drawImage(potionpng,0,100,100,100)

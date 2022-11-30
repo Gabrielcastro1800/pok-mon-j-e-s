@@ -4070,8 +4070,7 @@ function draw(){
             ctx.drawImage(damagepng,80,240,50,50);
         }
         if(ispeed>mspeed && click==1 || mspeed>ispeed && click==3){
-            damagepng.src = "I
-        }mages/fundo/damage.png";
+            damagepng.src = "Images/fundo/damage.png";
             ctx.drawImage(damagepng,280,240,50,50);
         }
     }

@@ -4001,7 +4001,7 @@ function draw(){
 
         //desenhar contagem
         backcount.src="Images/Sprites/counter.png";
-        ctx.drawImage(backcount, 385, 100, 30, 30);
+        ctx.drawImage(backcount, 385, 100, 300, 300);
 
         //desenhar barras de vida
         ctx.drawImage(chat, 10, 15, 240, 60);

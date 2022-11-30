@@ -3188,8 +3188,8 @@ function left(){
             count-=2;
             choose--;
             if(count<1){
-                choose=3;
-                count = 5;
+                choose=4;
+                count = 7;
             }
         }else{
             yn--;
@@ -3240,7 +3240,7 @@ function right(){
         if(!escolha){
             count+=2;
             choose++;
-            if(count>5){
+            if(count>7){
                 choose=1;
                 count = 1;
             }
@@ -3896,7 +3896,7 @@ function draw(){
         ctx.drawImage(chat, 180, 15, 450, 45);
         ctx.fillText("Escolha o Pokémon inicial:", 400, 50);
 
-        ctx.drawImage(chat, 340, 220, 110, 45);
+        ctx.drawImage(chat, 345, 220, 110, 45);
         ctx.font = "20px Arial";
         ctx.fillText("Aleatório", 400, 250);
 
@@ -3908,9 +3908,11 @@ function draw(){
 
         //sim ou não
         if(!escolha){
-            ctx.fillStyle = "rgb(184,241,112)";
-            poke1.src = "Images/fundo/poke1.png";
-            ctx.drawImage(poke1,50+(100*count), 100, 100, 100);
+            if(choose<3){
+                ctx.fillStyle = "rgb(184,241,112)";
+                poke1.src = "Images/fundo/poke1.png";
+                ctx.drawImage(poke1,50+(100*count), 100, 100, 100);
+            }
         }else{
             ctx.fillStyle = "rgb(184,241,112)";
             ctx.fillRect(45+(100*yn), 328, 50, 30);

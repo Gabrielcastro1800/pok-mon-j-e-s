@@ -3505,10 +3505,10 @@ function enter(){
                         bmessage = "";
                         inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                         arenaescolher = Math.ceil(Math.random()*3);
+                        meuxp+=10*ininvl;
                         do{
                             ininvl = Math.ceil(Math.random()*meunvl+2);
                         }while(ininvl<meunvl-3);
-                        meuxp+=10*ininvl;
                         while(meuxp>=maxxp){
                             meuxp=meuxp-maxxp;
                             maxxp=maxxp*2;
@@ -3607,10 +3607,10 @@ function enter(){
                     bmessage = "";
                     inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                     arenaescolher = Math.ceil(Math.random()*3);
+                    meuxp+=10*ininvl;
                     do{
                         ininvl = Math.ceil(Math.random()*meunvl+2);
                     }while(ininvl<meunvl-3);
-                    meuxp+=10*ininvl;
                     if(meuxp>=maxxp){
                         meuxp=meuxp-maxxp;
                         maxxp=maxxp*2;
@@ -3734,10 +3734,10 @@ function enter(){
                         bmessage = "";
                         inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                         arenaescolher = Math.ceil(Math.random()*3);
+                        meuxp+=10*ininvl;
                         do{
                             ininvl = Math.ceil(Math.random()*meunvl+2);
                         }while(ininvl<meunvl-3);
-                        meuxp+=10*ininvl;
                         while(meuxp>=maxxp){
                             meuxp=meuxp-maxxp;
                             maxxp=maxxp*2;
@@ -3791,10 +3791,10 @@ function enter(){
                     bmessage = "";
                     inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                     arenaescolher = Math.ceil(Math.random()*3);
+                    meuxp+=10*ininvl;
                     do{
                         ininvl = Math.ceil(Math.random()*meunvl+2);
                     }while(ininvl<meunvl-3);
-                    meuxp+=10*ininvl;
                     if(meuxp>=maxxp){
                         meuxp=meuxp-maxxp;
                         maxxp=maxxp*2;
@@ -3813,10 +3813,10 @@ function enter(){
                         bmessage = "";
                         inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                         arenaescolher = Math.ceil(Math.random()*3);
+                        meuxp+=10*ininvl;
                         do{
                             ininvl = Math.ceil(Math.random()*meunvl+2);
                         }while(ininvl<meunvl-3);
-                        meuxp+=10*ininvl;
                         while(meuxp>=maxxp){
                             meuxp=meuxp-maxxp;
                             maxxp=maxxp*2;

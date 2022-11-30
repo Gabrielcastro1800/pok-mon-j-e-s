@@ -3374,15 +3374,28 @@ function enter(){
                 battlemode=1;
             }
             if(bagoverlay == true){
-                if(bagovs == 1 && bag[1] > 0){potion(); bag[1]-=1}
-                if(bagovs == 2 && bag[2] > 0){spotion(); bag[2]-=1}
-                mspeed += 10000;
-                if(!iwait){
-                    do{
-                        inimigoatk = Math.floor(Math.random()*4);
-                    }while(moves[inimigoatual][inimigoatk]==0);
+                if(bagovs == 1 && bag[1] > 0){
+                    potion(); 
+                    bag[1]-=1;
+                    mspeed += 10000;
+                    if(!iwait){
+                        do{
+                            inimigoatk = Math.floor(Math.random()*4);
+                        }while(moves[inimigoatual][inimigoatk]==0);
+                    }
+                    battlemode = 2;
                 }
-                battlemode = 2;
+                if(bagovs == 2 && bag[2] > 0){
+                    spotion();
+                    bag[2]-=1;
+                    mspeed += 10000;
+                    if(!iwait){
+                        do{
+                            inimigoatk = Math.floor(Math.random()*4);
+                        }while(moves[inimigoatual][inimigoatk]==0);
+                    }
+                    battlemode = 2;
+                }
             }
         }else if(battlemode==1){
             mspeed = ((50+2*Statusg[pokeatual][5]+5)*meunvl/100);

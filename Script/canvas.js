@@ -3135,7 +3135,9 @@ lvs=[0,16,32,-1,16,36,-1,16,36,-1]
 mboost=[0,0,0,0,0];
 iboost=[0,0,0,0,0];
 meunvl = 5;
-ininvl = 5;
+do{
+    ininvl == Math.ceil(Math.random()*meunvl+3);
+}while(ininvl<meunvl-2);
 meuxp = 0;
 
 click = 0;
@@ -3463,7 +3465,7 @@ function enter(){
                         do{
                             ininvl == Math.ceil(Math.random()*meunvl+3);
                         }while(ininvl<meunvl-2);
-                        meunvl++;
+                        meuxp+=10*ininvl;
                         click=0;
                         if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
                             pokeatual++;

@@ -3822,6 +3822,8 @@ function gameover(){
     mboost=[0,0,0,0,0];
     iboost=[0,0,0,0,0];
     mconfuso = true;
+    meuxp = 0;
+    maxxp = 100;
  }
 }
 

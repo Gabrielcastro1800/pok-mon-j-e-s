@@ -3467,6 +3467,11 @@ function enter(){
                             ininvl = Math.ceil(Math.random()*meunvl+3);
                         }while(ininvl<meunvl-2);
                         meuxp+=10*ininvl;
+                        if(meuxp>=maxxp){
+                            maxxp=maxxp*2;
+                            meuxp=0;
+                            meunvl++;
+                        }
                         click=0;
                         if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
                             pokeatual++;
@@ -3881,9 +3886,12 @@ function draw(){
         ctx.font = "15px Arial";
         ctx.fillStyle = "black";
         ctx.fillRect(30, 20, 200, 15);
+        ctx.fillRect(30, 40, 200, 10);
         ctx.fillText("Nvl: "+meunvl, 30, 50);
         ctx.fillStyle = "rgb(184,241,142)";
         ctx.fillRect(30, 20, 200*vida/maxvida, 15);
+        ctx.fillStyle = "rgb(68,196,250)";
+        ctx.fillRect(30, 40, 200*meuxp/maxxp, 10);
         ctx.fillStyle = "black";
         ctx.fillRect(770, 20, -200, 15);
         ctx.fillText("Nvl: "+ininvl, 730, 50);

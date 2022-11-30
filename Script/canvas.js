@@ -3306,14 +3306,15 @@ function down(){
 }
 //se apertar enter, executar
 function enter(){
-    if(tela == 4 && money >= 10){
-        if(comp == 1){
+    if(tela == 4){
+        if(comp == 1 && money >= 10){
             bag[1]+=1;
-            money = money-10
+            money = money-10;
+            alert();
         }
         if(comp == 2 && money >= 50){
             bag[2]+=1;
-            money = money-50
+            money = money-50;
         }
     }
     if(tela==1){

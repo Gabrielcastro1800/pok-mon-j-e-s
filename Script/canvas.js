@@ -4000,7 +4000,7 @@ function draw(){
         if(!iwait)ctx.drawImage(spr2, xini, 160, 200, 200);
 
         //desenhar contagem
-        backcount.src="Images/fundos/counter.png";
+        backcount.src="Images/fundo/counter.png";
         ctx.drawImage(backcount, 385, -5, 30, 30);
 
         //desenhar barras de vida

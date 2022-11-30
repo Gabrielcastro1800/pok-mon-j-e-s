@@ -3478,7 +3478,7 @@ function enter(){
                     }
                 }else if(click==2){
                     gameover();
-                    if(inivida==0){
+                    if(inivida<=0){
                         tela = 2;
                         money += 10;
                         battlemode=0;
@@ -3580,7 +3580,7 @@ function enter(){
                         inivida=maxinivida
                     }
                 }
-                if(inivida==0){
+                if(inivida<=0){
                     tela = 2;
                     money += 5;
                     battlemode=0;
@@ -3743,7 +3743,7 @@ function enter(){
                         inivida=maxinivida
                     }
                 }
-                if(inivida==0){
+                if(inivida<=0){
                     tela = 2;
                     money += 5;
                     battlemode=0;
@@ -3765,7 +3765,7 @@ function enter(){
                     }
                 }
                 }else if(click == 5){
-                    if(inivida==0){
+                    if(inivida<=0){
                         tela = 2;
                         money += 5;
                         battlemode=0;

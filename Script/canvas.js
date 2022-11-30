@@ -3310,7 +3310,7 @@ function enter(){
         if(comp == 1 && money >= 10){
             bag[1]+=1;
             money = money-10;
-            alert();
+            alert(bag[1]);
         }
         if(comp == 2 && money >= 50){
             bag[2]+=1;

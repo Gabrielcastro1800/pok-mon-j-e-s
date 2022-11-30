@@ -3320,13 +3320,16 @@ function enter(){
         if(!escolha){
             switch(choose){
                 case 1:
-                    poke = "Bulbassaur";
+                    poke = "Bulbassaur?";
                     break;
                 case 2:
-                    poke = "Charmander";
+                    poke = "Charmander?";
                     break;
                 case 3:
-                    poke = "Squirtle";
+                    poke = "Squirtle?";
+                    break;
+                case 4:
+                    poke = "um Aleatório?"
             }
             message = "Tem certeza que deseja escolher "+poke;
             escolha = true;
@@ -3897,7 +3900,7 @@ function draw(){
         ctx.fillText("Escolha o Pokémon inicial:", 400, 50);
 
         ctx.drawImage(chat, 345, 220, 110, 45);
-        
+
         //desenhar mensagem
         ctx.font = "20px Arial";
         ctx.textAlign = "start";

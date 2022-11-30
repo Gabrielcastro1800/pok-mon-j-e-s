@@ -4008,11 +4008,11 @@ function draw(){
 
         //desenhar contagem
         backcount.src="Images/fundo/counter.png";
-        ctx.drawImage(backcount, 340, -5, 130, 130);
+        ctx.drawImage(backcount, 335, -5, 130, 130);
         ctx.font = "30px Arial";
         ctx.fillStyle = "black";
         ctx.textAlign = "center";
-        ctx.fillText(batalha, 400, 10);
+        ctx.fillText(batalha, 400, 40);
 
         //desenhar barras de vida
         ctx.drawImage(chat, 10, 15, 240, 60);

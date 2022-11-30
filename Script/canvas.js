@@ -3509,7 +3509,7 @@ function enter(){
                             ininvl = Math.ceil(Math.random()*meunvl+2);
                         }while(ininvl<meunvl-3);
                         meuxp+=10*ininvl;
-                        if(meuxp>=maxxp){
+                        while(meuxp>=maxxp){
                             meuxp=meuxp-maxxp;
                             maxxp=maxxp*2;
                             meunvl++;
@@ -3738,7 +3738,7 @@ function enter(){
                             ininvl = Math.ceil(Math.random()*meunvl+2);
                         }while(ininvl<meunvl-3);
                         meuxp+=10*ininvl;
-                        if(meuxp>=maxxp){
+                        while(meuxp>=maxxp){
                             meuxp=meuxp-maxxp;
                             maxxp=maxxp*2;
                             meunvl++;
@@ -3817,7 +3817,7 @@ function enter(){
                             ininvl = Math.ceil(Math.random()*meunvl+2);
                         }while(ininvl<meunvl-3);
                         meuxp+=10*ininvl;
-                        if(meuxp>=maxxp){
+                        while(meuxp>=maxxp){
                             meuxp=meuxp-maxxp;
                             maxxp=maxxp*2;
                             meunvl++;

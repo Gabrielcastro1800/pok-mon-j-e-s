@@ -3122,6 +3122,7 @@ var damagepng = new Image();
 var xplayer = 300;
 var xini = 500;
 var anim = false;
+var batalha = 0;
 //errar e acertar
 var maccuracy = 1, mevasion = 1, iaccuracy = 1, ievasion = 1, a = 1;
 pokes = [0,"Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetch'd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
@@ -3503,6 +3504,7 @@ function enter(){
                     gameover();
                     if(inivida<=0){
                         tela = 2;
+                        batalha++;
                         money += 10;
                         battlemode=0;
                         bmessage = "";
@@ -3605,6 +3607,7 @@ function enter(){
                 }
                 if(inivida<=0){
                     tela = 2;
+                    batalha++;
                     money += 5;
                     battlemode=0;
                     bmessage = "";
@@ -3732,6 +3735,7 @@ function enter(){
                     }
                     if(inivida<=0){
                         tela = 2;
+                        batalha++;
                         money += 10;
                         battlemode=0;
                         bmessage = "";
@@ -3789,6 +3793,7 @@ function enter(){
                 }
                 if(inivida<=0){
                     tela = 2;
+                    batalha++;
                     money += 5;
                     battlemode=0;
                     bmessage = "";
@@ -3811,6 +3816,7 @@ function enter(){
                 }else if(click == 5){
                     if(inivida<=0){
                         tela = 2;
+                        batalha++;
                         money += 5;
                         battlemode=0;
                         bmessage = "";
@@ -3863,6 +3869,7 @@ if(battlemode==1){
 //se o seu pokemon morrer executar
 function gameover(){
  if(vida <= 0){
+    batalha = 0;
     money = 10;
     tela = 1;
     vida = maxvida
@@ -4001,7 +4008,11 @@ function draw(){
 
         //desenhar contagem
         backcount.src="Images/fundo/counter.png";
-        ctx.drawImage(backcount, 370, -5, 130, 130);
+        ctx.drawImage(backcount, 350, -5, 130, 130);
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        ctx.fillText(batalha, 400, 250);
 
         //desenhar barras de vida
         ctx.drawImage(chat, 10, 15, 240, 60);

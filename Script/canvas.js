@@ -3896,10 +3896,6 @@ function draw(){
         ctx.drawImage(chat, 180, 15, 450, 45);
         ctx.fillText("Escolha o Pokémon inicial:", 400, 50);
 
-        ctx.drawImage(chat, 345, 220, 110, 45);
-        ctx.font = "20px Arial";
-        ctx.fillText("Aleatório", 400, 250);
-
         //desenhar mensagem
         ctx.font = "20px Arial";
         ctx.textAlign = "start";
@@ -3908,13 +3904,13 @@ function draw(){
 
         //sim ou não
         if(!escolha){
-            if(choose<3){
+            if(choose<4){
                 ctx.fillStyle = "rgb(184,241,112)";
                 poke1.src = "Images/fundo/poke1.png";
                 ctx.drawImage(poke1,50+(100*count), 100, 100, 100);
             }else{
                 ctx.fillStyle = "rgb(184,241,112)";
-                ctx.fillRect(2, 270, 720, 45);
+                ctx.fillRect(345, 220, 110, 45);
             }
         }else{
             ctx.fillStyle = "rgb(184,241,112)";
@@ -3924,6 +3920,11 @@ function draw(){
             ctx.fillText("Sim", 50, 350);
             ctx.fillText("Não", 150, 350);
         }
+
+        ctx.drawImage(chat, 345, 220, 110, 45);
+        ctx.font = "20px Arial";
+        ctx.fillText("Aleatório", 400, 250);
+
         poke2.src = "Images/fundo/poke2.png"
 
         //desenhar pokemons

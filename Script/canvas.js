@@ -3903,12 +3903,12 @@ function draw(){
         ctx.font = "15px Arial";
         ctx.fillStyle = "black";
         ctx.fillRect(30, 20, 200, 15);
-        ctx.fillRect(30, 40, 200, 10);
+        ctx.fillRect(30, 60, 200, 10);
         ctx.fillText("Nvl: "+meunvl, 30, 50);
         ctx.fillStyle = "rgb(184,241,142)";
         ctx.fillRect(30, 20, 200*vida/maxvida, 15);
         ctx.fillStyle = "rgb(68,196,250)";
-        ctx.fillRect(30, 40, 200*meuxp/maxxp, 10);
+        ctx.fillRect(30, 60, 200*meuxp/maxxp, 10);
         ctx.fillStyle = "black";
         ctx.fillRect(770, 20, -200, 15);
         ctx.fillText("Nvl: "+ininvl, 730, 50);

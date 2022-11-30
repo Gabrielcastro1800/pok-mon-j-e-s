@@ -3825,6 +3825,9 @@ function enter(){
 function backspace(){
 if(tela == 2){tela = 4}else if(tela == 4){tela =2}
 if(tela == 3){bagoverlay = false}
+if(battlemode==1){
+    battlemode=0;
+}
 }
 //se o seu pokemon morrer executar
 function gameover(){

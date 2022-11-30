@@ -3117,6 +3117,7 @@ var iwait = false;
 var mwait = false;
 var mspeed = 0;
 var ispeed = 0;
+var item = -1;
 //errar e acertar
 var maccuracy = 1, mevasion = 1, iaccuracy = 1, ievasion = 1, a = 1;
 pokes = [0,"Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetch'd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
@@ -3213,18 +3214,19 @@ function left(){
 
 //funçoes de items
 function potion(){
-    vida = vida+20;
-    if(vida > maxvida){
-        vida = maxvida
-    }
     bmessage = pokes[pokeatual]+" usou Potion";
+    item = 0;
 }
 function spotion(){
-    vida = vida+50;
+    bmessage = pokes[pokeatual]+" usou SuperPotion";
+    item = 1;
+}
+function Cura(cura){
+    vida = vida+cura;
     if(vida > maxvida){
         vida = maxvida
     }
-    bmessage = pokes[pokeatual]+" usou SuperPotion";
+    bmessage = pokes[pokeatual]+" curou "+(cura-(vida+cura-maxvida))+" pontos de vida!";
 }
 //se apertar pra direita, executar
 function right(){
@@ -3424,45 +3426,55 @@ function enter(){
             click++;
             if(mspeed>ispeed){
                 if(click == 1){
-                    if(mestado == 5){
-                        if(Math.random()>0.6){
-                            mestado = 0;
-                        }
-                    }
-                    if(mestado == 2){
-                        if(Math.random()>0.6){
-                            mestado = 0;
-                        }
-                    }
-                    if(mestado != 5 && mestado != 2){
-                        if(mestado == 3){
-                            a = Math.random();
-                        }
-                        if(a > .5){
-                            if(!mconfuso || mconfuso && Math.random()>0.66){
-                                if(xatk==0 && yatk==0){
-                                    moves[pokeatual][0](0,maccuracy,iaccuracy);
-                                }else if(xatk==1 && yatk==0){
-                                    moves[pokeatual][1](0,maccuracy,iaccuracy);
-                                }else if(xatk==0 && yatk==1){
-                                    moves[pokeatual][2](0,maccuracy,iaccuracy);
-                                }else if(xatk==1 && yatk==1){
-                                    moves[pokeatual][3](0,maccuracy,iaccuracy);
-                                }
-                                if(inivida<0){
-                                    inivida=0;
-                                }
-                            }else{
-                                bmessage = pokes[pokeatual]+" se bateu por estar confuso!";
-                                vida-=5;
+                    if(item==-1){
+                        if(mestado == 5){
+                            if(Math.random()>0.6){
+                                mestado = 0;
                             }
-                            a = 1;
+                        }
+                        if(mestado == 2){
+                            if(Math.random()>0.6){
+                                mestado = 0;
+                            }
+                        }
+                        if(mestado != 5 && mestado != 2){
+                            if(mestado == 3){
+                                a = Math.random();
+                            }
+                            if(a > .5){
+                                if(!mconfuso || mconfuso && Math.random()>0.66){
+                                    if(xatk==0 && yatk==0){
+                                        moves[pokeatual][0](0,maccuracy,iaccuracy);
+                                    }else if(xatk==1 && yatk==0){
+                                        moves[pokeatual][1](0,maccuracy,iaccuracy);
+                                    }else if(xatk==0 && yatk==1){
+                                        moves[pokeatual][2](0,maccuracy,iaccuracy);
+                                    }else if(xatk==1 && yatk==1){
+                                        moves[pokeatual][3](0,maccuracy,iaccuracy);
+                                    }
+                                    if(inivida<0){
+                                        inivida=0;
+                                    }
+                                }else{
+                                    bmessage = pokes[pokeatual]+" se bateu por estar confuso!";
+                                    vida-=5;
+                                }
+                                a = 1;
+                            }else{
+                                bmessage = "Está paralizado!"
+                                a = 1;
+                            }
                         }else{
-                            bmessage = "Está paralizado!"
-                            a = 1;
+                            bmessage = pokes[pokeatual]+" está impossibilitado de fazer isso";
                         }
                     }else{
-                        bmessage = pokes[pokeatual]+" está impossibilitado de fazer isso";
+                        if(item == 0){
+                            Cura(20);
+                        }
+                        if(item == 1){
+                            Cura(50);
+                        }
+                        item = -1;
                     }
                 }else if(click==2){
                     gameover();

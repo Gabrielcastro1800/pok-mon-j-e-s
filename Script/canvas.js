@@ -3896,6 +3896,8 @@ function draw(){
         ctx.drawImage(chat, 180, 15, 450, 45);
         ctx.fillText("Escolha o Pokémon inicial:", 400, 50);
 
+        ctx.drawImage(chat, 345, 220, 110, 45);
+        
         //desenhar mensagem
         ctx.font = "20px Arial";
         ctx.textAlign = "start";
@@ -3920,9 +3922,9 @@ function draw(){
             ctx.fillText("Sim", 50, 350);
             ctx.fillText("Não", 150, 350);
         }
-
-        ctx.drawImage(chat, 345, 220, 110, 45);
         ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
         ctx.fillText("Aleatório", 400, 250);
 
         poke2.src = "Images/fundo/poke2.png"

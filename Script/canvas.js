@@ -3217,12 +3217,14 @@ function potion(){
     if(vida > maxvida){
         vida = maxvida
     }
+    bmessage = pokes[pokeatual]+" usou Potion";
 }
 function spotion(){
     vida = vida+50;
     if(vida > maxvida){
         vida = maxvida
     }
+    bmessage = pokes[pokeatual]+" usou SuperPotion";
 }
 //se apertar pra direita, executar
 function right(){
@@ -3301,10 +3303,6 @@ function down(){
 }
 //se apertar enter, executar
 function enter(){
-    if(bagoverlay == true){
-        if(bagovs == 1 && bag[1] > 0){potion(); bag[1]-=1}
-        if(bagovs == 2 && bag[2] > 0){spotion(); bag[2]-=1}
-    }
     if(tela == 4 && money >= 10){
         if(comp == 1){
             bag[1]+=1;
@@ -3372,6 +3370,17 @@ function enter(){
             }
             if(fob==1){
                 battlemode=1;
+            }
+            if(bagoverlay == true){
+                if(bagovs == 1 && bag[1] > 0){potion(); bag[1]-=1}
+                if(bagovs == 2 && bag[2] > 0){spotion(); bag[2]-=1}
+                mspeed += 10000;
+                if(!iwait){
+                    do{
+                        inimigoatk = Math.floor(Math.random()*4);
+                    }while(moves[inimigoatual][inimigoatk]==0);
+                }
+                battlemode = 2;
             }
         }else if(battlemode==1){
             mspeed = ((50+2*Statusg[pokeatual][5]+5)*meunvl/100);

@@ -3117,7 +3117,7 @@ var mspeed = 0;
 var ispeed = 0;
 var item = -1;
 var damagepng = new Image();
-var xplayer = 200;
+var xplayer = 300;
 var xini = 500;
 //errar e acertar
 var maccuracy = 1, mevasion = 1, iaccuracy = 1, ievasion = 1, a = 1;

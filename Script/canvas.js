@@ -3912,6 +3912,9 @@ function draw(){
                 ctx.fillStyle = "rgb(184,241,112)";
                 poke1.src = "Images/fundo/poke1.png";
                 ctx.drawImage(poke1,50+(100*count), 100, 100, 100);
+            }else{
+                ctx.fillStyle = "rgb(184,241,112)";
+                ctx.fillRect(2, 270, 720, 45);
             }
         }else{
             ctx.fillStyle = "rgb(184,241,112)";

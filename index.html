@@ -7,11 +7,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         #inicio {border-style: solid; border-radius: 1px; border-color: black; margin-left: 300; margin-right: 300;}
+        .button {
+            border: none;
+            color: grey;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;}
+            .up {
+            margin-left: 460px;}
+            .left {
+            margin-left: 510px;}
+            .right {
+            margin-left: 5px;}
+            .down {
+            margin-left: 440px;}
+            .enter {
+            margin-left: 20px;}
+            .backspace {
+            margin-left: 20px;}
+            
     </style>
     <title>Pokémon J e S</title>
 </head>
 <body>
     <canvas id="inicio", width="800" height="500"></canvas>
+    <br>
+    <button class="button enter" type="button" onclick="enter()">Enter</button>
+    <button class="button up" type="button" onclick="up()">Cima</button>
+    <br>
+    <button class="button left" type="button" onclick="left()">Esquerda</button>
+    <button class="button right" type="button" onclick="right()">Direita</button>
+    <br>
+    <button class="button back" type="button" onclick="backspace()">BackSpace</button>
+    <button class="button down" type="button" onclick="down()">Baixo</button>
     <script src="Script/canvas.js"></script>
 </body>
 </html>

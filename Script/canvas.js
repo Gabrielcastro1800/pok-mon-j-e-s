@@ -3136,6 +3136,7 @@ mboost=[0,0,0,0,0];
 iboost=[0,0,0,0,0];
 meunvl = 5;
 ininvl = 5;
+meuxp = 0;
 
 click = 0;
 
@@ -3459,7 +3460,9 @@ function enter(){
                         bmessage = "";
                         inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                         arenaescolher = Math.ceil(Math.random()*3);
-                        ininvl++;
+                        do{
+                            ininvl == Math.ceil(Math.random()*meunvl+3);
+                        }while(ininvl<meunvl-2);
                         meunvl++;
                         click=0;
                         if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){

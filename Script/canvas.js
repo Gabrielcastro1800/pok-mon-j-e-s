@@ -3079,6 +3079,7 @@ var xplayer = 300;
 var xini = 500;
 var click;
 var inimigoatk = 0;
+var meuatk = 0;
 var mseed = false;
 var iniseed = false;
 var mestado = 0;
@@ -3348,20 +3349,21 @@ function enter(){
             }
         }else if(battlemode==1){
             if(xatk==0 && yatk==0 && moves[pokeatual][0] != 0){
-                bmessage = pokes[pokeatual]+" usou "+moves[pokeatual][0].name;
+                meuatk = 0;
                 battlemode=2;
             }else if(xatk==1 && yatk==0 && moves[pokeatual][1] != 0){
-                bmessage = pokes[pokeatual]+" usou "+moves[pokeatual][1].name;
+                meuatk = 1;
                 battlemode=2;
             }else if(xatk==0 && yatk==1 && moves[pokeatual][2] != 0){
-                bmessage = pokes[pokeatual]+" usou "+moves[pokeatual][2].name;
+                meuatk = 2;
                 battlemode=2;
             }else if(xatk==1 && yatk==1 && moves[pokeatual][3] != 0){
-                bmessage = pokes[pokeatual]+" usou "+moves[pokeatual][3].name;
+                meuatk = 3;
                 battlemode=2;
             }
         }else if(battlemode==2){
             click++;
+            bmessage = pokes[pokeatual]+" usou "+moves[pokeatual][meuatk].name;
             if(click == 1){
                 if(mestado == 5){
                     if(Math.random()>0.6){
@@ -3740,7 +3742,7 @@ function draw(){
         }
     }
     if(tela == 4){
-        mart.src = "images/fundo/pokemart.png"
+        mart.src = "Images/fundo/pokemart.png"
         ctx.clearRect(0,0,800,500)
         ctx.drawImage(mart,0,0,800,500)
         if(comp == 1){

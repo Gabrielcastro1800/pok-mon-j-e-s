@@ -812,6 +812,9 @@ function Bite(bol, aaccuracy, baccuracy){
             inivida-=damg;
             bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
         }else if(bol==1){
+            if(Math.random()>0.7){
+                mflinch = true;
+            }
             var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
             var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
             var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 0, bol);
@@ -843,6 +846,9 @@ function BoneClub(bol, aaccuracy, baccuracy){
             inivida-=damg;
             bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
         }else if(bol==1){
+            if(Math.random()>0.9){
+                mflinch = true;
+            }
             var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
             var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
             var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 0, bol);
@@ -874,6 +880,9 @@ function RollingKick(bol, aaccuracy, baccuracy){
             inivida-=damg;
             bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
         }else if(bol==1){
+            if(Math.random()>0.7){
+                mflinch = true
+            }
             var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
             var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
             var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 0, bol);
@@ -905,6 +914,9 @@ function Stomp(bol, aaccuracy, baccuracy){
             inivida-=damg;
             bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
         }else if(bol==1){
+            if(Math.random()>0.7){
+                mflinch = true;
+            }
             var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
             var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
             var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 0, bol);
@@ -996,6 +1008,9 @@ function HyperFang(bol, aaccuracy, baccuracy){
             inivida-=damg;
             bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
         }else if(bol==1){
+            if(Math.random()>0.7){
+                mflinch = true;
+            }
             var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
             var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
             var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 0, bol);
@@ -1027,6 +1042,9 @@ function Headbutt(bol, aaccuracy, baccuracy){
             inivida-=damg;
             bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
         }else if(bol==1){
+            if(Math.random()>0.7){
+                mflinch = true;
+            }
             var atk = ((50+2*Statusg[inimigoatual][1]+5)*ininvl/100);
             var dfs = ((50+2*Statusg[pokeatual][2]+5)*meunvl/100);
             var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 0, bol);
@@ -3093,8 +3111,11 @@ var iconfuso = false;
 var mwrap = false;
 var iwrap = false;
 var flinch = false;
+var mflinch = false;
 var iwait = false;
 var mwait = false;
+var mspeed = 0;
+var ispeed = 0;
 //errar e acertar
 var maccuracy = 1, mevasion = 1, iaccuracy = 1, ievasion = 1, a = 1;
 pokes = [0,"Bulbasaur","Ivysaur","Venusaur","Charmander","Charmeleon","Charizard","Squirtle","Wartortle","Blastoise","Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Pidgey","Pidgeotto","Pidgeot","Rattata","Raticate","Spearow","Fearow","Ekans","Arbok","Pikachu","Raichu","Sandshrew","Sandslash","Nidoran","Nidorina","Nidoqueen","Nidoran","Nidorino","Nidoking","Clefairy","Clefable","Vulpix","Ninetales","Jigglypuff","Wigglytuff","Zubat","Golbat","Oddish","Gloom","Vileplume","Paras","Parasect","Venonat","Venomoth","Diglett","Dugtrio","Meowth","Persian","Psyduck","Golduck","Mankey","Primeape","Growlithe","Arcanine","Poliwag","Poliwhirl","Poliwrath","Abra","Kadabra","Alakazam","Machop","Machoke","Machamp","Bellsprout","Weepinbell","Victreebel","Tentacool","Tentacruel","Geodude","Graveler","Golem","Ponyta","Rapidash","Slowpoke","Slowbro","Magnemite","Magneton","Farfetch'd","Doduo","Dodrio","Seel","Dewgong","Grimer","Muk","Shellder","Cloyster","Gastly","Haunter","Gengar","Onix","Drowzee","Hypno","Krabby","Kingler","Voltorb","Electrode","Exeggcute","Exeggutor","Cubone","Marowak","Hitmonlee","Hitmonchan","Lickitung","Koffing","Weezing","Rhyhorn","Rhydon","Chansey","Tangela","Kangaskhan","Horsea","Seadra","Goldeen","Seaking","Staryu","Starmie","Mr. Mime","Scyther","Jynx","Electabuzz","Magmar","Pinsir","Tauros","Magikarp","Gyarados","Lapras","Ditto","Eevee","Vaporeon","Jolteon","Flareon","Porygon","Omanyte","Omastar","Kabuto","Kabutops","Aerodactyl","Snorlax","Articuno","Zapdos","Moltres","Dratini","Dragonair","Dragonite","Mewtwo","Mew"];
@@ -3348,6 +3369,14 @@ function enter(){
                 battlemode=1;
             }
         }else if(battlemode==1){
+            mspeed = ((50+2*Statusg[pokeatual][5]+5)*meunvl/100);
+            ispeed = ((50+2*Statusg[inimigoatual][5]+5)*ininvl/100);
+            if(mestado == 3){
+                mspeed-=500;
+            }
+            if(iestado == 3){
+                ispeed-=500;
+            }
             if(xatk==0 && yatk==0 && moves[pokeatual][0] != 0){
                 meuatk = 0;
                 battlemode=2;
@@ -3361,173 +3390,327 @@ function enter(){
                 meuatk = 3;
                 battlemode=2;
             }
+            if(!iwait){
+                do{
+                    inimigoatk = Math.floor(Math.random()*4);
+                }while(moves[inimigoatual][inimigoatk]==0);
+            }
+            if(moves[pokeatual][meuatk].name=="QuickAttack"){
+                mspeed+=1000;
+            }
+            if(moves[inimigoatual][inimigoatk].name=="QuickAttack"){
+                ispeed+=1000;
+            }
+            if(mspeed>ispeed){
+                bmessage = pokes[pokeatual]+" usou "+moves[pokeatual][meuatk].name;
+            }else{
+                bmessage = pokes[inimigoatual]+" usou "+moves[inimigoatual][inimigoatk].name;
+            }
         }else if(battlemode==2){
             click++;
-            bmessage = pokes[pokeatual]+" usou "+moves[pokeatual][meuatk].name;
-            if(click == 1){
-                if(mestado == 5){
-                    if(Math.random()>0.6){
-                        mestado = 0;
-                    }
-                }
-                if(mestado == 2){
-                    if(Math.random()>0.6){
-                        mestado = 0;
-                    }
-                }
-                if(mestado != 5 && mestado != 2){
-                    if(mestado == 3){
-                        a = Math.random();
-                    }
-                    if(a > .5){
-                        if(!mconfuso || mconfuso && Math.random()>0.66){
-                            if(xatk==0 && yatk==0){
-                                moves[pokeatual][0](0,maccuracy,iaccuracy);
-                            }else if(xatk==1 && yatk==0){
-                                moves[pokeatual][1](0,maccuracy,iaccuracy);
-                            }else if(xatk==0 && yatk==1){
-                                moves[pokeatual][2](0,maccuracy,iaccuracy);
-                            }else if(xatk==1 && yatk==1){
-                                moves[pokeatual][3](0,maccuracy,iaccuracy);
-                            }
-                            if(inivida<0){
-                                inivida=0;
-                            }
-                        }else{
-                            bmessage = pokes[pokeatual]+" se bateu por estar confuso!";
-                            vida-=5;
+            if(mspeed>ispeed){
+                if(click == 1){
+                    if(mestado == 5){
+                        if(Math.random()>0.6){
+                            mestado = 0;
                         }
-                        a = 1;
-                    }else{
-                        bmessage = "Está paralizado!"
-                        a = 1;
                     }
-                }else{
-                    bmessage = pokes[pokeatual]+" está impossibilitado de fazer isso";
-                }
-            }else if(click==2){
-                gameover();
-                if(inivida==0){
-                    tela = 2;
-                    money += 5;
-                    battlemode=0;
-                    bmessage = "";
-                    inimigoatual = Math.ceil(Math.random()*151);//151 para todos
-                    arenaescolher = Math.ceil(Math.random()*3);
-                    ininvl++;
-                    meunvl++;
-                    click=0;
-                    if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
-                        pokeatual++;
-                    }
-                }else{
-                    if(!flinch){
-                        if(!iwait){
-                            do{
-                                inimigoatk = Math.floor(Math.random()*4);
-                            }while(moves[inimigoatual][inimigoatk]==0);
+                    if(mestado == 2){
+                        if(Math.random()>0.6){
+                            mestado = 0;
                         }
-                        bmessage = pokes[inimigoatual]+" usou "+moves[inimigoatual][inimigoatk].name;
-                    }else{
-                        bmessage = pokes[inimigoatual]+" exitou!";
-                        flinch = false;
-                        click = 3;
                     }
-                }
-            }else if(click == 3){
-                if(iestado == 5){
-                    if(Math.random()>0.6){
-                        iestado = 0;
-                    }
-                }
-                if(iestado == 2){
-                    if(Math.random()>0.6){
-                        iestado = 0;
-                    }
-                }
-                if(iestado != 5 && iestado != 2){
-                    if(irecharge == false){
-                        if(iestado == 3){
+                    if(mestado != 5 && mestado != 2){
+                        if(mestado == 3){
                             a = Math.random();
                         }
                         if(a > .5){
-                            if(!iconfuso || iconfuso && Math.random()>0.66){
-                                moves[inimigoatual][inimigoatk](1,iaccuracy,maccuracy);
-                                if(vida<0){
-                                    vida=0;
+                            if(!mconfuso || mconfuso && Math.random()>0.66){
+                                if(xatk==0 && yatk==0){
+                                    moves[pokeatual][0](0,maccuracy,iaccuracy);
+                                }else if(xatk==1 && yatk==0){
+                                    moves[pokeatual][1](0,maccuracy,iaccuracy);
+                                }else if(xatk==0 && yatk==1){
+                                    moves[pokeatual][2](0,maccuracy,iaccuracy);
+                                }else if(xatk==1 && yatk==1){
+                                    moves[pokeatual][3](0,maccuracy,iaccuracy);
+                                }
+                                if(inivida<0){
+                                    inivida=0;
                                 }
                             }else{
-                                bmessage = pokes[inimigoatual]+" se bateu por estar confuso!";
-                                inivida-=5;
+                                bmessage = pokes[pokeatual]+" se bateu por estar confuso!";
+                                vida-=5;
                             }
-                                a = 1;
+                            a = 1;
                         }else{
                             bmessage = "Está paralizado!"
                             a = 1;
                         }
                     }else{
-                        bmessage = pokes[inimigoatual]+" está recarregando";
-                        irecharge = false;
+                        bmessage = pokes[pokeatual]+" está impossibilitado de fazer isso";
                     }
-                }else{
-                    bmessage = pokes[inimigoatual]+" está impossibilitado de fazer isso";
-                }
-            }else if(click == 4){
-                if(vida > 0){
-                if(mseed == true){
-                    vida-=maxvida/8;
-                    inivida+=maxvida/8;
-                }
-                if(iniseed == true){
-                    inivida-=maxinivida/8;
-                    vida+=maxinivida/8;
-                }
-                if(mwrap == true){
-                    vida-=maxvida/8;
-                }
-                if(iwrap == true){
-                    inivida-=maxinivida/8;
-                }
-                if(mestado == 4){
-                    vida-=maxvida/8;
-                }
-                if(iestado == 4){
-                    inivida-=maxvida/8;
-                }
-                if(mestado == 1){
-                    vida-=maxvida/16;
-                }
-                if(iestado == 1){
-                    inivida-=maxvida/16;
-                }
-                bmessage = "Dano extra";
-                if(vida>maxvida){
-                    vida=maxvida
-                }
-                if(inivida>maxinivida){
-                    inivida=maxinivida
-                }
-            }
-            }else if(click == 5){
-                gameover();
-                if(mrecharge == false){
-                    if(!mwait){
-                    click=0;
-                    battlemode = 0;
-                    }else{
+                }else if(click==2){
+                    gameover();
+                    if(inivida==0){
+                        tela = 2;
+                        money += 5;
+                        battlemode=0;
+                        bmessage = "";
+                        inimigoatual = Math.ceil(Math.random()*151);//151 para todos
+                        arenaescolher = Math.ceil(Math.random()*3);
+                        ininvl++;
+                        meunvl++;
                         click=0;
-                        battlemode = 2;
-                        bmessage = pokes[pokeatual]+" usou Dig!";
+                        if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
+                            pokeatual++;
+                        }
+                    }else{
+                        if(!flinch){
+                            bmessage = pokes[inimigoatual]+" usou "+moves[inimigoatual][inimigoatk].name;
+                        }else{
+                            flinch = false;
+                            click = 3;
+                        }
                     }
-                }else{
-                    mrecharge = false;
-                    click=1;
-                    battlemode = 2;
-                    bmessage = "Está recarregando";
+                }else if(click == 3){
+                    if(iestado == 5){
+                        if(Math.random()>0.6){
+                            iestado = 0;
+                        }
+                    }
+                    if(iestado == 2){
+                        if(Math.random()>0.6){
+                            iestado = 0;
+                        }
+                    }
+                    if(iestado != 5 && iestado != 2){
+                        if(irecharge == false){
+                            if(iestado == 3){
+                                a = Math.random();
+                            }
+                            if(a > .5){
+                                if(!iconfuso || iconfuso && Math.random()>0.66){
+                                    moves[inimigoatual][inimigoatk](1,iaccuracy,maccuracy);
+                                    if(vida<0){
+                                        vida=0;
+                                    }
+                                }else{
+                                    bmessage = pokes[inimigoatual]+" se bateu por estar confuso!";
+                                    inivida-=5;
+                                }
+                                    a = 1;
+                            }else{
+                                bmessage = "Está paralizado!"
+                                a = 1;
+                            }
+                        }else{
+                            bmessage = pokes[inimigoatual]+" está recarregando";
+                            irecharge = false;
+                        }
+                    }else{
+                        bmessage = pokes[inimigoatual]+" está impossibilitado de fazer isso";
+                    }
+                }else if(click == 4){
+                    if(vida > 0){
+                    if(mseed == true){
+                        vida-=maxvida/8;
+                        inivida+=maxvida/8;
+                    }
+                    if(iniseed == true){
+                        inivida-=maxinivida/8;
+                        vida+=maxinivida/8;
+                    }
+                    if(mwrap == true){
+                        vida-=maxvida/8;
+                    }
+                    if(iwrap == true){
+                        inivida-=maxinivida/8;
+                    }
+                    if(mestado == 4){
+                        vida-=maxvida/8;
+                    }
+                    if(iestado == 4){
+                        inivida-=maxvida/8;
+                    }
+                    if(mestado == 1){
+                        vida-=maxvida/16;
+                    }
+                    if(iestado == 1){
+                        inivida-=maxvida/16;
+                    }
+                    bmessage = "Dano extra";
+                    if(vida>maxvida){
+                        vida=maxvida
+                    }
+                    if(inivida>maxinivida){
+                        inivida=maxinivida
+                    }
+                }
+                }else if(click == 5){
+                    gameover();
+                    if(mrecharge == false){
+                        if(!mwait){
+                        click=0;
+                        battlemode = 0;
+                        }else{
+                            click=0;
+                            battlemode = 2;
+                            bmessage = pokes[pokeatual]+" usou Dig!";
+                        }
+                    }else{
+                        mrecharge = false;
+                        click=1;
+                        battlemode = 2;
+                        bmessage = "Está recarregando";
+                    }
+                }
+            }else{
+                if(click == 1){
+                    if(iestado == 5){
+                        if(Math.random()>0.6){
+                            iestado = 0;
+                        }
+                    }
+                    if(iestado == 2){
+                        if(Math.random()>0.6){
+                            iestado = 0;
+                        }
+                    }
+                    if(iestado != 5 && iestado != 2){
+                        if(irecharge == false){
+                            if(iestado == 3){
+                                a = Math.random();
+                            }
+                            if(a > .5){
+                                if(!iconfuso || iconfuso && Math.random()>0.66){
+                                    moves[inimigoatual][inimigoatk](1,iaccuracy,maccuracy);
+                                    if(vida<0){
+                                        vida=0;
+                                    }
+                                }else{
+                                    bmessage = pokes[inimigoatual]+" se bateu por estar confuso!";
+                                    inivida-=5;
+                                }
+                                    a = 1;
+                            }else{
+                                bmessage = "Está paralizado!"
+                                a = 1;
+                            }
+                        }else{
+                            bmessage = pokes[inimigoatual]+" está recarregando";
+                            irecharge = false;
+                        }
+                    }else{
+                        bmessage = pokes[inimigoatual]+" está impossibilitado de fazer isso";
+                    }
+                }else if(click==2){
+                    gameover();
+                    if(!mflinch){
+                        bmessage = pokes[pokeatual]+" usou "+moves[pokeatual][meuatk].name;
+                    }else{
+                        click = 3;
+                        mflinch = false;
+                    }
+                }else if(click == 3){
+                    if(mestado == 5){
+                        if(Math.random()>0.6){
+                            mestado = 0;
+                        }
+                    }
+                    if(mestado == 2){
+                        if(Math.random()>0.6){
+                            mestado = 0;
+                        }
+                    }
+                    if(mestado != 5 && mestado != 2){
+                        if(mestado == 3){
+                            a = Math.random();
+                        }
+                        if(a > .5){
+                            if(!mconfuso || mconfuso && Math.random()>0.66){
+                                if(xatk==0 && yatk==0){
+                                    moves[pokeatual][0](0,maccuracy,iaccuracy);
+                                }else if(xatk==1 && yatk==0){
+                                    moves[pokeatual][1](0,maccuracy,iaccuracy);
+                                }else if(xatk==0 && yatk==1){
+                                    moves[pokeatual][2](0,maccuracy,iaccuracy);
+                                }else if(xatk==1 && yatk==1){
+                                    moves[pokeatual][3](0,maccuracy,iaccuracy);
+                                }
+                                if(inivida<0){
+                                    inivida=0;
+                                }
+                            }else{
+                                bmessage = pokes[pokeatual]+" se bateu por estar confuso!";
+                                vida-=5;
+                            }
+                            a = 1;
+                        }else{
+                            bmessage = "Está paralizado!"
+                            a = 1;
+                        }
+                    }else{
+                        bmessage = pokes[pokeatual]+" está impossibilitado de fazer isso";
+                    }
+                }else if(click == 4){
+                    if(vida > 0){
+                    if(mseed == true){
+                        vida-=maxvida/8;
+                        inivida+=maxvida/8;
+                    }
+                    if(iniseed == true){
+                        inivida-=maxinivida/8;
+                        vida+=maxinivida/8;
+                    }
+                    if(mwrap == true){
+                        vida-=maxvida/8;
+                    }
+                    if(iwrap == true){
+                        inivida-=maxinivida/8;
+                    }
+                    if(mestado == 4){
+                        vida-=maxvida/8;
+                    }
+                    if(iestado == 4){
+                        inivida-=maxvida/8;
+                    }
+                    if(mestado == 1){
+                        vida-=maxvida/16;
+                    }
+                    if(iestado == 1){
+                        inivida-=maxvida/16;
+                    }
+                    bmessage = "Dano extra";
+                    if(vida>maxvida){
+                        vida=maxvida
+                    }
+                    if(inivida>maxinivida){
+                        inivida=maxinivida
+                    }
+                }
+                }else if(click == 5){
+                    gameover();
+                    if(mrecharge == false){
+                        if(!mwait){
+                        click=0;
+                        battlemode = 0;
+                        }else{
+                            click=0;
+                            battlemode = 2;
+                            bmessage = pokes[pokeatual]+" usou Dig!";
+                        }
+                    }else{
+                        mrecharge = false;
+                        click=1;
+                        battlemode = 2;
+                        bmessage = "Está recarregando";
+                    }
                 }
             }
         }
-    }}
+    }
+}
 
 //se apertar backspace executar!
 function backspace(){
@@ -3767,4 +3950,4 @@ function draw(){
     requestAnimationFrame(draw);
 }
 
-draw()
+draw();

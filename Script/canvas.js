@@ -3073,8 +3073,8 @@ var poke = "";
 var escolha = false;
 var yn = 0;
 var fob = 1; //fob = fight or bag
-var money = 10
-var comp = 1
+var money = 10;
+var comp = 1;
 var bag=[,];
 bag[1]= 0
 bag[2]=0
@@ -3454,7 +3454,7 @@ function enter(){
                     gameover();
                     if(inivida==0){
                         tela = 2;
-                        money += 5;
+                        money += 10;
                         battlemode=0;
                         bmessage = "";
                         inimigoatual = Math.ceil(Math.random()*151);//151 para todos

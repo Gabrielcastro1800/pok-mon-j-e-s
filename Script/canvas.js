@@ -3910,14 +3910,23 @@ function gameover(){
     maxxp = 100;
  }
 }
-
+function playmusic(){
+    if(!(tela == 3)){
+        battlemusic.pause();
+        battlemusic.currentTime = 0;}
+        if(tela == 3){
+        if(music == 1){
+            battlemusic.play()
+            battlemusic.volume = 1
+            
+        }}
+        requestAnimationFrame(playmusic)
+}
 
 //desenha tudo na tela
 function draw(){
     //Se for a tela 1 ele vai desenhar isso
-    if(!(tela == 3)){
-    battlemusic.pause();
-    battlemusic.currentTime = 0;}
+   
     if(tela == 1){
         ctx.clearRect(0, 0, 800, 500);
         //desenhar fundo
@@ -4006,10 +4015,7 @@ function draw(){
     }
     //Se for a tela 3 ele vai desenhar isso
     if(tela==3){
-        if(music == 1){
-            battlemusic.play()
-            battlemusic.volume = 1
-        }
+       
         ctx.clearRect(0, 0, 800, 500)
         arena.src = "Images/fundo/arena.png"
         arena2.src = "Images/fundo/arena2.png"
@@ -4165,3 +4171,4 @@ function draw(){
 }
 
 draw();
+playmusic();

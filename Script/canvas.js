@@ -1683,7 +1683,7 @@ function PoisonPowder(bol, aaccuracy, baccuracy){
                 bmessage = pokes[inimigoatual]+" foi envenenado";
             }
         }else if(bol==1 && mestado == 0){
-            if(tipos[inimigoatual][1] == 16 || tipos[inimigoatual][1] == 7 || tipos[inimigoatual][0] == 7){
+            if(tipos[pokeatual][1] == 16 || tipos[pokeatual][1] == 7 || tipos[pokeatual][0] == 7){
                 bmessage = pokes[pokeatual]+" é imune";
             }else{
                 mestado = 4;
@@ -3087,8 +3087,9 @@ var yn = 0;
 var fob = 1; //fob = fight or bag
 var money = 10;
 var comp = 0;
-var bag=[[potion, 0, 10, "Poção","Images/itens/potion.png"],[spotion, 0, 50, "SuperPoção","Images/itens/super-potion.png"]];
+var bag=[[potion, 0, 10, "Poção","Images/itens/potion.png"],[spotion, 0, 50, "SuperPoção","Images/itens/super-potion.png"],[pokeball, 5, 10, "PokeBola","Images/itens/pokeball.png"]];
 var bagoverlay = false;
+var pokeoverlay = false;
 var bagovs = 0;
 
 
@@ -3099,7 +3100,7 @@ var spr1 = new Image();
 var spr2 = new Image();
 
 //batalha
-var pokeatual, meunvl, vida, maxvida, inimigoatual, ininvl, inivida, maxinivida, Statusg=[], pokes=[], moves=[], tipos=[], lvs=[], mboost=[], iboost=[];
+var pokeatual, meunvl, vida, maxvida, inimigoatual, ininvl, inivida, maxinivida, Statusg=[], pokes=[], moves=[], tipos=[], lvs=[], mboost=[], iboost=[], meuspokes=[];
 var yatk = 0;
 var xatk = 0;
 var bmessage;
@@ -3134,6 +3135,9 @@ var anim = false;
 var batalha = 0;
 var music = 0;
 var battlemusic = new Audio("audio/battle.mp3");
+var pokeovs = 0;
+//pokes: poke, vida, estado, nivel, xp;
+meuspokes=[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]];
 
 //errar e acertar
 var maccuracy = 1, mevasion = 1, iaccuracy = 1, ievasion = 1, a = 1;
@@ -3157,8 +3161,8 @@ meunvl = 5;
 do{
     ininvl = Math.ceil(Math.random()*meunvl+3);
 }while(ininvl<meunvl-2);
-meuxp = 0;
-maxxp = 100;
+var meuxp = 0;
+var maxxp = 100;
 
 click = 0;
 
@@ -3193,6 +3197,26 @@ addEventListener("keyup", function(){
     }
 });
 
+//funçoes de items
+function pokeball(){
+    bmessage = pokes[pokeatual]+" usou a Pokebola";
+}
+function potion(){
+    bmessage = pokes[pokeatual]+" usou Potion";
+    item = 0;
+}
+function spotion(){
+    bmessage = pokes[pokeatual]+" usou SuperPotion";
+    item = 1;
+}
+function Cura(cura){
+    bmessage = pokes[pokeatual]+" curou "+((cura-(vida+cura-maxvida)).toFixed(0))+" pontos de vida!";
+    vida = vida+cura;
+    if(vida > maxvida){
+        vida = maxvida
+    }
+}
+
 //se apertar pra esquerda, executar
 function left(){
     if(tela == 4){
@@ -3218,9 +3242,11 @@ function left(){
     }else if(tela==3){
         if(battlemode==0 && bagoverlay == false){
             fob = fob+1;
-            if(fob > 2)
+            if(fob == 3)
             {
                 fob = 1;
+            }else if(fob == 5){
+                fob = 3;
             }
         }else if(battlemode==1){
             if(xatk==1){
@@ -3231,22 +3257,6 @@ function left(){
         }
     }}}
 
-//funçoes de items
-function potion(){
-    bmessage = pokes[pokeatual]+" usou Potion";
-    item = 0;
-}
-function spotion(){
-    bmessage = pokes[pokeatual]+" usou SuperPotion";
-    item = 1;
-}
-function Cura(cura){
-    bmessage = pokes[pokeatual]+" curou "+((cura-(vida+cura-maxvida)).toFixed(0))+" pontos de vida!";
-    vida = vida+cura;
-    if(vida > maxvida){
-        vida = maxvida
-    }
-}
 //se apertar pra direita, executar
 function right(){
     if(tela == 4){
@@ -3270,10 +3280,12 @@ function right(){
         }
     }else if(tela==3){
         if(battlemode==0 && bagoverlay == false){
-            fob = fob-1
+            fob = fob-1;
             if(fob == 0)
             {
-                fob = 2
+                fob = 2;
+            }else if(fob == 2){
+                fob = 4;
             }
         }else if(battlemode==1){
             if(xatk==1){
@@ -3289,12 +3301,30 @@ function right(){
 function up(){
     if(bagoverlay == true)
     {
-        bagovs = bagovs+1;
-        if(bagovs > bag.length-1){
-            bagovs = 0;
-        }}
+        bagovs = bagovs-1;
+        if(bagovs < 0){
+            bagovs = bag.length-1;
+        }
+    }
+    if(pokeoverlay == true)
+    {
+        pokeovs = pokeovs-1;
+        if(pokeovs < 0){
+            pokeovs = meuspokes.length-1;
+        }
+    }
     if(tela==3){
-        if(battlemode==1){
+        if(battlemode==0 && bagoverlay == false){
+            if(fob == 1){
+                fob = 3;
+            }else if(fob == 3){
+                fob = 1;
+            }else if(fob == 2){
+                fob = 4;
+            }else if(fob == 4){
+                fob = 2;
+            }
+        }else if(battlemode==1){
             if(yatk==1){
                 yatk=0;
             }else{
@@ -3308,12 +3338,30 @@ function up(){
 function down(){
     if(bagoverlay == true)
     {
-        bagovs = bagovs-1;
-        if(bagovs < 0){
-            bagovs = bag.length-1;
-        }}
+        bagovs = bagovs+1;
+        if(bagovs > bag.length-1){
+            bagovs = 0;
+        }
+    }
+    if(pokeoverlay == true)
+    {
+        pokeovs = pokeovs+1;
+        if(pokeovs > meuspokes.length-1){
+            pokeovs = 0;
+        }
+    }
     if(tela==3){
-        if(battlemode==1){
+        if(battlemode==0 && bagoverlay == false){
+            if(fob == 1){
+                fob = 3;
+            }else if(fob == 3){
+                fob = 1;
+            }else if(fob == 2){
+                fob = 4;
+            }else if(fob == 4){
+                fob = 2;
+            }
+        }else if(battlemode==1){
             if(yatk==1){
                 yatk=0;
             }else{
@@ -3378,7 +3426,7 @@ function enter(){
         inivida = maxinivida;
         mseed = false;
         iniseed = false;
-        mestado = 0;
+        mestado = 3;
         iestado = 0;
         mconfuso = false;
         iconfuso = false; 
@@ -3390,6 +3438,12 @@ function enter(){
         mwait = false;
     }else if(tela==3){
         if(battlemode==0){
+            //pokes: poke, vida, estado, nivel, xp;
+            meuspokes[0][0]=pokeatual;
+            meuspokes[0][1]=vida;
+            meuspokes[0][2]=mestado;
+            meuspokes[0][3]=meunvl;
+            meuspokes[0][4]=meuxp;
             if(bagoverlay == true){
                 if(bag[bagovs][1] > 0){
                     bag[bagovs][0]();
@@ -3408,6 +3462,9 @@ function enter(){
             }
             if(fob==1){
                 battlemode=1;
+            }
+            if(fob==3 && pokeoverlay==false){
+                pokeoverlay=true;
             }
         }else if(battlemode==1){
             mspeed = ((50+2*Statusg[pokeatual][5]+5)*meunvl/100);
@@ -3862,11 +3919,14 @@ function enter(){
 
 //se apertar backspace executar!
 function backspace(){
-if(tela == 2){tela = 4}else if(tela == 4){tela =2}
-if(tela == 3){bagoverlay = false}
-if(battlemode==1){
-    battlemode=0;
-}
+    if(tela == 2){tela = 4}else if(tela == 4){tela =2}
+    if(tela == 3){bagoverlay = false}
+    if(battlemode==1){
+        battlemode=0;
+    }
+    if(pokeoverlay == true){
+        pokeoverlay=false;
+    }
 }
 //se o seu pokemon morrer executar
 function gameover(){
@@ -4058,16 +4118,24 @@ function draw(){
         if(battlemode==0){
             ctx.fillStyle = "rgb(184,241,142)";
             if(fob == 1){
-                ctx.fillRect(515, 370,80,40);
+                ctx.fillRect(515, 370,115,40);
             }
             if(fob == 2){
-                ctx.fillRect(645, 370,100,40);
+                ctx.fillRect(645, 370,105,40);
+            }
+            if(fob == 3){
+                ctx.fillRect(515, 430,115,40);
+            }
+            if(fob == 4){
+                ctx.fillRect(645, 430,105,40);
             }
             ctx.fillStyle = "black";
             ctx.textAlign = "start";
             ctx.font = "25px Arial";
             ctx.fillText("Lutar", 520, 400);
             ctx.fillText("Mochila", 650, 400);
+            ctx.fillText("Pokémon", 520, 460);
+            ctx.fillText("Pokédex", 650, 460);
 
             ctx.fillStyle = "black";
             ctx.fillText("O que o "+pokes[pokeatual]+" vai fazer?", 80, 400);
@@ -4098,7 +4166,7 @@ function draw(){
             ctx.fillText(bmessage, 80, 400);
         }
         if(bagoverlay == true){
-            ctx.drawImage(chat,580,300,250,150)
+            ctx.drawImage(chat,580,300,250,150);
             ctx.fillStyle = "rgb(184,241,142)";
             ctx.fillRect(600, 310+(bagovs*40),200,40);
             ctx.fillStyle = "black";
@@ -4106,6 +4174,33 @@ function draw(){
             ctx.font = "25px Arial";
             for(var i=0;i<bag.length;i++){
                 ctx.fillText(bag[i][3]+": "+bag[i][1], 600, 340+(i*40));
+            }
+        }
+        if(pokeoverlay==true){
+            //pokes: poke, vida, estado, nivel, xp;
+            ctx.drawImage(chat,500,-50,300,600);
+            ctx.fillStyle = "rgb(184,241,142)";
+            ctx.fillRect(520,2+(83*pokeovs),260,83);
+            for(var i=0;i<meuspokes.length;i++){
+                if(meuspokes[i][0]!=0){
+                    image = new Image();
+                    image.src = "Images/Sprites/"+meuspokes[i][0]+".png";
+                    ctx.drawImage(image,510,2+(83*i),80,80);
+                    ctx.fillStyle = "black";
+                    ctx.textAlign = "start";
+                    ctx.font = "15px Calibri";
+                    ctx.fillText(pokes[meuspokes[i][0]]+"   Nvl: "+meuspokes[i][3], 580, 35+(83*i));
+                    image = new Image();
+                    image.src = "Images/icones/"+meuspokes[i][2]+".png";
+                    ctx.drawImage(image, 730, 25+(83*i), 15, 15);
+                    ctx.fillStyle = "black";
+                    ctx.fillRect(580, 50+(83*i), 180, 15);
+                    ctx.fillRect(580, 70+(83*i), 180, 10);
+                    ctx.fillStyle = "rgb(77,188,88)";
+                    ctx.fillRect(580, 50+(83*i), 180*meuspokes[i][1]/(((50+2*Statusg[meuspokes[i][0]][0])*meuspokes[i][3]/100)+10+meuspokes[i][3]), 15);
+                    ctx.fillStyle = "rgb(68,196,250)";
+                    ctx.fillRect(580, 70+(83*i), 200*meuspokes[i][4]/100*((meuspokes[i][3]-5)*2), 10);
+                }
             }
         }
         if(anim){
@@ -4126,7 +4221,7 @@ function draw(){
         ctx.clearRect(0,0,800,500)
         ctx.drawImage(mart,0,0,800,500)
         ctx.fillStyle = "rgb(184,241,142)";
-        ctx.fillRect(15+(100*(comp)), 115,80,80);
+        ctx.fillRect((100*(comp)), 100,100,100);
         for(var i=0;i<bag.length;i++){
             image = new Image();
             image.src = bag[i][4];

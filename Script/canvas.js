@@ -4008,6 +4008,7 @@ function draw(){
     if(tela==3){
         if(music == 1){
             battlemusic.play()
+            battlemusic.volume = 1
         }
         ctx.clearRect(0, 0, 800, 500)
         arena.src = "Images/fundo/arena.png"

@@ -3072,12 +3072,11 @@ var poke1 = new Image();
 var poke2 = new Image();
 var vspng = new Image();
 var barpng = new Image();
-var potionpng = new Image();
-var spotionpng = new Image();
 var arena = new Image();
 var arena2 = new Image();
 var arena3 = new Image();
 var mart = new Image();
+var image = new Image();
 var arenaescolher = 0;
 var count = 1;
 var choose = 1;
@@ -3087,12 +3086,10 @@ var escolha = false;
 var yn = 0;
 var fob = 1; //fob = fight or bag
 var money = 10;
-var comp = 1;
-var bag=[,];
-bag[1]= 0
-bag[2]=0
+var comp = 0;
+var bag=[[potion, 0, 10, "Poção","Images/itens/potion.png"],[spotion, 0, 50, "SuperPoção","Images/itens/super-potion.png"]];
 var bagoverlay = false;
-var bagovs = 1;
+var bagovs = 0;
 
 
 //transição
@@ -3200,8 +3197,10 @@ addEventListener("keyup", function(){
 function left(){
     if(tela == 4){
         comp = comp-1;
-        if(comp < 1){
-            comp = 2;}}else{
+        if(comp < 0){
+            comp = bag.length-1;
+        }
+        }else{
     if(tela==1){
         if(!escolha){
             count-=2;
@@ -3252,8 +3251,8 @@ function Cura(cura){
 function right(){
     if(tela == 4){
         comp = comp+1;
-        if(comp > 2){
-            comp = 1;
+        if(comp > bag.length-1){
+            comp = 0;
     }}
     if(tela==1){
         if(!escolha){
@@ -3291,8 +3290,8 @@ function up(){
     if(bagoverlay == true)
     {
         bagovs = bagovs+1;
-        if(bagovs > 2){
-            bagovs = 1;
+        if(bagovs > bag.length-1){
+            bagovs = 0;
         }}
     if(tela==3){
         if(battlemode==1){
@@ -3310,8 +3309,8 @@ function down(){
     if(bagoverlay == true)
     {
         bagovs = bagovs-1;
-        if(bagovs < 1){
-            bagovs = 2;
+        if(bagovs < 0){
+            bagovs = bag.length-1;
         }}
     if(tela==3){
         if(battlemode==1){
@@ -3329,13 +3328,9 @@ function enter(){
         music+=1;
     }
     if(tela == 4){
-        if(comp == 1 && money >= 10){
-            bag[1]+=1;
-            money = money-10;
-        }
-        if(comp == 2 && money >= 50){
-            bag[2]+=1;
-            money = money-50;
+        if(money >= bag[comp][2]){
+            bag[comp][1]+=1;
+            money = money-bag[comp][2];
         }
     }
     if(tela==1){
@@ -3396,20 +3391,9 @@ function enter(){
     }else if(tela==3){
         if(battlemode==0){
             if(bagoverlay == true){
-                if(bagovs == 1 && bag[1] > 0){
-                    potion();
-                    bag[1]-=1;
-                    mspeed += 10000;
-                    if(!iwait){
-                        do{
-                            inimigoatk = Math.floor(Math.random()*4);
-                        }while(moves[inimigoatual][inimigoatk]==0);
-                    }
-                    battlemode = 2;
-                }
-                if(bagovs == 2 && bag[2] > 0){
-                    spotion();
-                    bag[2]-=1;
+                if(bag[bagovs][1] > 0){
+                    bag[bagovs][0]();
+                    bag[bagovs][1]-=1;
                     mspeed += 10000;
                     if(!iwait){
                         do{
@@ -4115,21 +4099,14 @@ function draw(){
         }
         if(bagoverlay == true){
             ctx.drawImage(chat,580,300,250,150)
-            if(bagovs == 1){
-                ctx.fillStyle = "rgb(184,241,142)";
-                ctx.fillRect(600, 310,100,40);
-                
-            }
-            if(bagovs == 2){
-                ctx.fillStyle = "rgb(184,241,142)";
-                ctx.fillRect(600, 350,170,40);
-                
-            }ctx.fillStyle = "black";
+            ctx.fillStyle = "rgb(184,241,142)";
+            ctx.fillRect(600, 310+(bagovs*40),200,40);
+            ctx.fillStyle = "black";
             ctx.textAlign = "start";
             ctx.font = "25px Arial";
-            ctx.fillText("Poção:"+bag[1], 600, 340);
-            ctx.fillText("Super Poção:"+bag[2], 600, 380);
-            
+            for(var i=0;i<bag.length;i++){
+                ctx.fillText(bag[i][3]+": "+bag[i][1], 600, 340+(i*40));
+            }
         }
         if(anim){
             if(mspeed>ispeed && click==1 || ispeed>mspeed && click==3){
@@ -4148,23 +4125,17 @@ function draw(){
         mart.src = "Images/fundo/pokemart.png"
         ctx.clearRect(0,0,800,500)
         ctx.drawImage(mart,0,0,800,500)
-        if(comp == 1){
-            ctx.fillStyle = "rgb(184,241,142)";
-            ctx.fillRect(15, 115,80,80);
-            }
-            if(comp == 2){
-                ctx.fillStyle = "rgb(184,241,142)";
-                ctx.fillRect(115, 115,80,80);
-                }
-        potionpng.src = "Images/fundo/potion.png";
-        spotionpng.src = "Images/fundo/super-potion.png";
-        ctx.drawImage(potionpng,0,100,100,100)
-        ctx.drawImage(spotionpng,100,100,100,100)
-        ctx.fillStyle = "black";
-        ctx.textAlign = "start";
-        ctx.font = "25px Arial";
-        ctx.fillText("10$", 30, 220);
-        ctx.fillText("50$", 130, 220);
+        ctx.fillStyle = "rgb(184,241,142)";
+        ctx.fillRect(15+(100*(comp)), 115,80,80);
+        for(var i=0;i<bag.length;i++){
+            image = new Image();
+            image.src = bag[i][4];
+            ctx.drawImage(image,0+(i*100),100,100,100);
+            ctx.fillStyle = "black";
+            ctx.textAlign = "start";
+            ctx.font = "25px Arial";
+            ctx.fillText(bag[i][2]+"$", 30+(i*100), 220);
+        }
         ctx.fillText("Dinheiro:"+money, 10, 25);
     }
     requestAnimationFrame(draw);

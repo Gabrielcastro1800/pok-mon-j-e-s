@@ -1946,10 +1946,16 @@ function Rest(bol, aaccuracy, baccuracy){
 
 function Recover(bol, aaccuracy, baccuracy){
     if(bol==0){
-        vida = maxvida/2;
+        vida += maxvida/2;
+        if(vida>maxvida){
+            vida=maxvida;
+        }
         bmessage = pokes[pokeatual]+" recuperou a vida";
     }else if(bol==1){
-        inivida = maxinivida/2;
+        inivida += maxinivida/2;
+        if(inivida>maxinivida){
+            inivida=maxinivida;
+        }
         bmessage = pokes[inimigoatual]+" recuperou a vida";
     }
 }
@@ -2211,6 +2217,9 @@ function Absorb(bol, aaccuracy, baccuracy){
             var damg = damage(meunvl, atk, power, dfs, type, inimigoatual, 1, bol);
             inivida-=damg;
             vida+=damg/2;
+            if(vida>maxvida){
+                vida=maxvida;
+            }
             bmessage = pokes[inimigoatual]+" levou "+damg.toFixed(0)+" de dano!";
         }else if(bol==1){
             var atk = ((50+2*Statusg[inimigoatual][3]+5)*ininvl/100);
@@ -2218,6 +2227,9 @@ function Absorb(bol, aaccuracy, baccuracy){
             var damg = damage(ininvl, atk, power, dfs, type, pokeatual, 1, bol);
             vida-=damg;
             inivida+=damg/2;
+            if(inivida>maxinivida){
+                inivida=maxinivida;
+            }
             bmessage = pokes[pokeatual]+" levou "+damg.toFixed(0)+" de dano!";
         }
     }else{

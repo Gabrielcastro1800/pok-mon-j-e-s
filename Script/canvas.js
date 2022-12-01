@@ -3239,11 +3239,11 @@ function spotion(){
     item = 1;
 }
 function Cura(cura){
+    bmessage = pokes[pokeatual]+" curou "+(cura-(vida+cura-maxvida))+" pontos de vida!";
     vida = vida+cura;
     if(vida > maxvida){
         vida = maxvida
     }
-    bmessage = pokes[pokeatual]+" curou "+(cura-(vida+cura-maxvida))+" pontos de vida!";
 }
 //se apertar pra direita, executar
 function right(){

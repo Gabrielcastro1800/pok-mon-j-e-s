@@ -3426,7 +3426,7 @@ function enter(){
         inivida = maxinivida;
         mseed = false;
         iniseed = false;
-        mestado = 3;
+        mestado = 0;
         iestado = 0;
         mconfuso = false;
         iconfuso = false; 

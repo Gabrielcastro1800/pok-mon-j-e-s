@@ -3135,6 +3135,9 @@ var anim = false;
 var batalha = 0;
 var music = 0;
 var battlemusic = new Audio("audio/battle.mp3");
+var bulbasound = new Audio("audio/bulbasaur.mp3")
+var charsound = new Audio("audio/charmander.mp3")
+var squisound = new Audio("audio/Squirtle.mp3")
 var pokeovs = 0;
 //pokes: poke, vida, estado, nivel, xp;
 meuspokes=[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]];
@@ -3386,12 +3389,15 @@ function enter(){
             switch(choose){
                 case 1:
                     poke = "Bulbassaur?";
+                    bulbasound.play();
                     break;
                 case 2:
                     poke = "Charmander?";
+                    charsound.play();
                     break;
                 case 3:
                     poke = "Squirtle?";
+                    squisound.play();
                     break;
                 case 4:
                     poke = "um Aleatório?"

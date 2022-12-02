@@ -3434,20 +3434,19 @@ function enter(){
                 }else if(choose == 4){
                     pokeatual = Math.ceil(Math.random()*151);;
                 }
-                inimigoatual = 25//Math.ceil(Math.random()*151);//151 para todos
+                inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                 arenaescolher = Math.ceil(Math.random()*3);
+                maxvida = ((50+2*Statusg[pokeatual][0])*meunvl/100)+10+meunvl;
+                vida = maxvida
                 escolha = false;
             }
         }
     }else if(tela==2){
         tela = 3;
-        maxvida = ((50+2*Statusg[pokeatual][0])*meunvl/100)+10+meunvl;
         maxinivida = ((50+2*Statusg[inimigoatual][0])*ininvl/100)+10+ininvl;;
-        vida = maxvida;
         inivida = maxinivida;
         mseed = false;
         iniseed = false;
-        mestado = 0;
         iestado = 0;
         mconfuso = false;
         iconfuso = false; 
@@ -3622,7 +3621,7 @@ function enter(){
                             Cura(50);
                         }
                         if(item == 2){
-                            if(Math.random()>0.5){
+                            if(Math.random()>0.8*inivida/maxinivida){
                                 k=0;
                                 while(meuspokes[k][0]!=0){
                                     k++;
@@ -3918,6 +3917,7 @@ function gameover(){
     message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selecionar!";
     bmessage = "";
     fob = 1; //fob = fight or bag
+    mestado = 0;
     money = 10
     comp = 1
     for(var i=0;i<bag.length;i++){
@@ -3939,7 +3939,7 @@ function win(){
     if(inivida<=0){
         tela = 2;
         batalha++;
-        money += 5;
+        money += 5*Math.floor(maxinivida/10);
         battlemode=0;
         bmessage = "";
         inimigoatual = Math.ceil(Math.random()*151);//151 para todos

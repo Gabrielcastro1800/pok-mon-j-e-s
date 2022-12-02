@@ -4295,11 +4295,16 @@ function draw(){
                 ctx.fillText("Trocar", 600, 340);
             }
         }
+        //desenhar pokedex
         if(pokedex>0){
             pokeback.src = "Images/fundo/pokedex.png";
             ctx.drawImage(pokeback,109,0,691,500);
             pokeimage.src = "Images/Sprites/"+pokedex+".png";
             ctx.drawImage(pokeimage,281,158,129,129);
+            ctx.fillStyle = "black";
+            ctx.textAlign = "center";
+            ctx.font = "13px Arial";
+            ctx.fillText((pokes[pokedex]).toUpperCase(), 109+165, 420);
         }
         if(anim){
             if(mspeed>ispeed && click==1 || ispeed>mspeed && click==3){

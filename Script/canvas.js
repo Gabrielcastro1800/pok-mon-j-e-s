@@ -3140,7 +3140,6 @@ var charsound = new Audio("audio/charmander.mp3")
 var squisound = new Audio("audio/Squirtle.mp3")
 var pokeovs = 0;
 var k=0;
-var pos = 0;
 var pokeop = false;
 var pokeopc = 0;
 var amessage = "";
@@ -3179,19 +3178,19 @@ ctx.imageSmoothingEnabled = false
 
 //teclas pressionadas
 addEventListener("keyup", function(){
-    if(event.keyCode === 39)
+    if(event.keyCode === 39 || event.keyCode === 68)
     {
         right();   
     }
-    if(event.keyCode === 37)
+    if(event.keyCode === 37 || event.keyCode === 65)
     {
         left();
     }
-    if(event.keyCode === 38)
+    if(event.keyCode === 38 || event.keyCode === 87)
     {
         up();
     }
-    if(event.keyCode === 40)
+    if(event.keyCode === 40 || event.keyCode === 83)
     {
         down();
     }
@@ -3478,6 +3477,7 @@ function enter(){
                     battlemode = 2;
                 }
             }else if(pokeoverlay == true){
+                amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
                 if(trade2==0){
                     if(pokeop == true && pokeopc == 0){
                         k=0;
@@ -3498,16 +3498,19 @@ function enter(){
                 }else{
                     meuspokes[trade1]=meuspokes[pokeovs];
                     meuspokes[pokeovs] = trade2;
-                    if(trade1==0 || pokeovs==0 && pokeovs!=trade1){
+                    if(trade1==0 && pokeovs!=trade1 || pokeovs==0 && pokeovs!=trade1){
                         pokeatual=meuspokes[0][0];
                         vida=meuspokes[0][1];
                         mestado=meuspokes[0][2];
                         meunvl=meuspokes[0][3];
                         meuxp=meuspokes[0][4];
                         pokeoverlay = false;
-                        bmessage = "Trocou para "+pokes[pokeatual];
+                        maxvida = ((50+2*Statusg[pokeatual][0])*meunvl/100)+10+meunvl;
+                        amessage = "Trocou para "+pokes[pokeatual];
                         click=2;
                         battlemode = 2;
+                    }else{
+                        amessage = "Não da de trocar pelo mesmo pokémon!";
                     }
                     trade1=0;
                     trade2=0;
@@ -3522,11 +3525,11 @@ function enter(){
                 battlemode=1;
             }
             if(fob==3 && pokeoverlay==false && battlemode==0){
-                meuspokes[pos][0]=pokeatual;
-                meuspokes[pos][1]=vida;
-                meuspokes[pos][2]=mestado;
-                meuspokes[pos][3]=meunvl;
-                meuspokes[pos][4]=meuxp;
+                meuspokes[0][0]=pokeatual;
+                meuspokes[0][1]=vida;
+                meuspokes[0][2]=mestado;
+                meuspokes[0][3]=meunvl;
+                meuspokes[0][4]=meuxp;
                 pokeoverlay=true;
             }
         }else if(battlemode==1){
@@ -3870,8 +3873,8 @@ function enter(){
                 }
                 win();
                 }else if(click == 5){
-                    win();
                     gameover();
+                    win();
                     if(mrecharge == false){
                         if(!mwait){
                         click=0;
@@ -3900,38 +3903,65 @@ function backspace(){
     if(battlemode==1){
         battlemode=0;
     }
-    if(pokeoverlay == true){
+    if(pokeoverlay == true && amessage!="Escolha outro pokémon!"){
         pokeoverlay=false;
         amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
+    }else{
+        amessage="Você tem que escolher um pokémon!";
     }
 }
 //se o seu pokemon morrer executar
 function gameover(){
- if(vida <= 0){
-    batalha = 0;
-    money = 10;
-    tela = 1;
-    vida = maxvida
-    ininvl = 5;
-    meunvl = 5;
-    message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selecionar!";
-    bmessage = "";
-    fob = 1; //fob = fight or bag
-    mestado = 0;
-    money = 10
-    comp = 1
-    for(var i=0;i<bag.length;i++){
-        bag[i][1]=0;
+    meuspokes[0][0]=pokeatual;
+    meuspokes[0][1]=vida;
+    meuspokes[0][2]=mestado;
+    meuspokes[0][3]=meunvl;
+    meuspokes[0][4]=meuxp;
+    if(vida <= 0){
+        k=0;
+        for(var i=0;i<meuspokes.length;i++){
+            if(meuspokes[i][1]!=0){
+                k++;
+            }
+        }
+        if(k>0){
+            meuspokes[0][0]=pokeatual;
+            meuspokes[0][1]=vida;
+            meuspokes[0][2]=mestado;
+            meuspokes[0][3]=meunvl;
+            meuspokes[0][4]=meuxp;
+            battlemode=0;
+            pokeoverlay=true;
+            fob = 3;
+            trade1 = 0;
+            trade2 = meuspokes[0];
+            amessage="Escolha outro pokémon!";
+        }else{
+            batalha = 0;
+            money = 10;
+            tela = 1;
+            vida = maxvida
+            ininvl = 5;
+            meunvl = 5;
+            message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selecionar!";
+            bmessage = "";
+            fob = 1; //fob = fight or bag
+            mestado = 0;
+            money = 10
+            comp = 1
+            for(var i=0;i<bag.length;i++){
+                bag[i][1]=0;
+            }
+            bagoverlay = false;
+            bagovs = 1;
+            battlemode =0;
+            mboost=[0,0,0,0,0];
+            iboost=[0,0,0,0,0];
+            mconfuso = true;
+            meuxp = 0;
+            maxxp = 100*((meunvl-5)*2);
+        }
     }
-    bagoverlay = false;
-    bagovs = 1;
-    battlemode =0;
-    mboost=[0,0,0,0,0];
-    iboost=[0,0,0,0,0];
-    mconfuso = true;
-    meuxp = 0;
-    maxxp = 100*((meunvl-5)*2);
- }
 }
 
 //executa se vencer
@@ -3946,7 +3976,7 @@ function win(){
         arenaescolher = Math.ceil(Math.random()*3);
         meuxp+=10*ininvl;
         do{
-            ininvl = Math.ceil(Math.random()*meunvl+2);
+            ininvl = Math.ceil(Math.random()*(meunvl+2));
         }while(ininvl<meunvl-3);
         while(meuxp>=maxxp){
             meuxp=meuxp-maxxp;

@@ -3139,6 +3139,8 @@ var bulbasound = new Audio("audio/bulbasaur.mp3")
 var charsound = new Audio("audio/charmander.mp3")
 var squisound = new Audio("audio/Squirtle.mp3")
 var pokeovs = 0;
+var k=0;
+var pos = 0;
 //pokes: poke, vida, estado, nivel, xp;
 meuspokes=[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]];
 
@@ -3203,6 +3205,7 @@ addEventListener("keyup", function(){
 //funçoes de items
 function pokeball(){
     bmessage = pokes[pokeatual]+" usou a Pokebola";
+    item=2;
 }
 function potion(){
     bmessage = pokes[pokeatual]+" usou Potion";
@@ -3308,15 +3311,13 @@ function up(){
         if(bagovs < 0){
             bagovs = bag.length-1;
         }
-    }
-    if(pokeoverlay == true)
+    }else if(pokeoverlay == true)
     {
         pokeovs = pokeovs-1;
         if(pokeovs < 0){
             pokeovs = meuspokes.length-1;
         }
-    }
-    if(tela==3){
+    }else if(tela==3){
         if(battlemode==0 && bagoverlay == false){
             if(fob == 1){
                 fob = 3;
@@ -3345,15 +3346,13 @@ function down(){
         if(bagovs > bag.length-1){
             bagovs = 0;
         }
-    }
-    if(pokeoverlay == true)
+    }else if(pokeoverlay == true)
     {
         pokeovs = pokeovs+1;
         if(pokeovs > meuspokes.length-1){
             pokeovs = 0;
         }
-    }
-    if(tela==3){
+    }else if(tela==3){
         if(battlemode==0 && bagoverlay == false){
             if(fob == 1){
                 fob = 3;
@@ -3445,11 +3444,11 @@ function enter(){
     }else if(tela==3){
         if(battlemode==0){
             //pokes: poke, vida, estado, nivel, xp;
-            meuspokes[0][0]=pokeatual;
-            meuspokes[0][1]=vida;
-            meuspokes[0][2]=mestado;
-            meuspokes[0][3]=meunvl;
-            meuspokes[0][4]=meuxp;
+            meuspokes[pos][0]=pokeatual;
+            meuspokes[pos][1]=vida;
+            meuspokes[pos][2]=mestado;
+            meuspokes[pos][3]=meunvl;
+            meuspokes[pos][4]=meuxp;
             if(bagoverlay == true){
                 if(bag[bagovs][1] > 0){
                     bag[bagovs][0]();
@@ -3470,6 +3469,11 @@ function enter(){
                 battlemode=1;
             }
             if(fob==3 && pokeoverlay==false){
+                meuspokes[pos][0]=pokeatual;
+                meuspokes[pos][1]=vida;
+                meuspokes[pos][2]=mestado;
+                meuspokes[pos][3]=meunvl;
+                meuspokes[pos][4]=meuxp;
                 pokeoverlay=true;
             }
         }else if(battlemode==1){
@@ -3563,32 +3567,29 @@ function enter(){
                         if(item == 1){
                             Cura(50);
                         }
+                        if(item == 2){
+                            if(Math.random()>0.5){
+                                k=0;
+                                while(meuspokes[k][0]!=0){
+                                    k++;
+                                }
+                                meuspokes[k][0]=inimigoatual;
+                                meuspokes[k][1]=inivida;
+                                meuspokes[k][2]=iestado;
+                                meuspokes[k][3]=ininvl;
+                                meuspokes[k][4]=0;
+                                bmessage = "Capturou "+pokes[inimigoatual];
+                                inivida = 0;
+                            }else{
+                                bmessage = "Não conseguiu capturar "+pokes[inimigoatual];
+                            }
+                        }
                         item = -1;
                     }
                 }else if(click==2){
                     gameover();
-                    if(inivida<=0){
-                        tela = 2;
-                        batalha++;
-                        money += 10;
-                        battlemode=0;
-                        bmessage = "";
-                        inimigoatual = Math.ceil(Math.random()*151);//151 para todos
-                        arenaescolher = Math.ceil(Math.random()*3);
-                        meuxp+=10*ininvl;
-                        do{
-                            ininvl = Math.ceil(Math.random()*meunvl+2);
-                        }while(ininvl<meunvl-3);
-                        while(meuxp>=maxxp){
-                            meuxp=meuxp-maxxp;
-                            maxxp=maxxp*2;
-                            meunvl++;
-                        }
-                        click=0;
-                        if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
-                            pokeatual++;
-                        }
-                    }else{
+                    win();
+                    if(inivida>0){
                         if(!flinch){
                             bmessage = pokes[inimigoatual]+" usou "+moves[inimigoatual][inimigoatk].name;
                         }else{
@@ -3670,28 +3671,7 @@ function enter(){
                         inivida=maxinivida
                     }
                 }
-                if(inivida<=0){
-                    tela = 2;
-                    batalha++;
-                    money += 5;
-                    battlemode=0;
-                    bmessage = "";
-                    inimigoatual = Math.ceil(Math.random()*151);//151 para todos
-                    arenaescolher = Math.ceil(Math.random()*3);
-                    meuxp+=10*ininvl;
-                    do{
-                        ininvl = Math.ceil(Math.random()*meunvl+2);
-                    }while(ininvl<meunvl-3);
-                    if(meuxp>=maxxp){
-                        meuxp=meuxp-maxxp;
-                        maxxp=maxxp*2;
-                        meunvl++;
-                    }
-                    click=0;
-                    if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
-                        pokeatual++;
-                    }
-                }
+                win();
                 }else if(click == 5){
                     gameover();
                     if(mrecharge == false){
@@ -3798,28 +3778,7 @@ function enter(){
                     }else{
                         bmessage = pokes[pokeatual]+" está impossibilitado de fazer isso";
                     }
-                    if(inivida<=0){
-                        tela = 2;
-                        batalha++;
-                        money += 10;
-                        battlemode=0;
-                        bmessage = "";
-                        inimigoatual = Math.ceil(Math.random()*151);//151 para todos
-                        arenaescolher = Math.ceil(Math.random()*3);
-                        meuxp+=10*ininvl;
-                        do{
-                            ininvl = Math.ceil(Math.random()*meunvl+2);
-                        }while(ininvl<meunvl-3);
-                        while(meuxp>=maxxp){
-                            meuxp=meuxp-maxxp;
-                            maxxp=maxxp*2;
-                            meunvl++;
-                        }
-                        click=0;
-                        if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
-                            pokeatual++;
-                        }
-                    }
+                    win();
                 }else if(click == 4){
                     if(vida > 0){
                     if(mseed == true){
@@ -3856,51 +3815,9 @@ function enter(){
                         inivida=maxinivida
                     }
                 }
-                if(inivida<=0){
-                    tela = 2;
-                    batalha++;
-                    money += 5;
-                    battlemode=0;
-                    bmessage = "";
-                    inimigoatual = Math.ceil(Math.random()*151);//151 para todos
-                    arenaescolher = Math.ceil(Math.random()*3);
-                    meuxp+=10*ininvl;
-                    do{
-                        ininvl = Math.ceil(Math.random()*meunvl+2);
-                    }while(ininvl<meunvl-3);
-                    if(meuxp>=maxxp){
-                        meuxp=meuxp-maxxp;
-                        maxxp=maxxp*2;
-                        meunvl++;
-                    }
-                    click=0;
-                    if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
-                        pokeatual++;
-                    }
-                }
+                win();
                 }else if(click == 5){
-                    if(inivida<=0){
-                        tela = 2;
-                        batalha++;
-                        money += 5;
-                        battlemode=0;
-                        bmessage = "";
-                        inimigoatual = Math.ceil(Math.random()*151);//151 para todos
-                        arenaescolher = Math.ceil(Math.random()*3);
-                        meuxp+=10*ininvl;
-                        do{
-                            ininvl = Math.ceil(Math.random()*meunvl+2);
-                        }while(ininvl<meunvl-3);
-                        while(meuxp>=maxxp){
-                            meuxp=meuxp-maxxp;
-                            maxxp=maxxp*2;
-                            meunvl++;
-                        }
-                        click=0;
-                        if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
-                            pokeatual++;
-                        }
-                    }
+                    win();
                     gameover();
                     if(mrecharge == false){
                         if(!mwait){
@@ -3948,8 +3865,9 @@ function gameover(){
     fob = 1; //fob = fight or bag
     money = 10
     comp = 1
-    bag[1]= 0
-    bag[2]=0
+    for(var i=0;i<bag.length;i++){
+        bag[i][1]=0;
+    }
     bagoverlay = false;
     bagovs = 1;
     battlemode =0;
@@ -3960,6 +3878,33 @@ function gameover(){
     maxxp = 100;
  }
 }
+
+//executa se vencer
+function win(){
+    if(inivida<=0){
+        tela = 2;
+        batalha++;
+        money += 5;
+        battlemode=0;
+        bmessage = "";
+        inimigoatual = Math.ceil(Math.random()*151);//151 para todos
+        arenaescolher = Math.ceil(Math.random()*3);
+        meuxp+=10*ininvl;
+        do{
+            ininvl = Math.ceil(Math.random()*meunvl+2);
+        }while(ininvl<meunvl-3);
+        while(meuxp>=maxxp){
+            meuxp=meuxp-maxxp;
+            maxxp=maxxp*2;
+            meunvl++;
+        }
+        click=0;
+        if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
+            pokeatual++;
+        }
+    }
+}
+
 function playmusic(){
     if(!(tela == 3)){
         battlemusic.pause();
@@ -4187,6 +4132,8 @@ function draw(){
             ctx.drawImage(chat,500,-50,300,600);
             ctx.fillStyle = "rgb(184,241,142)";
             ctx.fillRect(520,2+(83*pokeovs),260,83);
+            ctx.fillStyle = "rgb(0,148,255,.4)";
+            ctx.fillRect(520,2,260,83);
             for(var i=0;i<meuspokes.length;i++){
                 if(meuspokes[i][0]!=0){
                     image = new Image();

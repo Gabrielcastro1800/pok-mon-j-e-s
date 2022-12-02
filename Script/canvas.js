@@ -3144,6 +3144,7 @@ var pokeop = false;
 var pokeopc = 0;
 var amessage = "";
 var trade1=0,trade2=0;
+var pokedex = 0;
 //pokes: poke, vida, estado, nivel, xp;
 meuspokes=[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]];
 
@@ -3531,6 +3532,9 @@ function enter(){
                 meuspokes[0][3]=meunvl;
                 meuspokes[0][4]=meuxp;
                 pokeoverlay=true;
+            }
+            if(fob==4){
+                pokedex=inimigoatual;
             }
         }else if(battlemode==1){
             mspeed = ((50+2*Statusg[pokeatual][5]+5)*meunvl/100);

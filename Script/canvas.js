@@ -3145,6 +3145,9 @@ var pokeopc = 0;
 var amessage = "";
 var trade1=0,trade2=0;
 var pokedex = 0;
+var choosedex = 0;
+var pokeback = new Image();
+var pokeimage = new Image();
 //pokes: poke, vida, estado, nivel, xp;
 meuspokes=[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]];
 
@@ -3250,13 +3253,19 @@ function left(){
             }
         }
     }else if(tela==3){
-        if(battlemode==0 && bagoverlay == false){
+        if(battlemode==0 && bagoverlay == false && choosedex==0){
             fob = fob+1;
             if(fob == 3)
             {
                 fob = 1;
             }else if(fob == 5){
                 fob = 3;
+            }
+        }else if(choosedex>0){
+            if(choosedex==1){
+                choosedex=2;
+            }else{
+                choosedex=1;
             }
         }else if(battlemode==1){
             if(xatk==1){
@@ -3289,13 +3298,19 @@ function right(){
             }
         }
     }else if(tela==3){
-        if(battlemode==0 && bagoverlay == false){
+        if(battlemode==0 && bagoverlay == false && choosedex==0){
             fob = fob-1;
             if(fob == 0)
             {
                 fob = 2;
             }else if(fob == 2){
                 fob = 4;
+            }
+        }else if(choosedex>0){
+            if(choosedex==1){
+                choosedex=2;
+            }else{
+                choosedex=1;
             }
         }else if(battlemode==1){
             if(xatk==1){
@@ -3328,7 +3343,7 @@ function up(){
             }
         }
     }else if(tela==3){
-        if(battlemode==0 && bagoverlay == false){
+        if(battlemode==0 && bagoverlay == false && choosedex==0){
             if(fob == 1){
                 fob = 3;
             }else if(fob == 3){
@@ -3369,7 +3384,7 @@ function down(){
             }
         }
     }else if(tela==3){
-        if(battlemode==0 && bagoverlay == false){
+        if(battlemode==0 && bagoverlay == false && choosedex==0){
             if(fob == 1){
                 fob = 3;
             }else if(fob == 3){
@@ -3511,7 +3526,7 @@ function enter(){
                         click=2;
                         battlemode = 2;
                     }else{
-                        amessage = "Não da de trocar pelo mesmo pokémon!";
+                        amessage = "Não troque pelo mesmo pokémon!";
                     }
                     trade1=0;
                     trade2=0;
@@ -3533,8 +3548,14 @@ function enter(){
                 meuspokes[0][4]=meuxp;
                 pokeoverlay=true;
             }
-            if(fob==4){
-                pokedex=inimigoatual;
+            if(choosedex==1){
+                pokedex = pokeatual;
+            }else if(choosedex==2){
+                pokedex = inimigoatual;
+            }
+            if(fob==4 && choosedex==0){
+                amessage="Qual pokémon vamos ver a pokedex?"
+                choosedex=1;
             }
         }else if(battlemode==1){
             mspeed = ((50+2*Statusg[pokeatual][5]+5)*meunvl/100);
@@ -3913,6 +3934,12 @@ function backspace(){
     }else{
         amessage="Você tem que escolher um pokémon!";
     }
+    if(pokedex>0){
+        pokedex=0;
+    }else if(choosedex>0){
+        choosedex=0;
+        amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
+    }
 }
 //se o seu pokemon morrer executar
 function gameover(){
@@ -4113,6 +4140,11 @@ function draw(){
             ctx.drawImage(arena2,0,0,800,350)}
             if(arenaescolher == 3){
                 ctx.drawImage(arena3,0,0,800,350)}
+
+        if(choosedex>0){
+            ctx.fillStyle = "rgb(184,241,142,0.7)";
+            ctx.fillRect(100+((choosedex-1)*400), 150,200,200);
+        }
         //desenhar pokémons
         spr1.src = "Images/Sprites/"+pokeatual+".png";
         ctx.save();
@@ -4262,6 +4294,12 @@ function draw(){
                 ctx.font = "25px Arial";
                 ctx.fillText("Trocar", 600, 340);
             }
+        }
+        if(pokedex>0){
+            pokeback.src = "Images/fundo/pokedex.png";
+            ctx.drawImage(pokeback,109,0,691,500);
+            pokeimage.src = "Images/Sprites/"+pokedex+".png";
+            ctx.drawImage(pokeimage,281,158,129,129);
         }
         if(anim){
             if(mspeed>ispeed && click==1 || ispeed>mspeed && click==3){

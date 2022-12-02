@@ -3141,6 +3141,10 @@ var squisound = new Audio("audio/Squirtle.mp3")
 var pokeovs = 0;
 var k=0;
 var pos = 0;
+var pokeop = false;
+var pokeopc = 0;
+var amessage = "";
+var trade1=0,trade2=0;
 //pokes: poke, vida, estado, nivel, xp;
 meuspokes=[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]];
 
@@ -3167,7 +3171,7 @@ do{
     ininvl = Math.ceil(Math.random()*meunvl+3);
 }while(ininvl<meunvl-2);
 var meuxp = 0;
-var maxxp = 100;
+var maxxp = 100*(meunvl-5)*2;
 
 click = 0;
 
@@ -3313,9 +3317,15 @@ function up(){
         }
     }else if(pokeoverlay == true)
     {
-        pokeovs = pokeovs-1;
-        if(pokeovs < 0){
-            pokeovs = meuspokes.length-1;
+        if(pokeop==false){
+            pokeovs = pokeovs-1;
+            if(pokeovs < 0){
+                k=0;
+                while(meuspokes[k][0]!=0){
+                    k++;
+                }
+                pokeovs = k-1;
+            }
         }
     }else if(tela==3){
         if(battlemode==0 && bagoverlay == false){
@@ -3348,9 +3358,15 @@ function down(){
         }
     }else if(pokeoverlay == true)
     {
-        pokeovs = pokeovs+1;
-        if(pokeovs > meuspokes.length-1){
-            pokeovs = 0;
+        if(pokeop==false){
+            pokeovs = pokeovs+1;
+            k=0;
+            while(meuspokes[k][0]!=0){
+                k++;
+            }
+            if(pokeovs > k-1){
+                pokeovs = 0;
+            }
         }
     }else if(tela==3){
         if(battlemode==0 && bagoverlay == false){
@@ -3441,14 +3457,15 @@ function enter(){
         iwrap = false;
         iwait = false;
         mwait = false;
+        amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
+        meuspokes[0][0]=pokeatual;
+        meuspokes[0][1]=vida;
+        meuspokes[0][2]=mestado;
+        meuspokes[0][3]=meunvl;
+        meuspokes[0][4]=meuxp;
     }else if(tela==3){
         if(battlemode==0){
             //pokes: poke, vida, estado, nivel, xp;
-            meuspokes[pos][0]=pokeatual;
-            meuspokes[pos][1]=vida;
-            meuspokes[pos][2]=mestado;
-            meuspokes[pos][3]=meunvl;
-            meuspokes[pos][4]=meuxp;
             if(bagoverlay == true){
                 if(bag[bagovs][1] > 0){
                     bag[bagovs][0]();
@@ -3461,6 +3478,43 @@ function enter(){
                     }
                     battlemode = 2;
                 }
+            }else if(pokeoverlay == true){
+                if(trade2==0){
+                    if(pokeop == true && pokeopc == 0){
+                        k=0;
+                        while(meuspokes[k][0]!=0){
+                            k++;
+                        }
+                        if(k>1){
+                            trade1 = pokeovs;
+                            trade2 = meuspokes[pokeovs];
+                            pokeop = false;
+                        }else{
+                            amessage = "Você tem apenas um pokémon!";
+                            pokeop = false;
+                        }
+                    }else{
+                        pokeop = true;
+                    }
+                }else{
+                    meuspokes[trade1]=meuspokes[pokeovs];
+                    meuspokes[pokeovs] = trade2;
+                    trade1=0;
+                    trade2=0;
+                    if(trade1==0 || pokeovs==0 && pokeovs!=trade1){
+                        pokeatual=meuspokes[0][0];
+                        vida=meuspokes[0][1];
+                        mestado=meuspokes[0][2];
+                        meunvl=meuspokes[0][3];
+                        meuxp=meuspokes[0][4];
+                        pokeoverlay = false;
+                        bmessage = "Trocou para "+pokes[pokeatual];
+                        click=2;
+                        battlemode = 2;
+                    }
+                }
+            }else{
+                amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
             }
             if(fob == 2 && bagoverlay==false){
                 bagoverlay = true
@@ -3468,7 +3522,7 @@ function enter(){
             if(fob==1){
                 battlemode=1;
             }
-            if(fob==3 && pokeoverlay==false){
+            if(fob==3 && pokeoverlay==false && battlemode==0){
                 meuspokes[pos][0]=pokeatual;
                 meuspokes[pos][1]=vida;
                 meuspokes[pos][2]=mestado;
@@ -3838,8 +3892,8 @@ function enter(){
             }
         }
     }
-}
 
+}
 //se apertar backspace executar!
 function backspace(){
     if(tela == 2){tela = 4}else if(tela == 4){tela =2}
@@ -3849,6 +3903,7 @@ function backspace(){
     }
     if(pokeoverlay == true){
         pokeoverlay=false;
+        amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
     }
 }
 //se o seu pokemon morrer executar
@@ -3875,7 +3930,7 @@ function gameover(){
     iboost=[0,0,0,0,0];
     mconfuso = true;
     meuxp = 0;
-    maxxp = 100;
+    maxxp = 100*((meunvl-5)*2);
  }
 }
 
@@ -3895,9 +3950,10 @@ function win(){
         }while(ininvl<meunvl-3);
         while(meuxp>=maxxp){
             meuxp=meuxp-maxxp;
-            maxxp=maxxp*2;
+            maxxp = 100*2;
             meunvl++;
         }
+        maxxp = 100*(meunvl-5)*2;
         click=0;
         if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
             pokeatual++;
@@ -3905,6 +3961,7 @@ function win(){
     }
 }
 
+//toca música ou sons
 function playmusic(){
     if(!(tela == 3)){
         battlemusic.pause();
@@ -4065,8 +4122,10 @@ function draw(){
         iniestado.src = "Images/icones/"+iestado+".png";
         ctx.drawImage(iniestado, 710, 35, 20, 20);
 
+        //desenha o chat em baixo da batalha
         ctx.drawImage(chat,0,350,800,150);
         if(battlemode==0){
+            //desenha as opções de combate
             ctx.fillStyle = "rgb(184,241,142)";
             if(fob == 1){
                 ctx.fillRect(515, 370,115,40);
@@ -4088,9 +4147,11 @@ function draw(){
             ctx.fillText("Pokémon", 520, 460);
             ctx.fillText("Pokédex", 650, 460);
 
+            //escreve a mensagem inicial
             ctx.fillStyle = "black";
-            ctx.fillText("O que o "+pokes[pokeatual]+" vai fazer?", 80, 400);
+            ctx.fillText(amessage, 80, 400);
         }else if(battlemode==1){
+            //desenha os ataques
             ctx.fillStyle = "rgb(184,241,142)";
             ctx.fillRect(90+(200*xatk), 370+(50*yatk),180,40);
 
@@ -4111,11 +4172,13 @@ function draw(){
             }
 
         }else if(battlemode==2){
+            //desenha as mensagens do ataque
             ctx.fillStyle = "black";
             ctx.textAlign = "start";
             ctx.font = "25px Arial";
             ctx.fillText(bmessage, 80, 400);
         }
+        //desenha a mochila
         if(bagoverlay == true){
             ctx.drawImage(chat,580,300,250,150);
             ctx.fillStyle = "rgb(184,241,142)";
@@ -4127,6 +4190,7 @@ function draw(){
                 ctx.fillText(bag[i][3]+": "+bag[i][1], 600, 340+(i*40));
             }
         }
+        //desenha os pokes capturados
         if(pokeoverlay==true){
             //pokes: poke, vida, estado, nivel, xp;
             ctx.drawImage(chat,500,-50,300,600);
@@ -4152,8 +4216,17 @@ function draw(){
                     ctx.fillStyle = "rgb(77,188,88)";
                     ctx.fillRect(580, 50+(83*i), 180*meuspokes[i][1]/(((50+2*Statusg[meuspokes[i][0]][0])*meuspokes[i][3]/100)+10+meuspokes[i][3]), 15);
                     ctx.fillStyle = "rgb(68,196,250)";
-                    ctx.fillRect(580, 70+(83*i), 200*meuspokes[i][4]/100*((meuspokes[i][3]-5)*2), 10);
+                    ctx.fillRect(580, 70+(83*i), 200*meuspokes[i][4]/(100*((meuspokes[i][3]-5)*2)), 10);
                 }
+            }
+            if(pokeop==true){
+                ctx.drawImage(chat,580,300,250,150);
+                ctx.fillStyle = "rgb(184,241,142)";
+                ctx.fillRect(600, 310,200,40);
+                ctx.fillStyle = "black";
+                ctx.textAlign = "start";
+                ctx.font = "25px Arial";
+                ctx.fillText("Trocar", 600, 340);
             }
         }
         if(anim){

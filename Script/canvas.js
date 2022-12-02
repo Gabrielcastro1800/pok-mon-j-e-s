@@ -34,10 +34,10 @@ function damage(nvl, atk, atkpower, dfs, type, poke, s, bol){
                 boostatk+=0.5;
             }
             for(var i=0;i>mboost[1+s*2];i--){
-                boostdfs=2/2-(i-1);
+                boostdfs=2/(2-(i-1));
             }
             for(var i=0;i>iboost[0+s*2];i--){
-                boostatk=2/2-(i-1);
+                boostatk=2/(2-(i-1));
             }
         }else if(bol == 0){
             for(var i=0;i<iboost[1+s*2];i++){
@@ -47,10 +47,10 @@ function damage(nvl, atk, atkpower, dfs, type, poke, s, bol){
                 boostatk+=0.5;
             }
             for(var i=0;i>iboost[1+s*2];i--){
-                boostdfs=2/2-(i-1);
+                boostdfs=2/(2-(i-1));
             }
             for(var i=0;i>mboost[0+s*2];i--){
-                boostatk=2/2-(i-1);
+                boostatk=2/(2-(i-1));
             }
         }
         anim = true;
@@ -2021,7 +2021,7 @@ function Growl(bol, aaccuracy, baccuracy){
         }else if(bol==1){
             if(mboost[0]>-6){
                 mboost[0]-=1;
-                bmessage = pokes[pokeatual]+"  perdeu ataque";
+                bmessage = pokes[pokeatual]+" perdeu ataque";
             }else{
                 bmessage = pokes[pokeatual]+" perdeu todo ataque";
             }
@@ -3434,7 +3434,7 @@ function enter(){
                 }else if(choose == 4){
                     pokeatual = Math.ceil(Math.random()*151);;
                 }
-                inimigoatual = Math.ceil(Math.random()*151);//151 para todos
+                inimigoatual = 25//Math.ceil(Math.random()*151);//151 para todos
                 arenaescolher = Math.ceil(Math.random()*3);
                 escolha = false;
             }

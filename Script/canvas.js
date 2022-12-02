@@ -3100,7 +3100,7 @@ var spr1 = new Image();
 var spr2 = new Image();
 
 //batalha
-var pokeatual, meunvl, vida, maxvida, inimigoatual, ininvl, inivida, maxinivida, Statusg=[], pokes=[], moves=[], tipos=[], lvs=[], mboost=[], iboost=[], meuspokes=[];
+var pokeatual, meunvl, vida, maxvida, inimigoatual, ininvl, inivida, maxinivida, Statusg=[], pokes=[], moves=[], tipos=[], lvs=[], mboost=[], iboost=[], meuspokes=[], pokedesc=[];
 var yatk = 0;
 var xatk = 0;
 var bmessage;
@@ -3169,6 +3169,9 @@ lvs=[0,16,32,-1,16,36,-1,16,36,-1,7,10,-1,7,10,-1,18,36,-1,20,-1,20,-1,22,-1,-2,
 //status boost
 mboost=[0,0,0,0,0];
 iboost=[0,0,0,0,0];
+//descrição dos pokémons, terminou no bulbassaur
+pokedesc=[0,["Bulbasaur pode ser visto tirando uma soneca ao sol. A semente nas suas costas cresce cada vez mais à medida que absorve os raios solares."], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""]];
+
 meunvl = 5;
 do{
     ininvl = Math.ceil(Math.random()*meunvl+3);

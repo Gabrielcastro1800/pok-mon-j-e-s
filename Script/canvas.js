@@ -3499,8 +3499,6 @@ function enter(){
                 }else{
                     meuspokes[trade1]=meuspokes[pokeovs];
                     meuspokes[pokeovs] = trade2;
-                    trade1=0;
-                    trade2=0;
                     if(trade1==0 || pokeovs==0 && pokeovs!=trade1){
                         pokeatual=meuspokes[0][0];
                         vida=meuspokes[0][1];
@@ -3512,6 +3510,8 @@ function enter(){
                         click=2;
                         battlemode = 2;
                     }
+                    trade1=0;
+                    trade2=0;
                 }
             }else{
                 amessage = "O que o "+pokes[pokeatual]+" vai fazer?";

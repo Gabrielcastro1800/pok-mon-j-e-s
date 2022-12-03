@@ -3149,6 +3149,7 @@ var pokedex = 0;
 var choosedex = 0;
 var pokeback = new Image();
 var pokeimage = new Image();
+var lines = [];
 //pokes: poke, vida, estado, nivel, xp;
 meuspokes=[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]];
 
@@ -3172,7 +3173,7 @@ lvs=[0,16,32,-1,16,36,-1,16,36,-1,7,10,-1,7,10,-1,18,36,-1,20,-1,20,-1,22,-1,-2,
 mboost=[0,0,0,0,0];
 iboost=[0,0,0,0,0];
 //descrição dos pokémons,  proximo zubat!
-pokedesc=[0,["Bulbasaur pode ser visto tirando uma soneca ao sol. A semente nas suas costas cresce cada vez mais à medida que absorve os raios solares."], ["Ivysaur conseque creser Plantas ao seu retor"], ["Venusaros podem chegar a pesar 250kg"], ["Quando esta com pouca vida pode chegar a aumentar o poder dos ataques de fogo"], ["Charmeleon Comparado com sua pre evolução é muito mais zangado!"], ["O pokemon dragão que não é do tipo dragão!"], ["Conhecido como o pokemon pequena tartaruga"], ["Sua casca é tão dura quanto aço!"], ["Tem dois canhoe em suas costas qua atiram todo seu poder aquatico!!!"], ["Consegue escalar paredes com muita facilidade"], ["O pokemon casulo"], ["O pokemon Borboleta"], ["Um inseto venenoso!"], ["Equanto espera sua evolução ele se esconde em Grupos de mais de 50!"], ["O pokemon dupla Abelha!!"], ["O pokemon passaro da regiao de kanto!"], ["Seus Olhos mostram confiaça e causam medo em seu adversarios!"], ["Pigeots podem chegar a 2m de altura!"], ["O pokemon rato do tipo normal!"], ["Suas presas estão sempre cresendo!"], ["A spcecie rival do pigdey!"], ["A spcecie rival do pigeoto"], ["Seu nome ao contrario é SNAKE Cobra em portugues!"], ["O pokemon serpente!"], ["O pokemon mais famoso do mundo!!"], ["A evoluçao de Pikachu!"], ["O pokemon tatu!"], ["Chega a ter um metro de altura!"], ["O pokemon femea mais diferente do macho!"], ["Chegam a pesar 20kg"], ["Como o nome diz é a rainha dos nidoran!"], ["O pokemon macho mais diferente da femea"], ["Chegam a pesar 19kg um pouco mais leve que as femeas"], ["O rei dos Nidoran"], ["O pokemon fofo do tipo fada!"], ["75% desses pokemon são femeas"], ["Apenas 25% desses pokemon são machos!"], ["Esse pokemon é um dos mais inteligentes"], ["O pokemon Balão rosa!"], ["Seu corpo é tão macio que os ataques fisicos tem pouco efeito!"], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""], [""]];
+pokedesc=[0,"Bulbasaur pode ser visto tirando uma soneca ao sol. A semente nas suas costas cresce cada vez mais à medida que absorve os raios solares.", "Ivysaur conseque creser Plantas ao seu retor", "Venusaros podem chegar a pesar 250kg", "Quando esta com pouca vida pode chegar a aumentar o poder dos ataques de fogo", "Charmeleon Comparado com sua pre evolução é muito mais zangado!", "O pokemon dragão que não é do tipo dragão!", "Conhecido como o pokemon pequena tartaruga", "Sua casca é tão dura quanto aço!", "Tem dois canhoe em suas costas qua atiram todo seu poder aquatico!!!", "Consegue escalar paredes com muita facilidade", "O pokemon casulo", "O pokemon Borboleta", "Um inseto venenoso!", "Equanto espera sua evolução ele se esconde em Grupos de mais de 50!", "O pokemon dupla Abelha!!", "O pokemon passaro da regiao de kanto!", "Seus Olhos mostram confiaça e causam medo em seu adversarios!", "Pigeots podem chegar a 2m de altura!", "O pokemon rato do tipo normal!", "Suas presas estão sempre cresendo!", "A spcecie rival do pigdey!", "A spcecie rival do pigeoto", "Seu nome ao contrario é SNAKE Cobra em portugues!", "O pokemon serpente!", "O pokemon mais famoso do mundo!!", "A evoluçao de Pikachu!", "O pokemon tatu!", "Chega a ter um metro de altura!", "O pokemon femea mais diferente do macho!", "Chegam a pesar 20kg", "Como o nome diz é a rainha dos nidoran!", "O pokemon macho mais diferente da femea", "Chegam a pesar 19kg um pouco mais leve que as femeas", "O rei dos Nidoran", "O pokemon fofo do tipo fada!", "75% desses pokemon são femeas", "Apenas 25% desses pokemon são machos!", "Esse pokemon é um dos mais inteligentes", "O pokemon Balão rosa!", "Seu corpo é tão macio que os ataques fisicos tem pouco efeito!", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 
 meunvl = 5;
 do{
@@ -4310,6 +4311,22 @@ function draw(){
             ctx.textAlign = "center";
             ctx.font = "13px Arial";
             ctx.fillText((pokes[pokedex]).toUpperCase(), 109+165, 420);
+            ctx.font = "bold 18px Arial";
+            ctx.fillText("N: "+pokedex, 109+450, 433);
+            if(tipos[pokedex].length>1){
+                for(var i =0;i<2;i++){
+                    pokeimage = new Image();
+                    pokeimage.src = "Images/tipos/"+tipos[pokedex][i]+".png";
+                    ctx.drawImage(pokeimage,209,164+(i*63),60,60);
+                }
+            }else{
+                pokeimage = new Image();
+                pokeimage.src = "Images/tipos/"+tipos[pokedex][0]+".png";
+                ctx.drawImage(pokeimage,209,194,60,60);
+            }
+            for(var i=0;i<pokedesc[pokedex];i++){
+                lines[c]+=pokedesc[pokedex][i];
+            }
         }
         if(anim){
             if(mspeed>ispeed && click==1 || ispeed>mspeed && click==3){

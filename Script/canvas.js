@@ -3150,6 +3150,10 @@ var choosedex = 0;
 var pokeback = new Image();
 var pokeimage = new Image();
 var lines = [];
+lines[0]="";
+var palavras = [];
+var c =0;
+var l=0;
 //pokes: poke, vida, estado, nivel, xp;
 meuspokes=[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]];
 
@@ -4313,6 +4317,13 @@ function draw(){
             ctx.fillText((pokes[pokedex]).toUpperCase(), 109+165, 420);
             ctx.font = "bold 18px Arial";
             ctx.fillText("N: "+pokedex, 109+450, 433);
+            if(lvs[pokedex]>0){
+                ctx.fillText("Evo: "+lvs[pokedex], 109+555, 433);
+            }else if(lvs[pokedex]<-1){
+                ctx.fillText("Evo: Pedra", 109+555, 433);
+            }else{
+                ctx.fillText("Evo: Não", 109+555, 433);
+            }
             if(tipos[pokedex].length>1){
                 for(var i =0;i<2;i++){
                     pokeimage = new Image();
@@ -4324,8 +4335,30 @@ function draw(){
                 pokeimage.src = "Images/tipos/"+tipos[pokedex][0]+".png";
                 ctx.drawImage(pokeimage,209,194,60,60);
             }
-            for(var i=0;i<pokedesc[pokedex];i++){
-                lines[c]+=pokedesc[pokedex][i];
+            palavras = pokedesc[pokedex].split(" ");
+            l=0;
+            lines[l]="";
+            c=0;
+            for(var i=0;i<palavras.length;i++){
+                for(var g=0;g<palavras[i].length;g++){
+                    if(c<24){
+                        c++
+                    }
+                }
+                if(c<24){
+                    lines[l]+=palavras[i]+" ";
+                }else{
+                    i--;
+                    c=0;
+                    l++;
+                    lines[l]="";
+                }
+            }
+            for(var i=0;i<lines.length;i++){
+                ctx.fillStyle = "rgb(72,0,255)";
+                ctx.textAlign = "start";
+                ctx.font = "16px brassMono";
+                ctx.fillText(lines[i], 109+390, 170+(15*i));
             }
         }
         if(anim){

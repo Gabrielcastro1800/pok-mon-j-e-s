@@ -50,3 +50,8 @@ body {
     background-size: cover;
     background-position: center center;
 }
+
+@font-face {
+    font-family: brassMono;
+    src: url("../fonte/brassmono.otf");
+}

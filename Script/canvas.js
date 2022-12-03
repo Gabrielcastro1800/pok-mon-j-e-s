@@ -3063,6 +3063,7 @@ function HyperBeam(bol, aaccuracy, baccuracy){
 //inicio
 var canvas = document.getElementById("inicio");
 var ctx = canvas.getContext("2d");
+
 var img1 = new Image();
 var img2 = new Image();
 var img3 = new Image();

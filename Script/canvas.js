@@ -3092,7 +3092,9 @@ var bag=[[potion, 0, 10, "Poção","Images/itens/potion.png"],[spotion, 0, 50, "
 var bagoverlay = false;
 var pokeoverlay = false;
 var bagovs = 0;
-
+var trans = 0;
+var transy = 0;
+var transimg = new Image();
 
 //transição
 var tela = 1;
@@ -3449,7 +3451,7 @@ function enter(){
                 message = "Use as setas <- e -> para decidir o pokémon e 'enter' para selecionar!";
                 escolha = false;
             }else{
-                tela = 2;
+                trans = 2;
                 if(choose == 1){
                     pokeatual = 1;
                 }else if(choose == 2){
@@ -3467,7 +3469,7 @@ function enter(){
             }
         }
     }else if(tela==2){
-        tela = 3;
+        trans = 3;
         maxinivida = ((50+2*Statusg[inimigoatual][0])*ininvl/100)+10+ininvl;;
         inivida = maxinivida;
         mseed = false;
@@ -3933,7 +3935,7 @@ function enter(){
 }
 //se apertar backspace executar!
 function backspace(){
-    if(tela == 2){tela = 4}else if(tela == 4){tela =2}
+    if(tela == 2){trans = 4}else if(tela == 4){trans =2}
     if(tela == 3){bagoverlay = false}
     if(battlemode==1){
         battlemode=0;
@@ -3980,7 +3982,7 @@ function gameover(){
         }else{
             batalha = 0;
             money = 10;
-            tela = 1;
+            trans = 1;
             vida = maxvida
             ininvl = 5;
             meunvl = 5;
@@ -4008,7 +4010,7 @@ function gameover(){
 //executa se vencer
 function win(){
     if(inivida<=0){
-        tela = 2;
+        trans = 2;
         batalha++;
         money += 5*Math.floor(maxinivida/10);
         battlemode=0;
@@ -4048,10 +4050,9 @@ function playmusic(){
 
 //desenha tudo na tela
 function draw(){
+    ctx.clearRect(0, 0, 800, 500);
     //Se for a tela 1 ele vai desenhar isso
-   
     if(tela == 1){
-        ctx.clearRect(0, 0, 800, 500);
         //desenhar fundo
         back.src = "Images/fundo/lab.png"
         ctx.drawImage(back, -90, -150, back.width*6, back.height*6);
@@ -4110,7 +4111,6 @@ function draw(){
     }
     //Se for a tela 2 ele vai desenhar isso
     if(tela == 2){
-        ctx.clearRect(0, 0, 800, 500);
 
         //desenhar versus
         versus.src = "Images/fundo/versus.png"
@@ -4138,8 +4138,6 @@ function draw(){
     }
     //Se for a tela 3 ele vai desenhar isso
     if(tela==3){
-       
-        ctx.clearRect(0, 0, 800, 500)
         arena.src = "Images/fundo/arena.png"
         arena2.src = "Images/fundo/arena2.png"
         arena3.src = "Images/fundo/arena3.png"
@@ -4375,9 +4373,9 @@ function draw(){
         }
     }
     if(tela == 4){
-        mart.src = "Images/fundo/pokemart.png"
-        ctx.clearRect(0,0,800,500)
-        ctx.drawImage(mart,0,0,800,500)
+        mart.src = "Images/fundo/pokemart.png";
+        ctx.clearRect(0,0,800,500);
+        ctx.drawImage(mart,0,0,800,500);
         ctx.fillStyle = "rgb(184,241,142)";
         ctx.fillRect((100*(comp)), 100,100,100);
         for(var i=0;i<bag.length;i++){
@@ -4390,6 +4388,31 @@ function draw(){
             ctx.fillText(bag[i][2]+"$", 30+(i*100), 220);
         }
         ctx.fillText("Dinheiro:"+money, 10, 25);
+    }
+    //transição
+    if(trans>0){
+        transy+=7;
+        if(transy>=300){
+            tela = trans;
+            trans = 0;
+        }
+    }else if(trans==0 && transy>0){
+        transy-=7;
+    }
+    if(transy<=280){
+        transimg = new Image();
+        transimg.src = "Images/fundo/transup.png";
+        ctx.drawImage(transimg,0,-280+transy,800,500);
+        transimg = new Image();
+        transimg.src = "Images/fundo/transdown.png";
+        ctx.drawImage(transimg,0,280-transy,800,500);
+    }else{
+        transimg = new Image();
+        transimg.src = "Images/fundo/transup.png";
+        ctx.drawImage(transimg,0,0,800,500);
+        transimg = new Image();
+        transimg.src = "Images/fundo/transdown.png";
+        ctx.drawImage(transimg,0,0,800,500);
     }
     requestAnimationFrame(draw);
 }

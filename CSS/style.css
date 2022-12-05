@@ -9,16 +9,6 @@ canvas {
     display: block;
     width: 50%;
 }
-#butaos{
-    border-radius: 1px;
-    border-style: solid;
-    border-color: black;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
 .button {
     border: none;
     color: grey;
@@ -29,7 +19,7 @@ canvas {
     font-size: 16px;
     margin: 4px 2px;}
 .up {
-    margin-left: 45%;
+    margin-left: 22%;
     margin-right: 10%;}
 .left {
     margin-left: 50%;}
@@ -37,12 +27,12 @@ canvas {
     margin-left: 1%px;
     margin-right: 10%;}
 .down {
-    margin-left: 39%;
+    margin-left: 20%;
     margin-right: 10%;}
 .enter {
-    margin-left: 3%px;}
+    margin-left: 25%;}
 .back {
-    margin-left: 3%px;}
+    margin-left: 25%;}
 
 body {
     background-image: url("../Images/fundo/fundo.png");

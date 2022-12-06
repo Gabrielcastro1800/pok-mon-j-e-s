@@ -3088,7 +3088,7 @@ var yn = 0;
 var fob = 1; //fob = fight or bag
 var money = 10;
 var comp = 0;
-var bag=[[potion, 0, 10, "Poção","Images/itens/potion.png"],[spotion, 0, 50, "SuperPoção","Images/itens/super-potion.png"],[pokeball, 5, 10, "PokeBola","Images/itens/pokeball.png"]];
+var bag=[[potion, 3, 10, "Poção","Images/itens/potion.png"],[spotion, 0, 50, "SuperPoção","Images/itens/super-potion.png"],[pokeball, 5, 10, "PokeBola","Images/itens/pokeball.png"]];
 var bagoverlay = false;
 var pokeoverlay = false;
 var bagovs = 0;
@@ -3130,7 +3130,7 @@ var iwait = false;
 var mwait = false;
 var mspeed = 0;
 var ispeed = 0;
-var item = -1;
+var item = false;
 var damagepng = new Image();
 var xplayer = 300;
 var xini = 500;
@@ -3147,15 +3147,19 @@ var pokeop = false;
 var pokeopc = 0;
 var amessage = "";
 var trade1=0,trade2=0;
+var captura = false;
 var pokedex = 0;
 var choosedex = 0;
 var pokeback = new Image();
 var pokeimage = new Image();
-var lines = [];
-lines[0]="";
+var lines = [""];
 var palavras = [];
 var c =0;
 var l=0;
+var verify = false;
+var use = false;
+var usaritem = 0;
+var pos = 0;
 //pokes: poke, vida, estado, nivel, xp;
 meuspokes=[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]];
 
@@ -3223,23 +3227,95 @@ addEventListener("keyup", function(){
 
 //funçoes de items
 function pokeball(){
-    bmessage = pokes[pokeatual]+" usou a Pokebola";
-    item=2;
+    if(!use){
+        verify = true;
+        bmessage = pokes[pokeatual]+" usou a Pokebola";
+        item=true;
+        if(!iwait){
+            do{
+                inimigoatk = Math.floor(Math.random()*4);
+            }while(moves[inimigoatual][inimigoatk]==0);
+        }
+        battlemode = 2;
+    }else{
+        if(Math.random()>0.8*inivida/maxinivida){
+            k=0;
+            while(meuspokes[k][0]!=0){
+                k++;
+            }
+            meuspokes[k][0]=inimigoatual;
+            meuspokes[k][1]=inivida;
+            meuspokes[k][2]=iestado;
+            meuspokes[k][3]=ininvl;
+            meuspokes[k][4]=0;
+            bmessage = "Capturou "+pokes[inimigoatual];
+            captura = true;
+            win();
+        }else{
+            bmessage = "Não conseguiu capturar "+pokes[inimigoatual];
+        }
+        use = false;
+    }
 }
 function potion(){
-    bmessage = pokes[pokeatual]+" usou Potion";
-    item = 0;
+    if(!use){
+        if(vida<maxvida){
+            verify = true;
+            if(usaritem==0){
+                bagoverlay=false;
+                pokeoverlay=true;
+                amessage = "Escolha um pokémon para usar";
+                usaritem=1;
+            }else if(usaritem==2){
+                bmessage = pokes[meuspokes[pos][0]]+" usou Poção";
+                item = true;
+                if(!iwait){
+                    do{
+                        inimigoatk = Math.floor(Math.random()*4);
+                    }while(moves[inimigoatual][inimigoatk]==0);
+                }
+                battlemode = 2;
+            }
+        }
+    }else{
+        Cura(20);
+        usaritem=0;
+        use = false;
+    }
 }
 function spotion(){
-    bmessage = pokes[pokeatual]+" usou SuperPotion";
-    item = 1;
+    if(!use){
+        if(vida<maxvida){
+            verify = true;
+            if(usaritem==0){
+                bagoverlay=false;
+                pokeoverlay=true;
+                amessage = "Escolha um pokémon para usar";
+                usaritem=1;
+            }else if(usaritem==2){
+                bmessage = pokes[meuspokes[pos][0]]+" usou Super Poção";
+                item = true;
+                if(!iwait){
+                    do{
+                        inimigoatk = Math.floor(Math.random()*4);
+                    }while(moves[inimigoatual][inimigoatk]==0);
+                }
+                battlemode = 2;
+            }
+        }
+    }else{
+        Cura(50);
+        usaritem=0;
+        use = false;
+    }
 }
 function Cura(cura){
-    bmessage = pokes[pokeatual]+" curou "+((cura-(vida+cura-maxvida)).toFixed(0))+" pontos de vida!";
-    vida = vida+cura;
-    if(vida > maxvida){
-        vida = maxvida
+    bmessage = pokes[meuspokes[pos][0]]+" curou alguns pontos de vida!";
+    meuspokes[pos][1] = meuspokes[pos][1]+cura;
+    if(meuspokes[pos][1] > (((50+2*Statusg[meuspokes[pos][0]][0])*meuspokes[pos][3]/100)+10+meuspokes[pos][3])){
+        meuspokes[pos][1] = (((50+2*Statusg[meuspokes[pos][0]][0])*meuspokes[pos][3]/100)+10+meuspokes[pos][3]);
     }
+    vida=meuspokes[0][1];
 }
 
 //se apertar pra esquerda, executar
@@ -3495,18 +3571,23 @@ function enter(){
             if(bagoverlay == true){
                 if(bag[bagovs][1] > 0){
                     bag[bagovs][0]();
-                    bag[bagovs][1]-=1;
-                    mspeed += 10000;
-                    if(!iwait){
-                        do{
-                            inimigoatk = Math.floor(Math.random()*4);
-                        }while(moves[inimigoatual][inimigoatk]==0);
+                    if(verify==true){
+                        bag[bagovs][1]-=1;
+                        mspeed += 10000;
+                        verify=false;
+                    }else{
+                        amessage="Você não pode usar isto agora!";
                     }
-                    battlemode = 2;
                 }
             }else if(pokeoverlay == true){
                 amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
-                if(trade2==0){
+                if(usaritem==1){
+                    pos = pokeovs;
+                    usaritem=2;
+                    pokeoverlay=false;
+                    bagoverlay=true;
+                    bag[bagovs][0]();
+                }else if(trade2==0){
                     if(pokeop == true && pokeopc == 0){
                         k=0;
                         while(meuspokes[k][0]!=0){
@@ -3546,8 +3627,8 @@ function enter(){
             }else{
                 amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
             }
-            if(fob == 2 && bagoverlay==false){
-                bagoverlay = true
+            if(fob == 2 && bagoverlay==false && usaritem==0){
+                bagoverlay = true;
             }
             if(fob==1){
                 battlemode=1;
@@ -3562,8 +3643,10 @@ function enter(){
             }
             if(choosedex==1){
                 pokedex = pokeatual;
+                lines = [""];
             }else if(choosedex==2){
                 pokedex = inimigoatual;
+                lines = [""];
             }
             if(fob==4 && choosedex==0){
                 amessage="Qual pokémon vamos ver a pokedex?"
@@ -3612,7 +3695,7 @@ function enter(){
             click++;
             if(mspeed>ispeed){
                 if(click == 1){
-                    if(item==-1){
+                    if(item==false){
                         if(mestado == 5){
                             if(Math.random()>0.6){
                                 mestado = 0;
@@ -3654,30 +3737,9 @@ function enter(){
                             bmessage = pokes[pokeatual]+" está impossibilitado de fazer isso";
                         }
                     }else{
-                        if(item == 0){
-                            Cura(20);
-                        }
-                        if(item == 1){
-                            Cura(50);
-                        }
-                        if(item == 2){
-                            if(Math.random()>0.8*inivida/maxinivida){
-                                k=0;
-                                while(meuspokes[k][0]!=0){
-                                    k++;
-                                }
-                                meuspokes[k][0]=inimigoatual;
-                                meuspokes[k][1]=inivida;
-                                meuspokes[k][2]=iestado;
-                                meuspokes[k][3]=ininvl;
-                                meuspokes[k][4]=0;
-                                bmessage = "Capturou "+pokes[inimigoatual];
-                                inivida = 0;
-                            }else{
-                                bmessage = "Não conseguiu capturar "+pokes[inimigoatual];
-                            }
-                        }
-                        item = -1;
+                        use = true;
+                        bag[bagovs][0]();
+                        item = false;
                     }
                 }else if(click==2){
                     gameover();
@@ -3960,6 +4022,7 @@ function gameover(){
     meuspokes[0][2]=mestado;
     meuspokes[0][3]=meunvl;
     meuspokes[0][4]=meuxp;
+    captura = false;
     if(vida <= 0){
         k=0;
         for(var i=0;i<meuspokes.length;i++){
@@ -4009,14 +4072,12 @@ function gameover(){
 
 //executa se vencer
 function win(){
-    if(inivida<=0){
+    if(inivida<=0 || captura){
         trans = 2;
         batalha++;
         money += 5*Math.floor(maxinivida/10);
         battlemode=0;
         bmessage = "";
-        inimigoatual = Math.ceil(Math.random()*151);//151 para todos
-        arenaescolher = Math.ceil(Math.random()*3);
         meuxp+=10*ininvl;
         do{
             ininvl = Math.ceil(Math.random()*(meunvl+2));
@@ -4031,6 +4092,7 @@ function win(){
         if(lvs[pokeatual]!=-1 && lvs[pokeatual]<=meunvl){
             pokeatual++;
         }
+        captura = false;
     }
 }
 
@@ -4394,6 +4456,10 @@ function draw(){
         transy+=7;
         if(transy>=300){
             tela = trans;
+            if(tela == 2){
+                inimigoatual = Math.ceil(Math.random()*151);//151 para todos
+                arenaescolher = Math.ceil(Math.random()*3);
+            }
             trans = 0;
         }
     }else if(trans==0 && transy>0){

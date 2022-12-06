@@ -1713,7 +1713,7 @@ function PoisonGas(bol, aaccuracy, baccuracy){
                 bmessage = pokes[inimigoatual]+" foi envenenado";
             }
         }else if(bol==1 && mestado == 0){
-            if(tipos[inimigoatual][1] == 16 || tipos[inimigoatual][1] == 7 || tipos[inimigoatual][0] == 7){
+            if(tipos[pokeatual][1] == 16 || tipos[pokeatual][1] == 7 || tipos[pokeatual][0] == 7){
                 bmessage = pokes[pokeatual]+" é imune";
             }else{
                 mestado = 4;
@@ -3088,13 +3088,15 @@ var yn = 0;
 var fob = 1; //fob = fight or bag
 var money = 10;
 var comp = 0;
-var bag=[[potion, 3, 10, "Poção","Images/itens/potion.png"],[spotion, 0, 50, "SuperPoção","Images/itens/super-potion.png"],[pokeball, 5, 10, "PokeBola","Images/itens/pokeball.png"]];
+var bag=[[potion, 0, 10, "Poção","Images/itens/potion.png"],[spotion, 0, 50, "SuperPoção","Images/itens/super-potion.png"],[fullheal, 0, 60, "CuraTudo","Images/itens/full-heal.png"],[revive, 0, 30, "Reviver","Images/itens/revive.png"],[maxrevive, 0, 80, "ReviverMax","Images/itens/max-revive.png"],[rarecandy, 0, 100, "Doce Raro","Images/itens/rare-candy.png"],[pokeball, 0, 10, "PokeBola","Images/itens/pokeball.png"],[thunderstone, 0, 150, "PedraTrovão","Images/itens/thunder-stone.png"],[moonstone, 0, 150, "PedradaLua","Images/itens/moon-stone.png"],[firestone, 0, 150, "PedradoFogo","Images/itens/fire-stone.png"],[leafstone, 0, 150, "PedradaFolha","Images/itens/leaf-stone.png"],[waterstone, 0, 150, "PedradaÁgua","Images/itens/water-stone.png"]];
 var bagoverlay = false;
 var pokeoverlay = false;
 var bagovs = 0;
 var trans = 0;
 var transy = 0;
 var transimg = new Image();
+var ly = 0;
+var cy = 0;
 
 //transição
 var tela = 1;
@@ -3185,7 +3187,7 @@ iboost=[0,0,0,0,0];
 //descrição dos pokémons,  proximo zubat!
 pokedesc=[0,"Bulbasaur pode ser visto tirando uma soneca ao sol. A semente nas suas costas cresce cada vez mais à medida que absorve os raios solares.", "Ivysaur conseque creser Plantas ao seu retor", "Venusaros podem chegar a pesar 250kg", "Quando esta com pouca vida pode chegar a aumentar o poder dos ataques de fogo", "Charmeleon Comparado com sua pre evolução é muito mais zangado!", "O pokemon dragão que não é do tipo dragão!", "Conhecido como o pokemon pequena tartaruga", "Sua casca é tão dura quanto aço!", "Tem dois canhoe em suas costas qua atiram todo seu poder aquatico!!!", "Consegue escalar paredes com muita facilidade", "O pokemon casulo", "O pokemon Borboleta", "Um inseto venenoso!", "Equanto espera sua evolução ele se esconde em Grupos de mais de 50!", "O pokemon dupla Abelha!!", "O pokemon passaro da regiao de kanto!", "Seus Olhos mostram confiaça e causam medo em seu adversarios!", "Pigeots podem chegar a 2m de altura!", "O pokemon rato do tipo normal!", "Suas presas estão sempre cresendo!", "A spcecie rival do pigdey!", "A spcecie rival do pigeoto", "Seu nome ao contrario é SNAKE Cobra em portugues!", "O pokemon serpente!", "O pokemon mais famoso do mundo!!", "A evoluçao de Pikachu!", "O pokemon tatu!", "Chega a ter um metro de altura!", "O pokemon femea mais diferente do macho!", "Chegam a pesar 20kg", "Como o nome diz é a rainha dos nidoran!", "O pokemon macho mais diferente da femea", "Chegam a pesar 19kg um pouco mais leve que as femeas", "O rei dos Nidoran", "O pokemon fofo do tipo fada!", "75% desses pokemon são femeas", "Apenas 25% desses pokemon são machos!", "Esse pokemon é um dos mais inteligentes", "O pokemon Balão rosa!", "Seu corpo é tão macio que os ataques fisicos tem pouco efeito!", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 
-meunvl = 5;
+meunvl = 15;
 do{
     ininvl = Math.ceil(Math.random()*meunvl+3);
 }while(ininvl<meunvl-2);
@@ -3228,8 +3230,7 @@ addEventListener("keyup", function(){
 //funçoes de items
 function pokeball(){
     if(!use){
-        verify = true;
-        bmessage = pokes[pokeatual]+" usou a Pokebola";
+        bmessage = "você usou a Pokebola";
         item=true;
         if(!iwait){
             do{
@@ -3237,6 +3238,8 @@ function pokeball(){
             }while(moves[inimigoatual][inimigoatk]==0);
         }
         battlemode = 2;
+        bag[bagovs][1]-=1;
+        mspeed += 10000;
     }else{
         if(Math.random()>0.8*inivida/maxinivida){
             k=0;
@@ -3259,15 +3262,16 @@ function pokeball(){
 }
 function potion(){
     if(!use){
-        if(vida<maxvida){
-            verify = true;
-            if(usaritem==0){
-                bagoverlay=false;
-                pokeoverlay=true;
-                amessage = "Escolha um pokémon para usar";
-                usaritem=1;
-            }else if(usaritem==2){
-                bmessage = pokes[meuspokes[pos][0]]+" usou Poção";
+        if(usaritem==0){
+            bagoverlay=false;
+            pokeoverlay=true;
+            amessage = "Escolha um pokémon para usar";
+            usaritem=1;
+        }else if(usaritem==2){
+            if(meuspokes[pos][1]<(((50+2*Statusg[meuspokes[pos][0]][0])*meuspokes[pos][3]/100)+10+meuspokes[pos][3])){
+                bag[bagovs][1]-=1;
+                mspeed += 10000;
+                bmessage = "você usou Poção";
                 item = true;
                 if(!iwait){
                     do{
@@ -3275,6 +3279,11 @@ function potion(){
                     }while(moves[inimigoatual][inimigoatk]==0);
                 }
                 battlemode = 2;
+            }else{
+                amessage="Você não pode usar isto agora!";
+                usaritem=0;
+                pokeoverlay=false;
+                bagoverlay=true;
             }
         }
     }else{
@@ -3283,17 +3292,168 @@ function potion(){
         use = false;
     }
 }
-function spotion(){
+function thunderstone(){
+    if(usaritem==0){
+        bagoverlay=false;
+        pokeoverlay=true;
+        amessage = "Escolha um pokémon para usar";
+        usaritem=1;
+    }else if(usaritem==2){
+        if(lvs[meuspokes[pos][0]]==-2){
+            bag[bagovs][1]-=1;
+            amessage = "Você usou Pedra Trovão";
+            meuspokes[pos][0]++;
+            pokeatual=meuspokes[0][0];
+            usaritem=0;
+            pokeoverlay=false;
+        }else if(meuspokes[pos][0]==133){
+            bag[bagovs][1]-=1;
+            amessage = "Você usou Pedra Trovão";
+            meuspokes[pos][0]=135;
+            pokeatual=meuspokes[0][0];
+            usaritem=0;
+            pokeoverlay=false;
+        }else{
+            amessage="Você não pode usar isto agora!";
+            usaritem=0;
+            pokeoverlay=false;
+            bagoverlay=true;
+        }
+    }
+}
+function moonstone(){
+    if(usaritem==0){
+        bagoverlay=false;
+        pokeoverlay=true;
+        amessage = "Escolha um pokémon para usar";
+        usaritem=1;
+    }else if(usaritem==2){
+        if(lvs[meuspokes[pos][0]]==-3){
+            bag[bagovs][1]-=1;
+            amessage = "Você usou Pedra da Lua";
+            meuspokes[pos][0]++;
+            pokeatual=meuspokes[0][0];
+            usaritem=0;
+            pokeoverlay=false;
+        }else{
+            amessage="Você não pode usar isto agora!";
+            usaritem=0;
+            pokeoverlay=false;
+            bagoverlay=true;
+        }
+    }
+}
+function leafstone(){
+    if(usaritem==0){
+        bagoverlay=false;
+        pokeoverlay=true;
+        amessage = "Escolha um pokémon para usar";
+        usaritem=1;
+    }else if(usaritem==2){
+        if(lvs[meuspokes[pos][0]]==-5){
+            bag[bagovs][1]-=1;
+            amessage = "Você usou Pedra da Folha";
+            meuspokes[pos][0]++;
+            pokeatual=meuspokes[0][0];
+            usaritem=0;
+            pokeoverlay=false;
+        }else{
+            amessage="Você não pode usar isto agora!";
+            usaritem=0;
+            pokeoverlay=false;
+            bagoverlay=true;
+        }
+    }
+}
+function firestone(){
+    if(usaritem==0){
+        bagoverlay=false;
+        pokeoverlay=true;
+        amessage = "Escolha um pokémon para usar";
+        usaritem=1;
+    }else if(usaritem==2){
+        if(lvs[meuspokes[pos][0]]==-4){
+            bag[bagovs][1]-=1;
+            amessage = "Você usou Pedra do Fogo";
+            meuspokes[pos][0]++;
+            pokeatual=meuspokes[0][0];
+            usaritem=0;
+            pokeoverlay=false;
+        }else if(meuspokes[pos][0]==133){
+            bag[bagovs][1]-=1;
+            amessage = "Você usou Pedra do Fogo";
+            meuspokes[pos][0]=136;
+            pokeatual=meuspokes[0][0];
+            usaritem=0;
+            pokeoverlay=false;
+        }else{
+            amessage="Você não pode usar isto agora!";
+            usaritem=0;
+            pokeoverlay=false;
+            bagoverlay=true;
+        }
+    }
+}
+function waterstone(){
+    if(usaritem==0){
+        bagoverlay=false;
+        pokeoverlay=true;
+        amessage = "Escolha um pokémon para usar";
+        usaritem=1;
+    }else if(usaritem==2){
+        if(lvs[meuspokes[pos][0]]==-6){
+            bag[bagovs][1]-=1;
+            amessage = "Você usou Pedra da Água";
+            meuspokes[pos][0]++;
+            pokeatual=meuspokes[0][0];
+            usaritem=0;
+            pokeoverlay=false;
+        }else if(meuspokes[pos][0]==133){
+            bag[bagovs][1]-=1;
+            amessage = "Você usou Pedra da Água";
+            meuspokes[pos][0]=134;
+            pokeatual=meuspokes[0][0];
+            usaritem=0;
+            pokeoverlay=false;
+        }else{
+            amessage="Você não pode usar isto agora!";
+            usaritem=0;
+            pokeoverlay=false;
+            bagoverlay=true;
+        }
+    }
+}
+function rarecandy(){
+    if(usaritem==0){
+        bagoverlay=false;
+        pokeoverlay=true;
+        amessage = "Escolha um pokémon para usar";
+        usaritem=1;
+    }else if(usaritem==2){
+        bag[bagovs][1]-=1;
+        mspeed += 10000;
+        bmessage = "você usou Doce Raro";
+        meuspokes[pos][3]++;
+        if(lvs[meuspokes[pos][0]]!=-1 && lvs[meuspokes[pos][0]]<=meuspokes[pos][3]){
+            meuspokes[pos][0]++;
+        }
+        meunvl=meuspokes[0][3];
+        pokeatual=meuspokes[0][0];
+        usaritem=0;
+    }
+}
+function revive(){
     if(!use){
-        if(vida<maxvida){
-            verify = true;
-            if(usaritem==0){
-                bagoverlay=false;
-                pokeoverlay=true;
-                amessage = "Escolha um pokémon para usar";
-                usaritem=1;
-            }else if(usaritem==2){
-                bmessage = pokes[meuspokes[pos][0]]+" usou Super Poção";
+        if(usaritem==0){
+            bagoverlay=false;
+            pokeoverlay=true;
+            amessage = "Escolha um pokémon para usar";
+            usaritem=1;
+        }else if(usaritem==2){
+            if(meuspokes[pos][1]<=0){
+                bag[bagovs][1]-=1;
+                mspeed += 10000;
+                bmessage = "você usou Revive";
                 item = true;
                 if(!iwait){
                     do{
@@ -3301,10 +3461,112 @@ function spotion(){
                     }while(moves[inimigoatual][inimigoatk]==0);
                 }
                 battlemode = 2;
+            }else{
+                amessage="Você não pode usar isto agora!";
+                usaritem=0;
+                pokeoverlay=false;
+                bagoverlay=true;
+            }
+        }
+    }else{
+        Cura((((50+2*Statusg[meuspokes[pos][0]][0])*meuspokes[pos][3]/100)+10+meuspokes[pos][3])/2);
+        usaritem=0;
+        use = false;
+    }
+}
+function maxrevive(){
+    if(!use){
+        if(usaritem==0){
+            bagoverlay=false;
+            pokeoverlay=true;
+            amessage = "Escolha um pokémon para usar";
+            usaritem=1;
+        }else if(usaritem==2){
+            if(meuspokes[pos][1]<=0){
+                bag[bagovs][1]-=1;
+                mspeed += 10000;
+                bmessage = "você usou Revive";
+                item = true;
+                if(!iwait){
+                    do{
+                        inimigoatk = Math.floor(Math.random()*4);
+                    }while(moves[inimigoatual][inimigoatk]==0);
+                }
+                battlemode = 2;
+            }else{
+                amessage="Você não pode usar isto agora!";
+                usaritem=0;
+                pokeoverlay=false;
+                bagoverlay=true;
+            }
+        }
+    }else{
+        Cura((((50+2*Statusg[meuspokes[pos][0]][0])*meuspokes[pos][3]/100)+10+meuspokes[pos][3]));
+        usaritem=0;
+        use = false;
+    }
+}
+function spotion(){
+    if(!use){
+        if(usaritem==0){
+            bagoverlay=false;
+            pokeoverlay=true;
+            amessage = "Escolha um pokémon para usar";
+            usaritem=1;
+        }else if(usaritem==2){
+            if(meuspokes[pos][1]<(((50+2*Statusg[meuspokes[pos][0]][0])*meuspokes[pos][3]/100)+10+meuspokes[pos][3])){
+                bag[bagovs][1]-=1;
+                mspeed += 10000;
+                bmessage = "você usou Super Poção";
+                item = true;
+                if(!iwait){
+                    do{
+                        inimigoatk = Math.floor(Math.random()*4);
+                    }while(moves[inimigoatual][inimigoatk]==0);
+                }
+                battlemode = 2;
+            }else{
+                amessage="Você não pode usar isto agora!";
+                usaritem=0;
+                pokeoverlay=false;
+                bagoverlay=true;
             }
         }
     }else{
         Cura(50);
+        usaritem=0;
+        use = false;
+    }
+}
+function fullheal(){
+    if(!use){
+        if(usaritem==0){
+            bagoverlay=false;
+            pokeoverlay=true;
+            amessage = "Escolha um pokémon para usar";
+            usaritem=1;
+        }else if(usaritem==2){
+            if(meuspokes[pos][2]>0){
+                bag[bagovs][1]-=1;
+                mspeed += 10000;
+                bmessage = "você usou CuraTudo";
+                item = true;
+                if(!iwait){
+                    do{
+                        inimigoatk = Math.floor(Math.random()*4);
+                    }while(moves[inimigoatual][inimigoatk]==0);
+                }
+                battlemode = 2;
+            }else{
+                amessage="Você não pode usar isto agora!";
+                usaritem=0;
+                pokeoverlay=false;
+                bagoverlay=true;
+            }
+        }
+    }else{
+        meuspokes[pos][2]=0;
+        mestado=meuspokes[0][2];
         usaritem=0;
         use = false;
     }
@@ -3325,7 +3587,8 @@ function left(){
         if(comp < 0){
             comp = bag.length-1;
         }
-        }else{
+        cy=Math.floor(comp/8);
+    }else{
     if(tela==1){
         if(!escolha){
             count-=2;
@@ -3370,7 +3633,9 @@ function right(){
         comp = comp+1;
         if(comp > bag.length-1){
             comp = 0;
-    }}
+        }
+        cy=Math.floor(comp/8);
+    }
     if(tela==1){
         if(!escolha){
             count+=2;
@@ -3559,6 +3824,7 @@ function enter(){
         iwrap = false;
         iwait = false;
         mwait = false;
+        fob=1;
         amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
         meuspokes[0][0]=pokeatual;
         meuspokes[0][1]=vida;
@@ -3571,13 +3837,6 @@ function enter(){
             if(bagoverlay == true){
                 if(bag[bagovs][1] > 0){
                     bag[bagovs][0]();
-                    if(verify==true){
-                        bag[bagovs][1]-=1;
-                        mspeed += 10000;
-                        verify=false;
-                    }else{
-                        amessage="Você não pode usar isto agora!";
-                    }
                 }
             }else if(pokeoverlay == true){
                 amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
@@ -3601,28 +3860,41 @@ function enter(){
                             amessage = "Você tem apenas um pokémon!";
                             pokeop = false;
                         }
-                    }else{
+                    }else if(meuspokes[pokeovs][1]>0){
                         pokeop = true;
                     }
                 }else{
-                    meuspokes[trade1]=meuspokes[pokeovs];
-                    meuspokes[pokeovs] = trade2;
                     if(trade1==0 && pokeovs!=trade1 || pokeovs==0 && pokeovs!=trade1){
-                        pokeatual=meuspokes[0][0];
-                        vida=meuspokes[0][1];
-                        mestado=meuspokes[0][2];
-                        meunvl=meuspokes[0][3];
-                        meuxp=meuspokes[0][4];
-                        pokeoverlay = false;
-                        maxvida = ((50+2*Statusg[pokeatual][0])*meunvl/100)+10+meunvl;
-                        amessage = "Trocou para "+pokes[pokeatual];
-                        click=2;
-                        battlemode = 2;
+                        if(meuspokes[trade1][1]>0 && meuspokes[pokeovs][1]>0 || trade1==0 && meuspokes[pokeovs][1]>0){
+                            meuspokes[trade1]=meuspokes[pokeovs];
+                            meuspokes[pokeovs] = trade2;
+                            pokeatual=meuspokes[0][0];
+                            vida=meuspokes[0][1];
+                            mestado=meuspokes[0][2];
+                            meunvl=meuspokes[0][3];
+                            meuxp=meuspokes[0][4];
+                            pokeoverlay = false;
+                            maxvida = ((50+2*Statusg[pokeatual][0])*meunvl/100)+10+meunvl;
+                            amessage = "Trocou para "+pokes[pokeatual];
+                            click=2;
+                            battlemode = 2;
+                            mspeed=3000;
+                        }else{
+                            amessage = "Ele não pode mais lutar!";
+                            pokeop=false;
+                        }
                     }else{
                         amessage = "Não troque pelo mesmo pokémon!";
+                        if(meuspokes[0][1]==0){
+                            trade1 = pokeovs;
+                            trade2 = meuspokes[pokeovs];
+                            pokeop = false;
+                        }
                     }
-                    trade1=0;
-                    trade2=0;
+                    if(meuspokes[0][1]>0){
+                        trade1=0;
+                        trade2=0;
+                    }
                 }
             }else{
                 amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
@@ -3997,15 +4269,18 @@ function enter(){
 }
 //se apertar backspace executar!
 function backspace(){
+    if(bagoverlay==true){
+        amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
+    }
     if(tela == 2){trans = 4}else if(tela == 4){trans =2}
     if(tela == 3){bagoverlay = false}
     if(battlemode==1){
         battlemode=0;
     }
-    if(pokeoverlay == true && amessage!="Escolha outro pokémon!"){
+    if(pokeoverlay == true && amessage!="Escolha outro pokémon!" && meuspokes[0][1]>0){
         pokeoverlay=false;
         amessage = "O que o "+pokes[pokeatual]+" vai fazer?";
-    }else{
+    }else if(pokeoverlay == true){
         amessage="Você tem que escolher um pokémon!";
     }
     if(pokedex>0){
@@ -4017,6 +4292,9 @@ function backspace(){
 }
 //se o seu pokemon morrer executar
 function gameover(){
+    if(vida<0){
+        vida=0;
+    }
     meuspokes[0][0]=pokeatual;
     meuspokes[0][1]=vida;
     meuspokes[0][2]=mestado;
@@ -4031,6 +4309,7 @@ function gameover(){
             }
         }
         if(k>0){
+            mestado=0;
             meuspokes[0][0]=pokeatual;
             meuspokes[0][1]=vida;
             meuspokes[0][2]=mestado;
@@ -4316,14 +4595,14 @@ function draw(){
         }
         //desenha a mochila
         if(bagoverlay == true){
-            ctx.drawImage(chat,580,300,250,150);
+            ctx.drawImage(chat,580,30,250,450);
             ctx.fillStyle = "rgb(184,241,142)";
-            ctx.fillRect(600, 310+(bagovs*40),200,40);
+            ctx.fillRect(600, 60+(bagovs*40),200,40);
             ctx.fillStyle = "black";
             ctx.textAlign = "start";
             ctx.font = "25px Arial";
             for(var i=0;i<bag.length;i++){
-                ctx.fillText(bag[i][3]+": "+bag[i][1], 600, 340+(i*40));
+                ctx.fillText(bag[i][3]+": "+bag[i][1], 600, 90+(i*40));
             }
         }
         //desenha os pokes capturados
@@ -4439,15 +4718,20 @@ function draw(){
         ctx.clearRect(0,0,800,500);
         ctx.drawImage(mart,0,0,800,500);
         ctx.fillStyle = "rgb(184,241,142)";
-        ctx.fillRect((100*(comp)), 100,100,100);
+        ctx.fillRect((100*(comp-(cy*8))), 100+(120*cy),100,100);
+        ly=-1;
         for(var i=0;i<bag.length;i++){
+            if(i%8==0){
+                ly++;
+            }
+            console.log(100+(120*ly))
             image = new Image();
             image.src = bag[i][4];
-            ctx.drawImage(image,0+(i*100),100,100,100);
+            ctx.drawImage(image,0+((i-(ly*8))*100),100+(120*ly),100,100);
             ctx.fillStyle = "black";
             ctx.textAlign = "start";
             ctx.font = "25px Arial";
-            ctx.fillText(bag[i][2]+"$", 30+(i*100), 220);
+            ctx.fillText(bag[i][2]+"$", 30+((i-(ly*8))*100), 220+(120*ly));
         }
         ctx.fillText("Dinheiro:"+money, 10, 25);
     }

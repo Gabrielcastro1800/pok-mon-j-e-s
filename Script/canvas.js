@@ -4595,14 +4595,26 @@ function draw(){
         }
         //desenha a mochila
         if(bagoverlay == true){
-            ctx.drawImage(chat,580,30,250,450);
+            ctx.drawImage(chat,580,30,250,460);
             ctx.fillStyle = "rgb(184,241,142)";
-            ctx.fillRect(600, 60+(bagovs*40),200,40);
+            if(bagovs<9){
+                ctx.fillRect(600, 60+(bagovs*40),200,40);
+            }else{
+                ctx.fillRect(600, 420,200,40);
+            }
             ctx.fillStyle = "black";
             ctx.textAlign = "start";
             ctx.font = "25px Arial";
             for(var i=0;i<bag.length;i++){
-                ctx.fillText(bag[i][3]+": "+bag[i][1], 600, 90+(i*40));
+                if(bagovs>9){
+                    if(i<=9+(bagovs-9) && i>=(bagovs-9)){
+                        ctx.fillText(bag[i][3]+": "+bag[i][1], 600, 90+((i-(bagovs-9))*40));
+                    }
+                }else{
+                    if(i<=9){
+                        ctx.fillText(bag[i][3]+": "+bag[i][1], 600, 90+(i*40));
+                    }
+                }
             }
         }
         //desenha os pokes capturados

@@ -1,3 +1,5 @@
+//Trabalho de programação: Pokémon JS por Gabriel Castro e Wendel Coelho ambos da 1C1
+//função de dano
 function damage(nvl, atk, atkpower, dfs, type, poke, s, bol){
     var multi = 1;
     var boostdfs = 1;

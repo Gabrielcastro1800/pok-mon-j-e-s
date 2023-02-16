@@ -3818,7 +3818,7 @@ function enter(){
                     }else if(choose == 3){
                         pokeatual = 7;
                     }else if(choose == 4){
-                        pokeatual = 43//Math.ceil(Math.random()*151);;
+                        pokeatual = Math.ceil(Math.random()*151);;
                     }
                     inimigoatual = Math.ceil(Math.random()*151);//151 para todos
                     arenaescolher = Math.ceil(Math.random()*3);

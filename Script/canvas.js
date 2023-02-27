@@ -4387,6 +4387,8 @@ function gameover(){
 //executa se vencer
 function win(){
     if(inivida<=0 || captura){
+        inimigoatual = Math.ceil(Math.random()*151);//151 para todos
+        arenaescolher = Math.ceil(Math.random()*3);
         trans = 2;
         batalha++;
         money += 5*Math.floor(maxinivida/10);
@@ -4787,10 +4789,6 @@ function draw(){
         transy+=7;
         if(transy>=300){
             tela = trans;
-            if(tela == 2){
-                inimigoatual = Math.ceil(Math.random()*151);//151 para todos
-                arenaescolher = Math.ceil(Math.random()*3);
-            }
             trans = 0;
         }
     }else if(trans==0 && transy>0){
